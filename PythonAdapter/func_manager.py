@@ -23,6 +23,19 @@ class FunctionManager:
     def get_all(self):
         return self.func_dict
 
+    def get_name_list(self):
+        return list(self.func_dict.keys())
+
+    def get_func_detail_list(self):
+        return [
+            {
+                "name": name,
+                "args": get_func_args(func),
+                "code": get_func_code(func),
+            }
+            for name, func in self.func_dict.items()
+        ]
+
     def clear(self):
         self.func_dict.clear()
 
