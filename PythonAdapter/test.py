@@ -1,33 +1,49 @@
-import python_adapter as py_adapter
+from python_adapter import reg_func as reg, run
 
 
-# Test Functions
-
-
+@reg
 def add(a, b):
     return a + b
 
 
+@reg
 def sub(a, b):
     return a - b
 
 
+@reg
 def addWithDefault(a, b=1):
     return a + b
 
 
+@reg
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+
+@reg
+def quick_sort(arr: list[int]):
+    # typecheck
+    if not isinstance(arr, list):
+        raise TypeError(f"quick_sort only accepts list, got {type(arr)}")
+
+    for x in arr:
+        if not isinstance(x, int):
+            raise TypeError(f"quick_sort only accepts list of int, got {type(x)}")
+
+    if len(arr) <= 1:
+        return arr
+    else:
+        pivot = arr[0]
+
+        less_than_pivot = [x for x in arr[1:] if x <= pivot]
+        greater_than_pivot = [x for x in arr[1:] if x > pivot]
+
+        return quick_sort(less_than_pivot) + [pivot] + quick_sort(greater_than_pivot)
+
+
 if __name__ == "__main__":
-    py_adapter.reg_func(add)
-    py_adapter.reg_func(sub)
-    py_adapter.reg_func(addWithDefault)
-    py_adapter.run()
-
-    print(py_adapter.exec_func("add", 1, 2))
-    print(py_adapter.exec_func("sub", 1, 2))
-    print(py_adapter.exec_func("addWithDefault", 1))
-    print(py_adapter.exec_func("addWithDefault", 1, 2100))
-
-    try:
-        py_adapter.exec_func("not_exist_func")
-    except Exception as e:
-        print(e)
+    run()
