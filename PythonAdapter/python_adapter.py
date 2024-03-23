@@ -1,5 +1,15 @@
+import os
+
 import func_manager as fm
 from logger import create_logger
+
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+
+# dotenv
+from dotenv import load_dotenv
+
+app = Flask(__name__)
 
 # funtion manager实例
 function_manager = fm.FunctionManager()
@@ -37,8 +47,43 @@ def exec_func(func_name, *args):
     return func(*args)
 
 
+# Flask request handler
+@app.get("/")
+def rootPage():
+    return "Hello World!"
+
+
+@app.get("/list")
+def list_all_functions():
+    return jsonify(function_manager.get_func_detail_list())
+
+
+@app.get("/list/name")
+def list_all_function_names():
+    return jsonify(function_manager.get_name_list())
+
+
+@app.post("/exec")
+def exec_function():
+    data = request.get_json()
+    func_name = data["name"]
+    args = data["args"]
+    try:
+        result = exec_func(func_name, *args)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    else:
+        return jsonify(result)
+
+
 def run():
     logger.info("Python Adapter Start")
-
-    # 从function manager中获取所有函数
-    func_dict = function_manager.get_all()
+    CORS(app)
+    logger.info("Loading .env")
+    load_dotenv()
+    logger.info("Loading .env done")
+    logger.info("Flask Server Start")
+    app.run(
+        host=os.getenv("PY_ADAPTER_HOST" or "127.0.0.1"),
+        port=os.getenv("PY_ADAPTER_PORT" or 6001),
+    )
