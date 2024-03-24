@@ -3,7 +3,7 @@ import os
 import func_manager as fm
 from logger import create_logger
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 
 # dotenv
@@ -76,12 +76,29 @@ def exec_function():
         return jsonify(result)
 
 
-def run():
+# 其他路由时，返回.目录下对应的文件
+# 默认关闭此路由，业务需要时打开
+# @app.route("/<path:filename>")
+def get_file(filename):
+    return send_file(filename)
+
+
+def run(file_server=False):
     logger.info("Python Adapter Start")
+
+    if file_server:
+        logger.warning("File server is open, be careful with security.")
+        app.get("/<path:filename>")(get_file)
+
+    # CORS config
     CORS(app)
+
+    # env config
     logger.info("Loading .env")
     load_dotenv()
     logger.info("Loading .env done")
+
+    # start flask server
     logger.info("Flask Server Start")
     app.run(
         host=os.getenv("PY_ADAPTER_HOST" or "127.0.0.1"),

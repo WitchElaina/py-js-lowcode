@@ -46,4 +46,4 @@ def quick_sort(arr: list[int]):
 
 
 if __name__ == "__main__":
-    run()
+    run(file_server=True)
