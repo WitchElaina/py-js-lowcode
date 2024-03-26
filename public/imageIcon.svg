@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>imageIcon</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="imageIcon" fill="#A5A0AB" fill-rule="nonzero">
+            <path d="M2,18 C1.45,18 0.979166667,17.8041667 0.5875,17.4125 C0.195833333,17.0208333 0,16.55 0,16 L0,2 C0,1.45 0.195833333,0.979166667 0.5875,0.5875 C0.979166667,0.195833333 1.45,0 2,0 L16,0 C16.55,0 17.0208333,0.195833333 17.4125,0.5875 C17.8041667,0.979166667 18,1.45 18,2 L18,16 C18,16.55 17.8041667,17.0208333 17.4125,17.4125 C17.0208333,17.8041667 16.55,18 16,18 L2,18 Z M2,16 L16,16 L16,2 L2,2 L2,16 Z M3,14 L15,14 L11.25,9 L8.25,13 L6,10 L3,14 Z M2.0375,16 L2.0375,2 L2.0375,16 Z" id="Shape"></path>
+        </g>
+    </g>
+</svg>
