@@ -8,6 +8,7 @@ import {
   Slider,
   Switch,
   Image,
+  Flex,
 } from 'antd';
 import { BaseComponent } from '../types/component';
 
@@ -122,6 +123,46 @@ const image: BaseComponent<typeof Image> = {
   },
 };
 
+const flex: BaseComponent<typeof Flex> = {
+  name: 'flex',
+  label: '布局',
+  component: Flex,
+  example: (
+    <Flex style={{ width: '100%', height: '100%' }} gap={4}>
+      <span
+        style={{
+          width: '33%',
+          textAlign: 'center',
+          backgroundColor: '#A6A2AE',
+          color: 'white',
+        }}
+      >
+        1
+      </span>
+      <span
+        style={{
+          width: '33%',
+          textAlign: 'center',
+          backgroundColor: '#594B84',
+          color: 'white',
+        }}
+      >
+        2
+      </span>
+      <span
+        style={{
+          width: '33%',
+          textAlign: 'center',
+          backgroundColor: '#A6A2AE',
+          color: 'white',
+        }}
+      >
+        3
+      </span>
+    </Flex>
+  ),
+};
+
 export const components = {
   button,
   input,
@@ -132,4 +173,5 @@ export const components = {
   slider,
   switch: switchComponent,
   image,
+  flex,
 };
