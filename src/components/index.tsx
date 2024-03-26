@@ -97,7 +97,7 @@ const slider: BaseComponent<typeof Slider> = {
   },
 };
 
-const switchComponent: BaseComponent<typeof Switch> = {
+const switcher: BaseComponent<typeof Switch> = {
   name: 'switch',
   label: '开关',
   component: Switch,
@@ -171,7 +171,7 @@ export const components = {
   radio,
   select,
   slider,
-  switch: switchComponent,
+  switcher,
   image,
   flex,
 };
