@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="169px" height="104px" viewBox="0 0 169 104" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>logo</title>
+    <defs>
+        <text id="text-1" font-family="ProductSans-Bold, Product Sans" font-size="66" font-weight="bold">
+            <tspan x="0" y="63" fill="#494695">Py</tspan>
+            <tspan x="75.57" y="63" fill="#E1A42D">Js</tspan>
+        </text>
+        <filter x="-12.8%" y="-20.6%" width="126.9%" height="148.8%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="1" dy="3" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="6" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.543874547   0 0 0 0 0.510898007   0 0 0 0 0.510898007  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="logo" transform="translate(11, 9)">
+            <g id="PyJs" fill="#494695" fill-opacity="1">
+                <use filter="url(#filter-2)" xlink:href="#text-1"></use>
+                <use xlink:href="#text-1"></use>
+            </g>
+            <text id="Lowcode" font-family="ProductSans-Bold, Product Sans" font-size="18" font-weight="bold" fill="#5F5353">
+                <tspan x="83" y="89">Lowcode</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
