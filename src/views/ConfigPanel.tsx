@@ -13,8 +13,9 @@ export function ConfigPanel() {
       }}
     >
       <Tabs defaultActiveKey="1" centered>
-        <Tabs.TabPane tab="属性" key="1"></Tabs.TabPane>
-        <Tabs.TabPane tab="事件" key="2"></Tabs.TabPane>
+        <Tabs.TabPane tab="结构" key="1"></Tabs.TabPane>
+        <Tabs.TabPane tab="属性" key="2"></Tabs.TabPane>
+        <Tabs.TabPane tab="事件" key="3"></Tabs.TabPane>
       </Tabs>
     </div>
   );
