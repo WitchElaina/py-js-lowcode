@@ -17,6 +17,15 @@ const button: BaseComponent<typeof Button> = {
   label: '按钮',
   component: Button,
   example: <Button block>按钮</Button>,
+  defaultSchema: {
+    componentNames: 'button',
+    props: {
+      children: '按钮',
+    },
+    title: '按钮',
+    states: {},
+    children: null,
+  },
 };
 
 const input: BaseComponent<typeof Input> = {
@@ -30,6 +39,17 @@ const input: BaseComponent<typeof Input> = {
       label: '值',
     },
   },
+  defaultSchema: {
+    componentNames: 'input',
+    props: {
+      placeholder: '请输入',
+    },
+    title: '输入框',
+    states: {
+      value: '',
+    },
+    children: [],
+  },
 };
 
 const checkbox: BaseComponent<typeof Checkbox> = {
@@ -42,6 +62,17 @@ const checkbox: BaseComponent<typeof Checkbox> = {
       name: 'checked',
       label: '是否选中',
     },
+  },
+  defaultSchema: {
+    componentNames: 'checkbox',
+    props: {
+      children: '多选框',
+    },
+    title: '多选框',
+    states: {
+      checked: false,
+    },
+    children: [],
   },
 };
 

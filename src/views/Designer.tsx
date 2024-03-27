@@ -1,14 +1,19 @@
 import { Flex, theme } from 'antd';
 import { useDrop } from 'react-dnd';
+import { useSchema } from '../utils/useSchema';
+import { Schema } from '../types/schema';
+import { useCallback, useEffect, useState, ReactNode } from 'react';
+import { RenderDesigner } from '../utils/render';
 
 const { useToken } = theme;
 
-const DroppableArea = () => {
+const DroppableArea = (onDrop) => {
   const { token } = useToken();
   const [collectedProps, drop] = useDrop({
     accept: 'component',
     drop: (item, monitor) => {
       console.log('drop', item, monitor);
+      onDrop(item);
     },
     collect: (monitor) => ({
       canDrop: monitor.canDrop(),
@@ -43,12 +48,13 @@ const DroppableArea = () => {
 interface DesignerScreenProps {
   width: number;
   height: number;
-  scale: number;
 }
 
 export function DesignerScreen(props: DesignerScreenProps) {
   const { width, height } = props;
   const { token } = useToken();
+
+  const [globalSchema, setGlobalSchema] = useSchema();
 
   return (
     <div
@@ -71,7 +77,11 @@ export function DesignerScreen(props: DesignerScreenProps) {
           transition: 'all 0.3s',
         }}
       >
-        <DroppableArea />
+        <RenderDesigner
+          schema={globalSchema as Schema}
+          setSchema={setGlobalSchema}
+          createBlackNode={DroppableArea}
+        />
       </div>
     </div>
   );

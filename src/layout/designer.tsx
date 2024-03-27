@@ -8,7 +8,7 @@ import { DesingerSegmented } from '../views/DesingerSegmented';
 
 export function Designer() {
   const { Title } = Typography;
-  const { width, height, scale, setWidth, setHeight, setScale } = useDesigner();
+  const { width, height, setWidth, setHeight } = useDesigner();
 
   return (
     <Flex style={{ height: '100%' }}>
@@ -25,15 +25,13 @@ export function Designer() {
           <DesingerSegmented
             width={width}
             height={height}
-            scale={scale}
             onWidthChange={setWidth}
             onHeightChange={setHeight}
-            onScaleChange={setScale}
           />
-          <DesignerScreen width={width} height={height} scale={scale} />
+          <DesignerScreen width={width} height={height} />
         </DesignerCanvas>
       </Col>
-      <Col span={5}>
+      <Col span={5} style={{ height: '100%' }}>
         <ConfigPanel />
       </Col>
     </Flex>

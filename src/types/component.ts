@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { Schema } from '../utils/useSchema';
 
 export interface BaseVariable {
   name: string;
@@ -20,4 +21,5 @@ export interface BaseComponent<T> {
   component: T;
   example: ReactNode;
   variables?: Record<string, BaseVariable>;
+  defaultSchema: Schema;
 }

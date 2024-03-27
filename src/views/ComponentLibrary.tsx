@@ -4,11 +4,12 @@ import { useDrag } from 'react-dnd';
 
 function DraggableComponentWrapper(props) {
   const { component, key } = props;
-  const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
+  const [{ isDragging, isOver }, drag, dragPreview] = useDrag(() => ({
     type: 'component',
     item: { component },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
+      isOver: monitor.getDropResult(),
     }),
   }));
 
@@ -24,7 +25,11 @@ function DraggableComponentWrapper(props) {
     >
       <Card
         title={label}
-        style={{ marginBottom: 16, margin: '2px', cursor: 'grab' }}
+        style={{
+          marginBottom: 16,
+          margin: '2px',
+          cursor: isDragging ? 'grabbing' : 'grab',
+        }}
         ref={drag}
         size="small"
       >

@@ -1,8 +1,11 @@
-import { Tabs, theme } from 'antd';
+import { ConfigProvider, Tabs, theme } from 'antd';
+import MonacoEditor from 'react-monaco-editor';
+import { useSchema } from '../utils/useSchema';
 
 export function ConfigPanel() {
   const { useToken } = theme;
   const { token } = useToken();
+  const [globalSchme] = useSchema();
 
   return (
     <div
@@ -10,13 +13,49 @@ export function ConfigPanel() {
         background: token.colorBgBase,
         border: `1px solid ${token.colorBorderSecondary}`,
         height: '100%',
+        width: '100%',
       }}
     >
-      <Tabs defaultActiveKey="1" centered>
-        <Tabs.TabPane tab="结构" key="1"></Tabs.TabPane>
-        <Tabs.TabPane tab="属性" key="2"></Tabs.TabPane>
-        <Tabs.TabPane tab="事件" key="3"></Tabs.TabPane>
-      </Tabs>
+      <ConfigProvider
+        theme={{
+          components: {
+            Tabs: {
+              horizontalMargin: '0',
+            },
+          },
+        }}
+      >
+        <Tabs
+          defaultActiveKey="1"
+          centered
+          items={[
+            {
+              key: '1',
+              label: '结构',
+              children: (
+                <MonacoEditor
+                  height={800}
+                  width={'100%'}
+                  language="json"
+                  theme="vs-dark"
+                  options={{
+                    readOnly: true,
+                  }}
+                  value={JSON.stringify(globalSchme, null, 2)}
+                />
+              ),
+            },
+            {
+              key: '2',
+              label: '属性',
+            },
+            {
+              key: '3',
+              label: '事件',
+            },
+          ]}
+        />
+      </ConfigProvider>
     </div>
   );
 }
