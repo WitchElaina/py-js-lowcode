@@ -1,4 +1,5 @@
 import { ConfigProvider, Tabs, theme } from 'antd';
+import { useEffect, useState } from 'react';
 import MonacoEditor from 'react-monaco-editor';
 import { useSchema } from '../utils/useSchema';
 
@@ -6,6 +7,12 @@ export function ConfigPanel() {
   const { useToken } = theme;
   const { token } = useToken();
   const [globalSchme] = useSchema();
+  const [schemaJson, setSchemaJson] = useState('');
+
+  useEffect(() => {
+    setSchemaJson(JSON.stringify(globalSchme, null, 2));
+    console.log('globalSchme Js', globalSchme, schemaJson);
+  }, [globalSchme]);
 
   return (
     <div
@@ -41,7 +48,7 @@ export function ConfigPanel() {
                   options={{
                     readOnly: true,
                   }}
-                  value={JSON.stringify(globalSchme, null, 2)}
+                  value={schemaJson}
                 />
               ),
             },

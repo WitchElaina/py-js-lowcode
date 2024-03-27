@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Schema } from '../types/schema';
 import { v4 as uuidv4 } from 'uuid';
+import { cloneDeep } from 'lodash';
 
 const defaultGlobalSchema: Schema = {
   id: 'flex-' + uuidv4(),
@@ -37,7 +38,7 @@ export const useSchema = () => {
     // Generate a UUID for the new schema
     schema.id = schema.componentNames + '-' + uuidv4();
     // Find the parent schema by id
-    const parentSchema = globalSchema;
+    const parentSchema = cloneDeep(globalSchema);
     // Find the parent schema by id
     const findParentSchema = (schema: Schema, id: string) => {
       if (schema.id === id) {
@@ -59,6 +60,9 @@ export const useSchema = () => {
     if (Array.isArray(parent.children)) {
       parent.children.push(schema);
     }
+
+    // Update the global schema
+    setGlobalSchema(parentSchema);
   };
 
   return [globalSchema, setGlobalSchema, appendSchema];

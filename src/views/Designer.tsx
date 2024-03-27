@@ -56,6 +56,10 @@ export function DesignerScreen(props: DesignerScreenProps) {
 
   const [globalSchema, , appendSchema] = useSchema();
 
+  useEffect(() => {
+    console.log('globalSchema', globalSchema);
+  }, [globalSchema]);
+
   return (
     <div
       style={{
