@@ -5,7 +5,8 @@ import { useDrag } from 'react-dnd';
 function DraggableComponentWrapper(props) {
   const { component, key } = props;
   const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
-    type: 'box',
+    type: 'component',
+    item: { component },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -18,7 +19,7 @@ function DraggableComponentWrapper(props) {
       ref={dragPreview}
       style={{
         opacity: isDragging ? 0.4 : 1,
-        border: isDragging ? '1px dashed #ccc' : 'none',
+        // border: isDragging ? '1px dashed #ccc' : 'none',
       }}
     >
       <Card
