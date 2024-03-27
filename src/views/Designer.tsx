@@ -54,7 +54,7 @@ export function DesignerScreen(props: DesignerScreenProps) {
   const { width, height } = props;
   const { token } = useToken();
 
-  const [globalSchema, setGlobalSchema] = useSchema();
+  const [globalSchema, , appendSchema] = useSchema();
 
   return (
     <div
@@ -79,7 +79,7 @@ export function DesignerScreen(props: DesignerScreenProps) {
       >
         <RenderDesigner
           schema={globalSchema as Schema}
-          setSchema={setGlobalSchema}
+          appendSchema={appendSchema}
           createBlackNode={DroppableArea}
         />
       </div>

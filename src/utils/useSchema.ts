@@ -3,6 +3,7 @@ import { Schema } from '../types/schema';
 import { v4 as uuidv4 } from 'uuid';
 
 const defaultGlobalSchema: Schema = {
+  id: 'flex-' + uuidv4(),
   componentNames: 'flex',
   props: {
     style: {
@@ -16,6 +17,7 @@ const defaultGlobalSchema: Schema = {
   states: {},
   children: [
     {
+      id: 'button-' + uuidv4(),
       componentNames: 'button',
       props: {
         block: true,
@@ -31,5 +33,33 @@ const defaultGlobalSchema: Schema = {
 export const useSchema = () => {
   const [globalSchema, setGlobalSchema] = useState<Schema>(defaultGlobalSchema);
 
-  return [globalSchema, setGlobalSchema];
+  const appendSchema = (schema: Schema, id: string) => {
+    // Generate a UUID for the new schema
+    schema.id = schema.componentNames + '-' + uuidv4();
+    // Find the parent schema by id
+    const parentSchema = globalSchema;
+    // Find the parent schema by id
+    const findParentSchema = (schema: Schema, id: string) => {
+      if (schema.id === id) {
+        return schema;
+      }
+      if (schema.children) {
+        for (let i = 0; i < schema.children.length; i++) {
+          const result = findParentSchema(schema.children[i], id);
+          if (result) {
+            return result;
+          }
+        }
+      }
+    };
+    const parent = findParentSchema(parentSchema, id);
+    console.log('parent', parent.componentNames, schema.componentNames);
+
+    // Add the new schema to the parent schema
+    if (Array.isArray(parent.children)) {
+      parent.children.push(schema);
+    }
+  };
+
+  return [globalSchema, setGlobalSchema, appendSchema];
 };
