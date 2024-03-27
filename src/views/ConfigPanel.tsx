@@ -2,17 +2,19 @@ import { ConfigProvider, Tabs, theme } from 'antd';
 import { useEffect, useState } from 'react';
 import MonacoEditor from 'react-monaco-editor';
 import { useSchema } from '../utils/useSchema';
+import { store } from '../store';
 
 export function ConfigPanel() {
   const { useToken } = theme;
   const { token } = useToken();
-  const [globalSchme] = useSchema();
+
+  const { schema } = store.getState();
   const [schemaJson, setSchemaJson] = useState('');
 
   useEffect(() => {
-    setSchemaJson(JSON.stringify(globalSchme, null, 2));
-    console.log('globalSchme Js', globalSchme, schemaJson);
-  }, [globalSchme]);
+    setSchemaJson(JSON.stringify(schema, null, 2));
+    console.log('globalSchme Js', schema, schemaJson);
+  }, [schema]);
 
   return (
     <div
@@ -55,6 +57,7 @@ export function ConfigPanel() {
             {
               key: '2',
               label: '属性',
+              children: <>{schema.children?.length}</>,
             },
             {
               key: '3',

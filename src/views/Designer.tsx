@@ -1,14 +1,13 @@
 import { Flex, theme } from 'antd';
 import { useDrop } from 'react-dnd';
-import { useSchema } from '../utils/useSchema';
-import { Schema } from '../types/schema';
-import { useCallback, useEffect, useState, ReactNode } from 'react';
-import { RenderDesigner } from '../utils/render';
+import { render } from '../utils/render';
+import { store } from '../store';
 
 const { useToken } = theme;
 
-const DroppableArea = (onDrop) => {
+const DroppableArea = (props: { onDrop }) => {
   const { token } = useToken();
+  const { onDrop } = props;
   const [collectedProps, drop] = useDrop({
     accept: 'component',
     drop: (item, monitor) => {
@@ -54,11 +53,8 @@ export function DesignerScreen(props: DesignerScreenProps) {
   const { width, height } = props;
   const { token } = useToken();
 
-  const [globalSchema, , appendSchema] = useSchema();
-
-  useEffect(() => {
-    console.log('globalSchema', globalSchema);
-  }, [globalSchema]);
+  const { schema } = store.getState();
+  const { append } = store.dispatch.schema;
 
   return (
     <div
@@ -81,11 +77,10 @@ export function DesignerScreen(props: DesignerScreenProps) {
           transition: 'all 0.3s',
         }}
       >
-        <RenderDesigner
-          schema={globalSchema as Schema}
-          appendSchema={appendSchema}
-          createBlackNode={DroppableArea}
-        />
+        {render(
+          schema,
+          DroppableArea({ onDrop: (item) => append(item, schema.id) }),
+        )}
       </div>
     </div>
   );
