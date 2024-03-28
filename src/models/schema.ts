@@ -3,6 +3,7 @@ import { RootModel } from '.';
 import { Schema } from '../types/schema';
 import { v4 as uuidv4 } from 'uuid';
 import { cloneDeep } from 'lodash';
+import { getSchemaById } from '../utils/schemaTools';
 
 const defaultSchema: Schema = {
   id: 'flex-' + uuidv4(),
@@ -83,6 +84,15 @@ export const schema = createModel<RootModel>()({
 
       // Update the global schema
       return parentSchema;
+    },
+    changePropsById(state, payload: { id: string; props: string; value: any }) {
+      const { id, props, value } = payload;
+      const propsObj = getSchemaById(id, state).props;
+
+      console.log(`Change ${id} ${props} \n ${propsObj[props]} <- ${value}`);
+
+      propsObj[props] = value;
+      return state;
     },
   },
   effects: (dispatch) => ({

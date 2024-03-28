@@ -11,7 +11,7 @@ export interface Schema {
   // 组件名称
   componentNames: keyof typeof components;
   // 组件属性
-  props: Record<string, any>;
+  props: (typeof components)[keyof typeof components]['props'];
   // 组件标题
   title: string;
   // 组件状态变量

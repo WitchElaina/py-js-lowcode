@@ -54,6 +54,8 @@ export const RenderDesigner = (props: {
           ? `1px dashed ${token.colorPrimary}`
           : '1px dashed transparent',
         cursor: 'default',
+        width: '100%',
+        // height: '100%',
       }}
     >
       <div
