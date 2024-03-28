@@ -37,13 +37,23 @@ export const schema = createModel<RootModel>()({
   reducers: {
     // handle state changes with pure functions
     append(state, payload: { schemaToAppend: Schema; parentId: string }) {
-      const { schemaToAppend, parentId } = payload;
+      const { schemaToAppend: schemaToAppendOriginal, parentId } = payload;
+
+      // deep copy schemaToAppend
+      const schemaToAppend = cloneDeep(schemaToAppendOriginal);
 
       console.log(`Append ${schemaToAppend.id} -> ${parentId}`, schemaToAppend);
       // Generate a UUID for the new schema
+
       schemaToAppend.id = schemaToAppend.componentNames + '-' + uuidv4();
       // Find the parent schema by id
-      const parentSchema = cloneDeep(state);
+
+      // shallowCopy [rewrite by immerPlugin below]
+      // const parentSchema = { ...state };
+
+      // use ImmerPlugin instead to avoid copying
+      const parentSchema = state;
+
       // Find the parent schema by id
       const findParentSchema = (schema: Schema, id: string) => {
         if (schema.id === id) {

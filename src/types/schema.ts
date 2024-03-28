@@ -16,6 +16,8 @@ export interface Schema {
   title: string;
   // 组件状态变量
   states: Record<string, any>;
+  // voidElementTag 是否是无子元素的标签
+  voidElementTag?: boolean;
   // 子组件schema
   children: Schema[] | null;
 }

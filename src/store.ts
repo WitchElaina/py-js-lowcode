@@ -4,7 +4,7 @@ import { models, RootModel } from './models';
 
 export const store = init({
   models,
-  plugins: [],
+  plugins: [immerPlugin()],
 });
 
 export type Store = typeof store;

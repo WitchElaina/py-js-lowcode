@@ -1,20 +1,12 @@
 import { ConfigProvider, Tabs, theme } from 'antd';
-import { useEffect, useState } from 'react';
 import MonacoEditor from 'react-monaco-editor';
-import { useSchema } from '../utils/useSchema';
-import { store } from '../store';
+import { useSelector } from 'react-redux';
 
 export function ConfigPanel() {
   const { useToken } = theme;
   const { token } = useToken();
 
-  const { schema } = store.getState();
-  const [schemaJson, setSchemaJson] = useState('');
-
-  useEffect(() => {
-    setSchemaJson(JSON.stringify(schema, null, 2));
-    console.log('globalSchme Js', schema, schemaJson);
-  }, [schema]);
+  const schema = useSelector((state) => state.schema);
 
   return (
     <div
@@ -50,7 +42,7 @@ export function ConfigPanel() {
                   options={{
                     readOnly: true,
                   }}
-                  value={schemaJson}
+                  value={JSON.stringify(schema, null, 2)}
                 />
               ),
             },

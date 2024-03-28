@@ -45,10 +45,9 @@ const input: BaseComponent<typeof Input> = {
       placeholder: '请输入',
     },
     title: '输入框',
-    states: {
-      value: '',
-    },
-    children: [],
+    states: {},
+    children: null,
+    voidElementTag: true,
   },
 };
 
@@ -72,7 +71,7 @@ const checkbox: BaseComponent<typeof Checkbox> = {
     states: {
       checked: false,
     },
-    children: [],
+    children: null,
   },
 };
 
@@ -87,6 +86,19 @@ const inputNumber: BaseComponent<typeof InputNumber> = {
       label: '值',
     },
   },
+  defaultSchema: {
+    componentNames: 'inputNumber',
+    props: {
+      placeholder: '请输入数字',
+      style: {
+        width: '100%',
+      },
+    },
+    title: '数字输入框',
+    states: {},
+    children: null,
+    voidElementTag: true,
+  },
 };
 
 const radio: BaseComponent<typeof Radio> = {
@@ -99,6 +111,15 @@ const radio: BaseComponent<typeof Radio> = {
       name: 'value',
       label: '值',
     },
+  },
+  defaultSchema: {
+    componentNames: 'radio',
+    props: {
+      children: '单选框',
+    },
+    title: '单选框',
+    states: {},
+    children: null,
   },
 };
 
@@ -113,6 +134,19 @@ const select: BaseComponent<typeof Select> = {
       label: '值',
     },
   },
+  defaultSchema: {
+    componentNames: 'select',
+    props: {
+      style: {
+        width: '100%',
+      },
+      placeholder: '请选择选项',
+    },
+    title: '选择器',
+    states: {},
+    children: null,
+    voidElementTag: true,
+  },
 };
 
 const slider: BaseComponent<typeof Slider> = {
@@ -126,10 +160,18 @@ const slider: BaseComponent<typeof Slider> = {
       label: '值',
     },
   },
+  defaultSchema: {
+    componentNames: 'slider',
+    props: {},
+    title: '滑动输入条',
+    states: {},
+    children: null,
+    voidElementTag: true,
+  },
 };
 
 const switcher: BaseComponent<typeof Switch> = {
-  name: 'switch',
+  name: 'switcher',
   label: '开关',
   component: Switch,
   example: <Switch />,
@@ -138,6 +180,23 @@ const switcher: BaseComponent<typeof Switch> = {
       name: 'checked',
       label: '是否选中',
     },
+  },
+  defaultSchema: {
+    componentNames: 'switcher',
+    props: {
+      style: {
+        width: 'fit-content',
+        height: '22px',
+        display: 'flex',
+        alignItems: 'center',
+      },
+    },
+    title: '开关',
+    states: {
+      checked: false,
+    },
+    children: null,
+    voidElementTag: true,
   },
 };
 
@@ -151,6 +210,18 @@ const image: BaseComponent<typeof Image> = {
       name: 'src',
       label: '图片地址',
     },
+  },
+  defaultSchema: {
+    componentNames: 'image',
+    props: {
+      // src: 'https://www.loliapi.com/acg/pc/',
+      src: '/imageIcon.svg',
+      height: 100,
+    },
+    title: '图片',
+    states: {},
+    children: null,
+    voidElementTag: true,
   },
 };
 
@@ -192,6 +263,23 @@ const flex: BaseComponent<typeof Flex> = {
       </span>
     </Flex>
   ),
+  defaultSchema: {
+    componentNames: 'flex',
+    props: {
+      style: {
+        width: '100%',
+        // height: '100%',
+        padding: 16,
+      },
+      vertical: false,
+      gap: 4,
+      align: 'center',
+      wrap: 'wrap',
+    },
+    title: '布局',
+    states: {},
+    children: [],
+  },
 };
 
 export const components = {

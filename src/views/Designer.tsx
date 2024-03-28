@@ -1,7 +1,8 @@
-import { Flex, theme } from 'antd';
+import { theme } from 'antd';
 import { useDrop } from 'react-dnd';
-import { render } from '../utils/render';
+import { RenderDesigner } from '../utils/render';
 import { store } from '../store';
+import { useSelector } from 'react-redux';
 
 const { useToken } = theme;
 
@@ -10,8 +11,7 @@ const DroppableArea = (props: { onDrop }) => {
   const { onDrop } = props;
   const [collectedProps, drop] = useDrop({
     accept: 'component',
-    drop: (item, monitor) => {
-      console.log('drop', item, monitor);
+    drop: (item) => {
       onDrop(item);
     },
     collect: (monitor) => ({
@@ -24,9 +24,10 @@ const DroppableArea = (props: { onDrop }) => {
     <div
       ref={drop}
       style={{
-        width: '100%',
+        // width: '100%',
         height: '100%',
-        display: 'flex',
+        minHeight: 100,
+        display: collectedProps.canDrop ? 'flex' : 'none',
         justifyContent: 'center',
         alignItems: 'center',
         textAlign: 'center',
@@ -53,8 +54,9 @@ export function DesignerScreen(props: DesignerScreenProps) {
   const { width, height } = props;
   const { token } = useToken();
 
-  const { schema } = store.getState();
-  const { append } = store.dispatch.schema;
+  const schema = useSelector((state) => state.schema);
+  // const schema = store.getState().schema;
+  const append = store.dispatch.schema.append;
 
   return (
     <div
@@ -75,12 +77,14 @@ export function DesignerScreen(props: DesignerScreenProps) {
           height: `${height}px`,
           position: 'relative',
           transition: 'all 0.3s',
+          overflow: 'auto',
         }}
       >
-        {render(
-          schema,
-          DroppableArea({ onDrop: (item) => append(item, schema.id) }),
-        )}
+        <RenderDesigner
+          schema={schema}
+          appendSchema={append}
+          createBlackNode={DroppableArea}
+        />
       </div>
     </div>
   );
