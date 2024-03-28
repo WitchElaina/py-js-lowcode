@@ -1,3 +1,18 @@
 body {
   margin: 0;
 }
+
+.config-wrapper {
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #f3f3f346;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.config-wrapper .wp-single-line {
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  height: 40px;
+}

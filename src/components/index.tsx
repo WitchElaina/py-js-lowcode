@@ -1,5 +1,4 @@
 import {
-  Button,
   Input,
   Checkbox,
   InputNumber,
@@ -9,36 +8,37 @@ import {
   Switch,
   Image,
   Flex,
+  InputProps,
+  CheckboxProps,
+  RadioProps,
+  SelectProps,
+  SliderSingleProps,
+  SwitchProps,
+  ImageProps,
+  FlexProps,
 } from 'antd';
+import { button } from './Button';
 import { BaseComponent } from '../types/component';
 
-const button: BaseComponent<typeof Button> = {
-  name: 'button',
-  label: '按钮',
-  component: Button,
-  example: <Button block>按钮</Button>,
-  defaultSchema: {
-    componentNames: 'button',
-    props: {
-      children: '按钮',
-    },
-    title: '按钮',
-    states: {},
-    children: null,
-  },
-};
-
-const input: BaseComponent<typeof Input> = {
+const input: BaseComponent<typeof Input, InputProps> = {
   name: 'input',
   label: '输入框',
   component: Input,
   example: <Input placeholder="请输入" />,
-  variables: {
-    value: {
-      name: 'value',
-      label: '值',
+  variables: [
+    {
+      name: 'placeholder',
+      label: '占位符',
     },
-  },
+    {
+      name: 'prefix',
+      label: '前缀',
+    },
+    {
+      name: 'suffix',
+      label: '后缀',
+    },
+  ],
   defaultSchema: {
     componentNames: 'input',
     props: {
@@ -51,17 +51,12 @@ const input: BaseComponent<typeof Input> = {
   },
 };
 
-const checkbox: BaseComponent<typeof Checkbox> = {
+const checkbox: BaseComponent<typeof Checkbox, CheckboxProps> = {
   name: 'checkbox',
   label: '多选框',
   component: Checkbox,
   example: <Checkbox>多选框</Checkbox>,
-  variables: {
-    checked: {
-      name: 'checked',
-      label: '是否选中',
-    },
-  },
+  variables: [],
   defaultSchema: {
     componentNames: 'checkbox',
     props: {
@@ -75,17 +70,12 @@ const checkbox: BaseComponent<typeof Checkbox> = {
   },
 };
 
-const inputNumber: BaseComponent<typeof InputNumber> = {
+const inputNumber: BaseComponent<typeof InputNumber, InputProps> = {
   name: 'inputNumber',
   label: '数字输入框',
   component: InputNumber,
   example: <InputNumber placeholder="请输入数字" style={{ width: '100%' }} />,
-  variables: {
-    value: {
-      name: 'value',
-      label: '值',
-    },
-  },
+  variables: [],
   defaultSchema: {
     componentNames: 'inputNumber',
     props: {
@@ -101,17 +91,12 @@ const inputNumber: BaseComponent<typeof InputNumber> = {
   },
 };
 
-const radio: BaseComponent<typeof Radio> = {
+const radio: BaseComponent<typeof Radio, RadioProps> = {
   name: 'radio',
   label: '单选框',
   component: Radio,
   example: <Radio>单选框</Radio>,
-  variables: {
-    value: {
-      name: 'value',
-      label: '值',
-    },
-  },
+  variables: [],
   defaultSchema: {
     componentNames: 'radio',
     props: {
@@ -123,17 +108,12 @@ const radio: BaseComponent<typeof Radio> = {
   },
 };
 
-const select: BaseComponent<typeof Select> = {
+const select: BaseComponent<typeof Select, SelectProps> = {
   name: 'select',
   label: '选择器',
   component: Select,
   example: <Select style={{ width: '100%' }} placeholder={'请选择选项'} />,
-  variables: {
-    value: {
-      name: 'value',
-      label: '值',
-    },
-  },
+  variables: [],
   defaultSchema: {
     componentNames: 'select',
     props: {
@@ -149,17 +129,12 @@ const select: BaseComponent<typeof Select> = {
   },
 };
 
-const slider: BaseComponent<typeof Slider> = {
+const slider: BaseComponent<typeof Slider, SliderSingleProps> = {
   name: 'slider',
   label: '滑动输入条',
   component: Slider,
   example: <Slider />,
-  variables: {
-    value: {
-      name: 'value',
-      label: '值',
-    },
-  },
+  variables: [],
   defaultSchema: {
     componentNames: 'slider',
     props: {},
@@ -170,17 +145,12 @@ const slider: BaseComponent<typeof Slider> = {
   },
 };
 
-const switcher: BaseComponent<typeof Switch> = {
+const switcher: BaseComponent<typeof Switch, SwitchProps> = {
   name: 'switcher',
   label: '开关',
   component: Switch,
   example: <Switch />,
-  variables: {
-    checked: {
-      name: 'checked',
-      label: '是否选中',
-    },
-  },
+  variables: [],
   defaultSchema: {
     componentNames: 'switcher',
     props: {
@@ -200,17 +170,12 @@ const switcher: BaseComponent<typeof Switch> = {
   },
 };
 
-const image: BaseComponent<typeof Image> = {
+const image: BaseComponent<typeof Image, ImageProps> = {
   name: 'image',
   label: '图片',
   component: Image,
   example: <Image src="/imageIcon.svg" />,
-  variables: {
-    src: {
-      name: 'src',
-      label: '图片地址',
-    },
-  },
+  variables: [],
   defaultSchema: {
     componentNames: 'image',
     props: {
@@ -225,7 +190,7 @@ const image: BaseComponent<typeof Image> = {
   },
 };
 
-const flex: BaseComponent<typeof Flex> = {
+const flex: BaseComponent<typeof Flex, FlexProps> = {
   name: 'flex',
   label: '布局',
   component: Flex,
@@ -270,11 +235,11 @@ const flex: BaseComponent<typeof Flex> = {
         width: '100%',
         // height: '100%',
         padding: 16,
+        flexGrow: 1,
       },
-      vertical: false,
-      gap: 4,
+      vertical: true,
+      gap: 16,
       align: 'center',
-      wrap: 'wrap',
     },
     title: '布局',
     states: {},
