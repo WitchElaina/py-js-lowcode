@@ -6,34 +6,21 @@ import {
 } from '@ant-design/icons';
 import { ConfigProvider, Flex, InputNumber, Segmented, Typography } from 'antd';
 import { useState } from 'react';
+import { store } from '../store';
+import { useSelector } from 'react-redux';
 
 const { Text } = Typography;
 
-interface DesingerSegmentedProps {
-  width: number;
-  height: number;
-  onWidthChange: (width: number) => void;
-  onHeightChange: (height: number) => void;
-}
+export function DesingerSegmented() {
+  const width = useSelector((state) => state.designer.width);
+  const height = useSelector((state) => state.designer.height);
+  const onWidthChange = store.dispatch.designer.setWidth;
+  const onHeightChange = store.dispatch.designer.setHeight;
+  const setPCView = store.dispatch.designer.setPCView;
+  const setTabletView = store.dispatch.designer.setTabletView;
+  const setMobileView = store.dispatch.designer.setMobileView;
 
-export function DesingerSegmented(props: DesingerSegmentedProps) {
-  const { width, height, onWidthChange, onHeightChange } = props;
   const [showCustom, setShowCustom] = useState(false);
-
-  const changeToPC = () => {
-    onWidthChange(1100);
-    onHeightChange(700);
-  };
-
-  const changeToPad = () => {
-    onWidthChange(1024);
-    onHeightChange(668);
-  };
-
-  const changeToPhone = () => {
-    onWidthChange(375);
-    onHeightChange(667);
-  };
 
   return (
     <Flex
@@ -73,11 +60,11 @@ export function DesingerSegmented(props: DesingerSegmentedProps) {
           ]}
           onChange={(value) => {
             if (value === 'PC') {
-              changeToPC();
+              setPCView();
             } else if (value === 'Pad') {
-              changeToPad();
+              setTabletView();
             } else if (value === 'Phone') {
-              changeToPhone();
+              setMobileView();
             }
             setShowCustom(value === 'Custom');
           }}

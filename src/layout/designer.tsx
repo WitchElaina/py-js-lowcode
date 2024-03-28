@@ -3,12 +3,15 @@ import { ComponentLibrary } from '../views/ComponentLibrary';
 import { ConfigPanel } from '../views/ConfigPanel';
 import { DesignerCanvas } from '../views/DesignerCanvas';
 import { DesignerScreen } from '../views/Designer';
-import { useDesigner } from '../utils/useDesinger';
 import { DesingerSegmented } from '../views/DesingerSegmented';
+
+import { useSelector } from 'react-redux';
 
 export function Designer() {
   const { Title } = Typography;
-  const { width, height, setWidth, setHeight } = useDesigner();
+
+  const width = useSelector((state) => state.designer.width);
+  const height = useSelector((state) => state.designer.height);
 
   return (
     <Flex style={{ height: '100%' }}>
@@ -22,12 +25,7 @@ export function Designer() {
         }}
       >
         <DesignerCanvas>
-          <DesingerSegmented
-            width={width}
-            height={height}
-            onWidthChange={setWidth}
-            onHeightChange={setHeight}
-          />
+          <DesingerSegmented />
           <DesignerScreen width={width} height={height} />
         </DesignerCanvas>
       </Col>
