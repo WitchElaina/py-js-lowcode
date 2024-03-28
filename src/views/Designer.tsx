@@ -6,11 +6,17 @@ import { useSelector } from 'react-redux';
 
 const { useToken } = theme;
 
-const DroppableArea = (props: { onDrop }) => {
+const DroppableArea = (props: {
+  onDrop: (any) => void;
+  accept: string;
+  customStyle?: React.CSSProperties;
+  outsideText: string;
+  overText: string;
+}) => {
   const { token } = useToken();
-  const { onDrop } = props;
+  const { onDrop, accept, outsideText, overText, customStyle } = props;
   const [collectedProps, drop] = useDrop({
-    accept: 'component',
+    accept,
     drop: (item) => {
       onDrop(item);
     },
@@ -26,7 +32,6 @@ const DroppableArea = (props: { onDrop }) => {
       style={{
         // width: '100%',
         height: '100%',
-        minHeight: 50,
         display: collectedProps.canDrop ? 'flex' : 'none',
         justifyContent: 'center',
         alignItems: 'center',
@@ -38,9 +43,10 @@ const DroppableArea = (props: { onDrop }) => {
         border: collectedProps.isOver
           ? `2px dashed ${token.colorPrimary}`
           : '2px dashed transparent',
+        ...customStyle,
       }}
     >
-      {collectedProps.isOver ? '松开以添加' : '可拖拽组件到此处'}
+      {collectedProps.isOver ? overText : outsideText}
     </div>
   );
 };
@@ -85,7 +91,7 @@ export function DesignerScreen(props: DesignerScreenProps) {
           schema={schema}
           appendSchema={append}
           onClickCallback={onClickCallback}
-          createBlackNode={DroppableArea}
+          BlankNode={DroppableArea}
         />
       </div>
     </div>
