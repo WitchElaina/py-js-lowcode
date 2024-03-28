@@ -12,7 +12,7 @@ export const RenderDesigner = (props: {
   appendSchema: (props: { schema: Schema; id: string }) => void;
   onClickCallback?: (schema: Schema) => void;
   createBlackNode?: (onDrop) => ReactNode;
-  cancelParentHover?: () => void;
+  setParentHover?: (props: boolean) => void;
 }) => {
   const { schema, createBlackNode, appendSchema, onClickCallback } = props;
 
@@ -41,10 +41,11 @@ export const RenderDesigner = (props: {
         console.log('点击了组件', schema);
       }}
       onMouseEnter={() => {
-        props.cancelParentHover && props.cancelParentHover();
+        props.setParentHover && props.setParentHover(false);
         setIsHovering(true);
       }}
       onMouseLeave={() => {
+        props.setParentHover && props.setParentHover(true);
         setIsHovering(false);
       }}
       style={{
@@ -90,7 +91,7 @@ export const RenderDesigner = (props: {
                 createBlackNode={createBlackNode}
                 appendSchema={appendSchema}
                 onClickCallback={onClickCallback}
-                cancelParentHover={() => setIsHovering(false)}
+                setParentHover={setIsHovering}
               />
             ))}
 
