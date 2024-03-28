@@ -57,6 +57,7 @@ export function DesignerScreen(props: DesignerScreenProps) {
   const schema = useSelector((state) => state.schema);
   // const schema = store.getState().schema;
   const append = store.dispatch.schema.append;
+  const onClickCallback = store.dispatch.designer.setCurSchema;
 
   return (
     <div
@@ -83,6 +84,7 @@ export function DesignerScreen(props: DesignerScreenProps) {
         <RenderDesigner
           schema={schema}
           appendSchema={append}
+          onClickCallback={onClickCallback}
           createBlackNode={DroppableArea}
         />
       </div>
