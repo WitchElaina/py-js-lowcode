@@ -3,6 +3,7 @@
     "ms-python.python",
     "ms-python.black-formatter",
     "witchelaina.witchelaina",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "redjue.git-commit-plugin"
   ]
 }
