@@ -7,7 +7,6 @@ import {
   Slider,
   Switch,
   Image,
-  Flex,
   InputProps,
   CheckboxProps,
   RadioProps,
@@ -15,9 +14,9 @@ import {
   SliderSingleProps,
   SwitchProps,
   ImageProps,
-  FlexProps,
 } from 'antd';
 import { button } from './Button';
+import { flex } from './Flex';
 import { BaseComponent } from '../types/component';
 
 const input: BaseComponent<typeof Input, InputProps> = {
@@ -187,63 +186,6 @@ const image: BaseComponent<typeof Image, ImageProps> = {
     states: {},
     children: null,
     voidElementTag: true,
-  },
-};
-
-const flex: BaseComponent<typeof Flex, FlexProps> = {
-  name: 'flex',
-  label: '布局',
-  component: Flex,
-  example: (
-    <Flex style={{ width: '100%', height: '100%' }} gap={4}>
-      <span
-        style={{
-          width: '33%',
-          textAlign: 'center',
-          backgroundColor: '#A6A2AE',
-          color: 'white',
-        }}
-      >
-        1
-      </span>
-      <span
-        style={{
-          width: '33%',
-          textAlign: 'center',
-          backgroundColor: '#594B84',
-          color: 'white',
-        }}
-      >
-        2
-      </span>
-      <span
-        style={{
-          width: '33%',
-          textAlign: 'center',
-          backgroundColor: '#A6A2AE',
-          color: 'white',
-        }}
-      >
-        3
-      </span>
-    </Flex>
-  ),
-  defaultSchema: {
-    componentNames: 'flex',
-    props: {
-      style: {
-        width: '100%',
-        // height: '100%',
-        padding: 16,
-        flexGrow: 1,
-      },
-      vertical: true,
-      gap: 16,
-      align: 'center',
-    },
-    title: '布局',
-    states: {},
-    children: [],
   },
 };
 

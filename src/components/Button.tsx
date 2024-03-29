@@ -21,7 +21,7 @@ const ButtonConfig = (props: { schema: Schema }) => {
   return (
     <Flex vertical gap={0} className="config-wrapper">
       <Flex className="wp-single-line wp-switch">
-        <Text strong>占满宽度</Text>
+        <Text strong>填充宽度</Text>
         <Switch
           defaultChecked={schema.props.block}
           onChange={(val) => {
