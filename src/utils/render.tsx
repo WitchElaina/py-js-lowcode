@@ -135,11 +135,13 @@ export const RenderDesigner = (props: {
         style={{
           position: 'absolute',
           width: 'max-content',
-          top: -25,
-          left: -3,
+          top: 0,
+          left: 0,
           zIndex: 10,
           opacity: isHovering || isOver ? 1 : 0,
+          display: isHovering || isOver ? 'block' : 'none',
           overflow: 'visible',
+          transform: 'translate(-14%, -100%)  scale(0.75)',
         }}
       >
         {isOver &&
