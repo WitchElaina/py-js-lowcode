@@ -31,7 +31,7 @@ const DroppableArea = (props: {
       ref={drop}
       style={{
         // width: '100%',
-        height: '100%',
+        // height: '100%',
         display: collectedProps.canDrop ? 'flex' : 'none',
         justifyContent: 'center',
         alignItems: 'center',
@@ -39,7 +39,7 @@ const DroppableArea = (props: {
         transition: 'all 0.3s ease',
         color: token.colorTextPlaceholder,
         backgroundColor: token.colorBgBase,
-        opacity: collectedProps.canDrop ? 1 : 0,
+        // opacity: collectedProps.canDrop ? 1 : 0,
         border: collectedProps.isOver
           ? `2px dashed ${token.colorPrimary}`
           : '2px dashed transparent',
@@ -91,7 +91,6 @@ export function DesignerScreen(props: DesignerScreenProps) {
           schema={schema}
           appendSchema={append}
           onClickCallback={onClickCallback}
-          BlankNode={DroppableArea}
         />
       </div>
     </div>
