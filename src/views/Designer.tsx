@@ -63,6 +63,8 @@ export function DesignerScreen(props: DesignerScreenProps) {
   const schema = useSelector((state) => state.schema);
   // const schema = store.getState().schema;
   const append = store.dispatch.schema.append;
+  const appendExist = store.dispatch.schema.appendExist;
+  const swapSchema = store.dispatch.schema.swapSchema;
   const onClickCallback = store.dispatch.designer.setCurSchema;
 
   return (
@@ -90,6 +92,8 @@ export function DesignerScreen(props: DesignerScreenProps) {
         <RenderDesigner
           schema={schema}
           appendSchema={append}
+          appendExistSchema={appendExist}
+          swapSchema={swapSchema}
           onClickCallback={onClickCallback}
         />
       </div>

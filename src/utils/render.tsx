@@ -10,10 +10,18 @@ const { useToken } = theme;
 export const RenderDesigner = (props: {
   schema: Schema;
   appendSchema: (props: { schema: Schema; id: string }) => void;
+  appendExistSchema: (props: { schema: Schema; id: string }) => void;
+  swapSchema: (props: { schema: Schema; id: string }) => void;
   onClickCallback?: (schema: Schema) => void;
   setParentHover?: (props: boolean) => void;
 }) => {
-  const { schema, appendSchema, onClickCallback } = props;
+  const {
+    schema,
+    appendSchema,
+    appendExistSchema,
+    swapSchema,
+    onClickCallback,
+  } = props;
 
   const Component = components[schema.componentNames].component;
 
@@ -60,12 +68,20 @@ export const RenderDesigner = (props: {
     }),
     drop(item, monitor) {
       console.log('组件内 onDropMove', schema.id, item, monitor.getItem());
-      window.alert('移动组件\n' + item.component.id + '\n 👇🏻 \n' + schema.id);
+      // window.alert('移动组件\n' + item.component.id + '\n 👇🏻 \n' + schema.id);
 
       if (Array.isArray(schema.children)) {
         console.log('Add to flex');
+        appendExistSchema({
+          schemaToAppend: item.component,
+          parentId: schema.id,
+        });
       } else {
         console.log('Swap position');
+        swapSchema({
+          fromId: item.component.id,
+          toId: schema.id,
+        });
       }
 
       // 用于阻止冒泡
@@ -180,6 +196,8 @@ export const RenderDesigner = (props: {
                 <RenderDesigner
                   schema={item}
                   appendSchema={appendSchema}
+                  appendExistSchema={appendExistSchema}
+                  swapSchema={swapSchema}
                   onClickCallback={onClickCallback}
                   setParentHover={setIsHovering}
                 />
@@ -189,26 +207,6 @@ export const RenderDesigner = (props: {
       </span>
 
       {/* 布局组件末尾插入占位符 */}
-      {/* {BlankNode && schema.children !== null && (
-        // 布局组件
-        <>
-          <BlankNode
-            onDrop={onDrop}
-            accept={'component'}
-            overText={'释放以添加'}
-            outsideText={'添加到这个布局组件内'}
-            customStyle={{
-              minHeight: 50,
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              backgroundColor: token.colorPrimaryBg,
-              opacity: 0.8,
-            }}
-          />
-        </>
-      )} */}
       {schema.children !== null && (
         // 布局组件
         <div

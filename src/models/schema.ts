@@ -3,7 +3,7 @@ import { RootModel } from '.';
 import { Schema } from '../types/schema';
 import { v4 as uuidv4 } from 'uuid';
 import { cloneDeep } from 'lodash';
-import { getSchemaById } from '../utils/schemaTools';
+import { getParentSchemaById, getSchemaById } from '../utils/schemaTools';
 
 const defaultSchema: Schema = {
   id: 'flex-' + uuidv4(),
@@ -55,21 +55,7 @@ export const schema = createModel<RootModel>()({
       // use ImmerPlugin instead to avoid copying
       const parentSchema = state;
 
-      // Find the parent schema by id
-      const findParentSchema = (schema: Schema, id: string) => {
-        if (schema.id === id) {
-          return schema;
-        }
-        if (schema.children) {
-          for (let i = 0; i < schema.children.length; i++) {
-            const result = findParentSchema(schema.children[i], id);
-            if (result) {
-              return result;
-            }
-          }
-        }
-      };
-      const parent = findParentSchema(parentSchema, parentId);
+      const parent = getSchemaById(parentId, parentSchema);
       console.log(
         'parent',
         parent.componentNames,
@@ -85,6 +71,36 @@ export const schema = createModel<RootModel>()({
       // Update the global schema
       return parentSchema;
     },
+    appendExist(state, payload: { schemaToAppend: Schema; parentId: string }) {
+      const { schemaToAppend: schemaToAppendOriginal, parentId } = payload;
+
+      // check if parentId exists and its children is Array
+      const parentSchema = state;
+      const parent = getSchemaById(parentId, state);
+      if (!Array.isArray(parent.children)) {
+        return state;
+      }
+
+      // copy schemaToAppend as a new id
+      const schemaToAppend = cloneDeep(schemaToAppendOriginal);
+      const idTemp = schemaToAppend.id;
+      schemaToAppend.id = 'temp-schema';
+
+      // append the new schema to the parent schema
+      parent.children.push(schemaToAppend);
+
+      // delete the old schema
+      const originalParent = getParentSchemaById(idTemp, parentSchema);
+      originalParent.children = originalParent.children.filter(
+        (child) => child.id !== idTemp,
+      );
+
+      // reset the new id to the original schemaToAppend
+      schemaToAppend.id = idTemp;
+
+      // Update the global schema
+      return parentSchema;
+    },
     changePropsById(state, payload: { id: string; props: string; value: any }) {
       const { id, props, value } = payload;
       const propsObj = getSchemaById(id, state).props;
@@ -93,6 +109,34 @@ export const schema = createModel<RootModel>()({
 
       propsObj[props] = value;
       return state;
+    },
+    swapSchema(state, payload: { fromId: string; toId: string }) {
+      const { fromId, toId } = payload;
+
+      const stateDeepCopy = cloneDeep(state);
+
+      const from = getSchemaById(fromId, stateDeepCopy);
+      const to = getSchemaById(toId, stateDeepCopy);
+
+      console.log('swapSchema', from, to);
+
+      console.log(`Swap ${from.id} <-> ${to.id}`);
+      const toDeepCopy = cloneDeep(to);
+
+      // format the to schema
+      Object.keys(to).forEach((key) => {
+        delete to[key];
+      });
+      Object.assign(to, from);
+      to.id = fromId;
+
+      // format the from schema
+      Object.keys(from).forEach((key) => {
+        delete from[key];
+      });
+      Object.assign(from, toDeepCopy);
+
+      return stateDeepCopy;
     },
   },
   effects: (dispatch) => ({
