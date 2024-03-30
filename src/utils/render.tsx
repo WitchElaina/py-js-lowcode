@@ -1,17 +1,20 @@
 import { Schema } from '../types/schema';
 import { components } from '../components';
-import { ReactNode, useEffect, useRef, useState } from 'react';
-import { useDrag, useDragLayer, useDrop } from 'react-dnd';
-import { Tag, Typography, theme } from 'antd';
+import { useEffect, useRef, useState } from 'react';
+import { useDrag, useDrop } from 'react-dnd';
+import { Tag, theme } from 'antd';
+import { BaseComponent } from '../types/component';
 
-const { Text } = Typography;
 const { useToken } = theme;
 
 export const RenderDesigner = (props: {
   schema: Schema;
-  appendSchema: (props: { schema: Schema; id: string }) => void;
-  appendExistSchema: (props: { schema: Schema; id: string }) => void;
-  swapSchema: (props: { schema: Schema; id: string }) => void;
+  appendSchema: (props: { schemaToAppend: Schema; parentId: string }) => void;
+  appendExistSchema: (props: {
+    schemaToAppend: Schema;
+    parentId: string;
+  }) => void;
+  swapSchema: (props: { fromId: string; toId: string }) => void;
   onClickCallback?: (schema: Schema) => void;
   setParentHover?: (props: boolean) => void;
 }) => {
@@ -23,22 +26,23 @@ export const RenderDesigner = (props: {
     onClickCallback,
   } = props;
 
-  const Component = components[schema.componentNames].component;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Component = components[schema.componentNames].component as any;
 
   const { token } = useToken();
 
-  const onDrop = (item) => {
+  const onDrop = (item: { component: BaseComponent<unknown, unknown> }) => {
     console.log('组件内 onDrop', schema, item.component.defaultSchema);
     appendSchema({
       schemaToAppend: item.component.defaultSchema,
-      parentId: schema.id,
+      parentId: schema.id as string,
     });
   };
 
   // 布局组件接纳新组件的区域
   const [blankDropProps, dropBlank] = useDrop({
     accept: 'component',
-    drop: (item) => {
+    drop: (item: { component: BaseComponent<unknown, unknown> }) => {
       onDrop(item);
     },
     collect: (monitor) => ({
@@ -58,9 +62,13 @@ export const RenderDesigner = (props: {
     }),
   });
 
-  const [{ isOver }, drop] = useDrop({
+  const [{ isOver }, drop] = useDrop<
+    { component: Schema },
+    void,
+    { isOver: boolean }
+  >({
     accept: 'move',
-    hover(item, monitor) {
+    hover() {
       // console.log('组件内 hover', monitor.isOver({ shallow: true }));
     },
     collect: (monitor) => ({
@@ -74,13 +82,13 @@ export const RenderDesigner = (props: {
         console.log('Add to flex');
         appendExistSchema({
           schemaToAppend: item.component,
-          parentId: schema.id,
+          parentId: schema.id as string,
         });
       } else {
         console.log('Swap position');
         swapSchema({
-          fromId: item.component.id,
-          toId: schema.id,
+          fromId: item.component.id as string,
+          toId: schema.id as string,
         });
       }
 
@@ -192,7 +200,7 @@ export const RenderDesigner = (props: {
 
             {/* 布局组件的children */}
             {Array.isArray(schema.children) &&
-              schema.children.map((item, index) => (
+              schema.children.map((item) => (
                 <RenderDesigner
                   schema={item}
                   appendSchema={appendSchema}

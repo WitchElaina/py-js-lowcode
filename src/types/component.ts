@@ -22,7 +22,7 @@ export interface BaseCallback {
 }
 
 // 将自定义组件的 props 与 React 原生 Ref 属性合并
-type CombineProps<T> = T & React.RefAttributes<HTMLElement>;
+export type CombineProps<T> = T & React.RefAttributes<HTMLElement>;
 
 /**
  * BaseComponent interface.

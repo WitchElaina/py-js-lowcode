@@ -62,9 +62,7 @@ const checkbox: BaseComponent<typeof Checkbox, CheckboxProps> = {
       children: '多选框',
     },
     title: '多选框',
-    states: {
-      checked: false,
-    },
+    states: {},
     children: null,
   },
 };
@@ -161,9 +159,7 @@ const switcher: BaseComponent<typeof Switch, SwitchProps> = {
       },
     },
     title: '开关',
-    states: {
-      checked: false,
-    },
+    states: {},
     children: null,
     voidElementTag: true,
   },

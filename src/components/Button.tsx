@@ -7,15 +7,18 @@ import {
   Select,
   Input,
 } from 'antd';
-import { BaseComponent } from '../types/component';
+import { BaseComponent, CombineProps } from '../types/component';
 import { Schema } from '../types/schema';
 import { store } from '../store';
 
 const { Text } = Typography;
 
+// eslint-disable-next-line react-refresh/only-export-components
 const ButtonConfig = (props: { schema: Schema }) => {
   const { schema } = props;
 
+  const id = schema.id as string;
+  const schemaProps = schema.props as CombineProps<ButtonProps>;
   const setProps = store.dispatch.schema.changePropsById;
 
   return (
@@ -23,10 +26,10 @@ const ButtonConfig = (props: { schema: Schema }) => {
       <Flex className="wp-single-line wp-switch">
         <Text strong>填充宽度</Text>
         <Switch
-          defaultChecked={schema.props.block}
+          defaultChecked={schemaProps.block}
           onChange={(val) => {
             setProps({
-              id: schema.id,
+              id,
               props: 'block',
               value: val,
             });
@@ -36,10 +39,10 @@ const ButtonConfig = (props: { schema: Schema }) => {
       <Flex className="wp-single-line wp-switch">
         <Text strong>禁用</Text>
         <Switch
-          defaultChecked={schema.props.disabled}
+          defaultChecked={schemaProps.disabled}
           onChange={(val) => {
             setProps({
-              id: schema.id,
+              id,
               props: 'disabled',
               value: val,
             });
@@ -49,10 +52,10 @@ const ButtonConfig = (props: { schema: Schema }) => {
       <Flex className="wp-single-line wp-select">
         <Text strong>危险操作按钮</Text>
         <Switch
-          defaultChecked={schema.props.danger}
+          defaultChecked={schemaProps.danger}
           onChange={(val) => {
             setProps({
-              id: schema.id,
+              id,
               props: 'danger',
               value: val,
             });
@@ -64,7 +67,7 @@ const ButtonConfig = (props: { schema: Schema }) => {
         <Select
           style={{ width: '50%' }}
           variant="filled"
-          defaultValue={schema.props.type || 'default'}
+          defaultValue={schemaProps.type || 'default'}
           options={[
             { label: '默认', value: 'default' },
             { label: '主要', value: 'primary' },
@@ -73,7 +76,7 @@ const ButtonConfig = (props: { schema: Schema }) => {
           ]}
           onChange={(val) => {
             setProps({
-              id: schema.id,
+              id,
               props: 'type',
               value: val,
             });
@@ -85,10 +88,10 @@ const ButtonConfig = (props: { schema: Schema }) => {
         <Input
           style={{ width: '50%' }}
           variant="filled"
-          defaultValue={schema.props.children}
+          defaultValue={schemaProps.children as string}
           onChange={(e) => {
             setProps({
-              id: schema.id,
+              id,
               props: 'children',
               value: e.target.value,
             });
