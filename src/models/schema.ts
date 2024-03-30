@@ -17,7 +17,6 @@ const defaultSchema: Schema = {
     vertical: true,
   },
   title: '设计器',
-  states: {},
   children: [
     {
       id: 'button-' + uuidv4(),
@@ -27,8 +26,17 @@ const defaultSchema: Schema = {
         children: 'Block 按钮',
       },
       title: '按钮',
-      states: {},
       children: null,
+    },
+    {
+      id: 'input-' + uuidv4(),
+      componentNames: 'input',
+      props: {
+        placeholder: '请输入',
+      },
+      title: '输入框',
+      children: null,
+      voidElementTag: true,
     },
   ],
 };

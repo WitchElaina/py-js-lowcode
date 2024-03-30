@@ -113,6 +113,7 @@ export const button: BaseComponent<typeof Button, ButtonProps> = {
       label: '文本',
     },
   ],
+  states: [],
   configPanel: ButtonConfig,
   defaultSchema: {
     componentNames: 'button',
@@ -120,7 +121,6 @@ export const button: BaseComponent<typeof Button, ButtonProps> = {
       children: '按钮',
     },
     title: '按钮',
-    states: {},
     children: null,
   },
 };

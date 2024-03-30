@@ -80,6 +80,7 @@ export const flex: BaseComponent<typeof Flex, FlexProps> = {
   component: Flex,
   configPanel: FlexConfig,
   variables: [],
+  states: [],
   example: (
     <Flex style={{ width: '100%', height: '100%' }} gap={4}>
       <span
@@ -128,7 +129,6 @@ export const flex: BaseComponent<typeof Flex, FlexProps> = {
       align: 'center',
     },
     title: '布局',
-    states: {},
     children: [],
   },
 };

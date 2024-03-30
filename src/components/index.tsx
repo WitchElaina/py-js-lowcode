@@ -38,13 +38,13 @@ const input: BaseComponent<typeof Input, InputProps> = {
       label: '后缀',
     },
   ],
+  states: ['value'],
   defaultSchema: {
     componentNames: 'input',
     props: {
       placeholder: '请输入',
     },
     title: '输入框',
-    states: {},
     children: null,
     voidElementTag: true,
   },
@@ -56,13 +56,13 @@ const checkbox: BaseComponent<typeof Checkbox, CheckboxProps> = {
   component: Checkbox,
   example: <Checkbox>多选框</Checkbox>,
   variables: [],
+  states: ['checked'],
   defaultSchema: {
     componentNames: 'checkbox',
     props: {
       children: '多选框',
     },
     title: '多选框',
-    states: {},
     children: null,
   },
 };
@@ -73,6 +73,7 @@ const inputNumber: BaseComponent<typeof InputNumber, InputProps> = {
   component: InputNumber,
   example: <InputNumber placeholder="请输入数字" style={{ width: '100%' }} />,
   variables: [],
+  states: ['value'],
   defaultSchema: {
     componentNames: 'inputNumber',
     props: {
@@ -82,7 +83,6 @@ const inputNumber: BaseComponent<typeof InputNumber, InputProps> = {
       },
     },
     title: '数字输入框',
-    states: {},
     children: null,
     voidElementTag: true,
   },
@@ -94,6 +94,7 @@ const radio: BaseComponent<typeof Radio, RadioProps> = {
   component: Radio,
   example: <Radio>单选框</Radio>,
   variables: [],
+  states: ['checked'],
   defaultSchema: {
     componentNames: 'radio',
     props: {
@@ -111,6 +112,7 @@ const select: BaseComponent<typeof Select, SelectProps> = {
   component: Select,
   example: <Select style={{ width: '100%' }} placeholder={'请选择选项'} />,
   variables: [],
+  states: ['value'],
   defaultSchema: {
     componentNames: 'select',
     props: {
@@ -132,6 +134,7 @@ const slider: BaseComponent<typeof Slider, SliderSingleProps> = {
   component: Slider,
   example: <Slider />,
   variables: [],
+  states: ['value'],
   defaultSchema: {
     componentNames: 'slider',
     props: {},
@@ -148,6 +151,7 @@ const switcher: BaseComponent<typeof Switch, SwitchProps> = {
   component: Switch,
   example: <Switch />,
   variables: [],
+  states: ['checked'],
   defaultSchema: {
     componentNames: 'switcher',
     props: {
@@ -171,6 +175,7 @@ const image: BaseComponent<typeof Image, ImageProps> = {
   component: Image,
   example: <Image src="/imageIcon.svg" />,
   variables: [],
+  states: ['src'],
   defaultSchema: {
     componentNames: 'image',
     props: {

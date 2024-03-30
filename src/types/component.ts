@@ -8,12 +8,10 @@ export interface BaseVariable<T> {
 
 // state 值类型
 export interface BaseState<T> {
-  // 在全局 state 管理器中的 id，未注册则为 null
-  globalId: string | null;
   // config panel 中展示给用户的 label
   label: string;
   // 默认值，初始化时使用
-  defaultValue: T[keyof T];
+  defaultValue: T;
 }
 
 export interface BaseCallback {
@@ -46,8 +44,5 @@ export interface BaseComponent<ComponentType, PropsType> {
   // 默认的 schema
   defaultSchema: Schema;
   // 组件 state
-  states?: Record<
-    keyof CombineProps<PropsType>,
-    BaseState<CombineProps<PropsType>>
-  >;
+  states: (keyof CombineProps<PropsType>)[];
 }
