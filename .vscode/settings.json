@@ -29,4 +29,7 @@
   },
   "prettier.configPath": ".prettierrc.json",
   "GitCommitPlugin.MaxSubjectCharacters": 50,
+  "material-icon-theme.folders.associations": {
+    "PythonAdapter" : "python",
+  }
 }

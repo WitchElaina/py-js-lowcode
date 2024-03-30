@@ -4,6 +4,7 @@
     "ms-python.black-formatter",
     "witchelaina.witchelaina",
     "esbenp.prettier-vscode",
-    "redjue.git-commit-plugin"
+    "redjue.git-commit-plugin",
+    "pkief.material-icon-theme"
   ]
 }
