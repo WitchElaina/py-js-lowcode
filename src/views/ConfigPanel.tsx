@@ -9,6 +9,7 @@ import {
   Select,
   Button,
   Input,
+  Card,
 } from 'antd';
 import MonacoEditor from 'react-monaco-editor';
 import { useSelector } from 'react-redux';
@@ -193,7 +194,10 @@ const EventConfig = (props: { curSchema: Schema }) => {
                 width: '60%',
               }}
             >
-              <Input value={selectedCompId} placeholder="组件ID" />
+              <Input
+                value={selectedCompId}
+                placeholder="从画布上拖拽组件到此处"
+              />
             </div>
             <Select
               placeholder="属性"
@@ -210,77 +214,58 @@ const EventConfig = (props: { curSchema: Schema }) => {
       };
 
       return (
-        <Flex gap={5} vertical>
-          <Flex
-            gap={2}
-            align="center"
-            style={{
-              justifyContent: 'space-between',
-            }}
-          >
-            <Flex gap={2}>
-              <Text strong>回调函数#{index + 1}</Text>
-              <Text code>
-                {index}: {funcName}
-                {`(${args.join(',')}) ==>`}
-              </Text>
-            </Flex>
-            <Flex gap={2}>
-              {editingIndex !== index ? (
-                <Button size="small" onClick={() => setEditingIndex(index)}>
-                  编辑
-                </Button>
-              ) : (
-                <Button
-                  size="small"
-                  onClick={() => setEditingIndex(null)}
-                  type="primary"
+        <Flex gap={10} vertical>
+          <>
+            <Text strong>要执行的 Python 函数</Text>
+            <FuncNameForm />
+          </>
+
+          <>
+            <Text strong>传入函数的参数</Text>
+            {args.map((arg, argIndex) => {
+              const argNameList = funcDetails?.data.find(
+                (func) => func.name === funcName,
+              )?.args;
+
+              return (
+                <Flex
+                  vertical
+                  gap={2}
+                  key={`${argIndex}.${arg.id}.${arg.propName}`}
                 >
-                  完成
-                </Button>
-              )}
-              <Button size="small" danger onClick={() => remove(index)}>
-                删除
-              </Button>
-            </Flex>
-          </Flex>
-          <FuncNameForm />
-
-          {args.map((arg, argIndex) => {
-            const argNameList = funcDetails?.data.find(
-              (func) => func.name === funcName,
-            )?.args;
-
-            return (
-              <div key={`${argIndex}.${arg.id}.${arg.propName}`}>
-                <Text code>
-                  {argNameList ? argNameList[argIndex] : `参数${argIndex}`}
-                </Text>
-                <PropsForm
-                  compId={arg.id}
-                  propsName={arg.propName}
-                  onChange={(props) => {
-                    const newArgs = [...args];
-                    newArgs[argIndex] = props;
-                    const newItem = cloneDeep(item);
-                    newItem.args = newArgs;
-                    replace(index, newItem);
-                  }}
-                />
-              </div>
-            );
-          })}
-          <Text code>返回值</Text>
-          <PropsForm
-            compId={item.returnTo.id}
-            propsName={item.returnTo.propName}
-            onChange={(props) => {
-              window.alert(`${props.id} - ${props.propName}`);
-              const newItem = cloneDeep(item);
-              newItem.returnTo = props;
-              replace(index, newItem);
-            }}
-          />
+                  <Flex gap={2}>
+                    <Text>参数</Text>
+                    <Text code>
+                      {argNameList ? argNameList[argIndex] : `参数${argIndex}`}
+                    </Text>
+                  </Flex>
+                  <PropsForm
+                    compId={arg.id}
+                    propsName={arg.propName}
+                    onChange={(props) => {
+                      const newArgs = [...args];
+                      newArgs[argIndex] = props;
+                      const newItem = cloneDeep(item);
+                      newItem.args = newArgs;
+                      replace(index, newItem);
+                    }}
+                  />
+                </Flex>
+              );
+            })}
+          </>
+          <>
+            <Text strong>返回值写入到</Text>
+            <PropsForm
+              compId={item.returnTo.id}
+              propsName={item.returnTo.propName}
+              onChange={(props) => {
+                const newItem = cloneDeep(item);
+                newItem.returnTo = props;
+                replace(index, newItem);
+              }}
+            />
+          </>
         </Flex>
       );
     };
@@ -288,7 +273,59 @@ const EventConfig = (props: { curSchema: Schema }) => {
     return (
       <>
         {list.map((item, index) => (
-          <Row key={getKey(index)} index={index} item={item} />
+          <>
+            <Card
+              size="small"
+              style={{
+                border: '1px solid #D4D4D4',
+              }}
+              title={
+                <>
+                  <Flex
+                    gap={2}
+                    align="center"
+                    style={{
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    <Flex gap={2}>
+                      <Title
+                        level={5}
+                        style={{
+                          margin: '15px 0px',
+                        }}
+                      >
+                        回调函数#{index + 1}
+                      </Title>
+                    </Flex>
+                    <Flex gap={6}>
+                      {editingIndex !== index ? (
+                        <Button
+                          size="small"
+                          onClick={() => setEditingIndex(index)}
+                        >
+                          编辑
+                        </Button>
+                      ) : (
+                        <Button
+                          size="small"
+                          onClick={() => setEditingIndex(null)}
+                          type="primary"
+                        >
+                          完成
+                        </Button>
+                      )}
+                      <Button size="small" danger onClick={() => remove(index)}>
+                        删除
+                      </Button>
+                    </Flex>
+                  </Flex>
+                </>
+              }
+            >
+              <Row key={getKey(index)} index={index} item={item} />
+            </Card>
+          </>
         ))}
         <Flex>
           <Button onClick={() => push(initialCallbackItem)} block>
@@ -301,7 +338,14 @@ const EventConfig = (props: { curSchema: Schema }) => {
 
   return (
     <>
-      <Text strong>组件事件</Text>
+      <Title
+        level={5}
+        style={{
+          margin: '5px 0px',
+        }}
+      >
+        组件事件
+      </Title>
       <Select value={curSelectEvent} onChange={setCurSelectEvent}>
         {eventList.map((event) => (
           <Select.Option key={event} value={event}>
@@ -377,6 +421,7 @@ export function ConfigPanel() {
         border: `1px solid ${token.colorBorderSecondary}`,
         height: '100%',
         width: '100%',
+        overflow: 'auto',
       }}
     >
       <ConfigProvider
