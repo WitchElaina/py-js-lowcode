@@ -19,6 +19,11 @@ export interface BaseCallback {
   label: string;
 }
 
+export interface UserEventContent {
+  // 展示给用户的事件说明标签
+  label: string;
+}
+
 // 将自定义组件的 props 与 React 原生 Ref 属性合并
 export type CombineProps<T> = T & React.RefAttributes<HTMLElement>;
 
@@ -45,4 +50,6 @@ export interface BaseComponent<ComponentType, PropsType> {
   defaultSchema: Schema;
   // 组件 state
   states: (keyof CombineProps<PropsType>)[];
+  // 用户事件
+  userEvents?: Record<string, UserEventContent>;
 }

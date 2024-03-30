@@ -6,42 +6,357 @@ import {
   Typography,
   Flex,
   Divider,
+  Select,
+  Button,
+  Input,
 } from 'antd';
 import MonacoEditor from 'react-monaco-editor';
 import { useSelector } from 'react-redux';
-import { Schema } from '../types/schema';
+import { Callback, CallbackProps, Schema } from '../types/schema';
 import { components } from '../components';
+import { useEffect, useState } from 'react';
+import { useRequests } from '../utils/requests';
+import { useDynamicList, useRequest } from 'ahooks';
+import { PythonCallback } from '../types/python';
+import { getSchemaById } from '../utils/schemaTools';
+import { cloneDeep } from 'lodash';
+import { useDrop } from 'react-dnd';
 
 const { Text, Title } = Typography;
 
+const InfoPanel = (props: { curSchema: Schema }) => {
+  const { curSchema } = props;
+  return (
+    <>
+      <Title level={5} style={{ margin: 0 }}>
+        {curSchema.title}
+      </Title>
+      <Text code>{curSchema.id}</Text>
+      <Divider style={{ margin: '10px 0' }} />
+    </>
+  );
+};
+
+// 属性配置子面板
 const PropsPanel = () => {
   const curSchema: Schema = useSelector<
     { designer: { currentSelectedSchema: Schema } },
     Schema
   >((state) => state.designer.currentSelectedSchema);
-  if (!curSchema) return null;
+  if (!curSchema)
+    return (
+      <Empty style={{ marginTop: 50 }} description={'请先在左侧选择组件'} />
+    );
 
   const Config = components[curSchema.componentNames]?.configPanel;
 
+  return (
+    <>
+      {Config ? (
+        <Flex
+          vertical
+          gap={8}
+          style={{
+            padding: 16,
+          }}
+        >
+          <InfoPanel curSchema={curSchema} />
+          <Config schema={curSchema} key={`${curSchema.id}-config-props`} />
+        </Flex>
+      ) : (
+        <Empty style={{ marginTop: 50 }} description={'该组件没有可配置属性'} />
+      )}
+    </>
+  );
+};
+
+// 函数事件配置表单
+const EventConfig = (props: { curSchema: Schema }) => {
+  const { curSchema } = props;
+
+  const curComponentEvents = components[curSchema.componentNames]?.userEvents;
+
+  const eventList = Object.keys(curComponentEvents || {});
+
+  const [curSelectEvent, setCurSelectEvent] = useState<string>(eventList[0]);
+
+  const { getFuncList, getFuncDetailList } = useRequests();
+
+  const {
+    data: funcList,
+    error: funcListError,
+    loading: funcListLoading,
+  } = useRequest(getFuncList);
+
+  const { data: funcDetails } = useRequest(getFuncDetailList);
+
+  if (!curComponentEvents) return null;
+
+  const CallbackForm = (props: { curEventName: string }) => {
+    const { curEventName } = props;
+    const globalSchema = useSelector<{ schema: Schema }, Schema>(
+      (state) => state.schema,
+    );
+
+    const initialCallbackItem = {
+      funcName: '',
+      args: [],
+      returnTo: {
+        id: '',
+        propName: '',
+      },
+    };
+
+    let existCallbacks: Callback[];
+    if (curSchema.userEvents[curEventName].length === 0) {
+      existCallbacks = [];
+    } else {
+      existCallbacks = cloneDeep(curSchema.userEvents[curEventName]);
+    }
+
+    const { list, remove, getKey, push, replace } =
+      useDynamicList(existCallbacks);
+    const [editingIndex, setEditingIndex] = useState<number | null>(null);
+
+    const Row = (props: { index: number; item: Callback }) => {
+      const { index, item } = props;
+
+      const [funcName, setFuncName] = useState<string>(item.funcName);
+      const [args, setArgs] = useState<CallbackProps[]>(item.args);
+      const [argNames, setArgNames] = useState<string[]>([]);
+
+      const FuncNameForm = () => {
+        return (
+          <Select
+            value={funcName}
+            onChange={(e) => {
+              setFuncName(e);
+              const newItem = cloneDeep(item);
+              newItem.funcName = e;
+              const newFuncArgs = funcDetails?.data.find(
+                (func) => func.name === e,
+              )?.args;
+              console.log('NewFuncArgs', funcDetails?.data, newFuncArgs);
+              // init args with newFuncArgs
+              newItem.args = newFuncArgs?.map((arg) => ({
+                id: '',
+                propName: '',
+              }));
+
+              replace(index, newItem);
+            }}
+          >
+            {funcList?.data?.map((func) => (
+              <Select.Option key={func} value={func}>
+                函数 <Text code>{func}</Text>
+              </Select.Option>
+            ))}
+          </Select>
+        );
+      };
+
+      const PropsForm = (props: {
+        compId: string;
+        propsName: string;
+        onChange: (value: CallbackProps) => void;
+      }) => {
+        const { compId, propsName, onChange } = props;
+        const [options, setOptions] = useState<string[]>([]);
+        const [selectedCompId, setSelectedCompId] = useState<string>(compId);
+
+        useEffect(() => {
+          if (!selectedCompId) return;
+          const compSchema = getSchemaById(selectedCompId, globalSchema);
+          if (compSchema) {
+            console.log('SetOptions', Object.keys(compSchema.props));
+            setOptions(Object.keys(compSchema.props));
+          }
+        }, [selectedCompId]);
+
+        const [{ isOver }, drop] = useDrop<
+          { component: Schema },
+          void,
+          { isOver: boolean }
+        >({
+          accept: 'move',
+          drop(item, monitor) {
+            console.log('DropMove to Input', item.component.id);
+            setSelectedCompId(item.component.id as string);
+          },
+        });
+
+        return (
+          <Flex gap={5} align="center">
+            <div
+              ref={drop}
+              style={{
+                width: '60%',
+              }}
+            >
+              <Input value={selectedCompId} placeholder="组件ID" />
+            </div>
+            <Select
+              placeholder="属性"
+              style={{ width: '40%' }}
+              defaultValue={propsName}
+              options={options.map((option) => ({
+                label: option,
+                value: option,
+              }))}
+              onChange={(e) => onChange({ id: selectedCompId, propName: e })}
+            ></Select>
+          </Flex>
+        );
+      };
+
+      return (
+        <Flex gap={5} vertical>
+          <Flex
+            gap={2}
+            align="center"
+            style={{
+              justifyContent: 'space-between',
+            }}
+          >
+            <Flex gap={2}>
+              <Text strong>回调函数#{index + 1}</Text>
+              <Text code>
+                {index}: {funcName}
+                {`(${args.join(',')}) ==>`}
+              </Text>
+            </Flex>
+            <Flex gap={2}>
+              {editingIndex !== index ? (
+                <Button size="small" onClick={() => setEditingIndex(index)}>
+                  编辑
+                </Button>
+              ) : (
+                <Button
+                  size="small"
+                  onClick={() => setEditingIndex(null)}
+                  type="primary"
+                >
+                  完成
+                </Button>
+              )}
+              <Button size="small" danger onClick={() => remove(index)}>
+                删除
+              </Button>
+            </Flex>
+          </Flex>
+          <FuncNameForm />
+
+          {args.map((arg, argIndex) => {
+            const argNameList = funcDetails?.data.find(
+              (func) => func.name === funcName,
+            )?.args;
+
+            return (
+              <div key={`${argIndex}.${arg.id}.${arg.propName}`}>
+                <Text code>
+                  {argNameList ? argNameList[argIndex] : `参数${argIndex}`}
+                </Text>
+                <PropsForm
+                  compId={arg.id}
+                  propsName={arg.propName}
+                  onChange={(props) => {
+                    const newArgs = [...args];
+                    newArgs[argIndex] = props;
+                    const newItem = cloneDeep(item);
+                    newItem.args = newArgs;
+                    replace(index, newItem);
+                  }}
+                />
+              </div>
+            );
+          })}
+          <Text code>返回值</Text>
+          <PropsForm
+            compId={item.returnTo.id}
+            propsName={item.returnTo.propName}
+            onChange={(props) => {
+              window.alert(`${props.id} - ${props.propName}`);
+              const newItem = cloneDeep(item);
+              newItem.returnTo = props;
+              replace(index, newItem);
+            }}
+          />
+        </Flex>
+      );
+    };
+
+    return (
+      <>
+        {list.map((item, index) => (
+          <Row key={getKey(index)} index={index} item={item} />
+        ))}
+        <Flex>
+          <Button onClick={() => push(initialCallbackItem)} block>
+            添加回调函数
+          </Button>
+        </Flex>
+      </>
+    );
+  };
+
+  return (
+    <>
+      <Text strong>组件事件</Text>
+      <Select value={curSelectEvent} onChange={setCurSelectEvent}>
+        {eventList.map((event) => (
+          <Select.Option key={event} value={event}>
+            {curComponentEvents[event].label}
+            <Text
+              code
+              style={{
+                marginLeft: 2,
+              }}
+            >
+              {event}
+            </Text>
+          </Select.Option>
+        ))}
+      </Select>
+      <CallbackForm curEventName={curSelectEvent} />
+    </>
+  );
+};
+
+// 事件配置子面板
+const EventPanel = () => {
+  const curSchema: Schema = useSelector<
+    { designer: { currentSelectedSchema: Schema } },
+    Schema
+  >((state) => state.designer.currentSelectedSchema);
+
+  if (!curSchema)
+    return (
+      <Empty style={{ marginTop: 50 }} description={'请先在左侧选择组件'} />
+    );
+
+  const events = components[curSchema.componentNames]?.userEvents;
+
   return curSchema ? (
-    Config ? (
-      <Flex
-        vertical
-        gap={8}
-        style={{
-          padding: 16,
-        }}
-      >
-        <Title level={5} style={{ margin: 0 }}>
-          {curSchema.title}
-        </Title>
-        <Text code>{curSchema.id}</Text>
-        <Divider style={{ margin: '10px 0' }} />
-        <Config schema={curSchema} key={curSchema.id} />
-      </Flex>
-    ) : (
-      <Empty style={{ marginTop: 50 }} description={'该组件没有可配置属性'} />
-    )
+    <Flex
+      vertical
+      gap={8}
+      style={{
+        padding: 16,
+      }}
+    >
+      <InfoPanel curSchema={curSchema} />
+      {events ? (
+        <EventConfig
+          curSchema={curSchema}
+          key={`${curSchema.id}-config-event`}
+        />
+      ) : (
+        <Empty
+          style={{ marginTop: 50 }}
+          description={'该组件没有可配置回调事件'}
+        />
+      )}
+    </Flex>
   ) : (
     <Empty style={{ marginTop: 50 }} description={'请先在左侧选择组件'} />
   );
@@ -101,6 +416,7 @@ export function ConfigPanel() {
             {
               key: '3',
               label: '事件',
+              children: <EventPanel />,
             },
           ]}
         />

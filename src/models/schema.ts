@@ -17,6 +17,7 @@ const defaultSchema: Schema = {
     vertical: true,
   },
   title: '设计器',
+  userEvents: {},
   children: [
     {
       id: 'button-' + uuidv4(),
@@ -27,6 +28,9 @@ const defaultSchema: Schema = {
       },
       title: '按钮',
       children: null,
+      userEvents: {
+        onClick: [],
+      },
     },
     {
       id: 'input-' + uuidv4(),
@@ -37,6 +41,7 @@ const defaultSchema: Schema = {
       title: '输入框',
       children: null,
       voidElementTag: true,
+      userEvents: {},
     },
   ],
 };

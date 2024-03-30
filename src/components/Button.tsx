@@ -114,6 +114,11 @@ export const button: BaseComponent<typeof Button, ButtonProps> = {
     },
   ],
   states: [],
+  userEvents: {
+    onClick: {
+      label: '点击按钮',
+    },
+  },
   configPanel: ButtonConfig,
   defaultSchema: {
     componentNames: 'button',
@@ -122,5 +127,8 @@ export const button: BaseComponent<typeof Button, ButtonProps> = {
     },
     title: '按钮',
     children: null,
+    userEvents: {
+      onClick: [],
+    },
   },
 };
