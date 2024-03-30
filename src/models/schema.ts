@@ -56,6 +56,9 @@ export const schema = createModel<RootModel>()({
       const parentSchema = state;
 
       const parent = getSchemaById(parentId, parentSchema);
+
+      if (!parent) return state;
+
       console.log(
         'parent',
         parent.componentNames,
@@ -77,13 +80,14 @@ export const schema = createModel<RootModel>()({
       // check if parentId exists and its children is Array
       const parentSchema = state;
       const parent = getSchemaById(parentId, state);
-      if (!Array.isArray(parent.children)) {
+
+      if (!parent || !Array.isArray(parent.children)) {
         return state;
       }
 
       // copy schemaToAppend as a new id
       const schemaToAppend = cloneDeep(schemaToAppendOriginal);
-      const idTemp = schemaToAppend.id;
+      const idTemp = schemaToAppend.id as string;
       schemaToAppend.id = 'temp-schema';
 
       // append the new schema to the parent schema
@@ -91,6 +95,11 @@ export const schema = createModel<RootModel>()({
 
       // delete the old schema
       const originalParent = getParentSchemaById(idTemp, parentSchema);
+
+      if (!originalParent || !Array.isArray(originalParent.children)) {
+        return state;
+      }
+
       originalParent.children = originalParent.children.filter(
         (child) => child.id !== idTemp,
       );
@@ -101,12 +110,20 @@ export const schema = createModel<RootModel>()({
       // Update the global schema
       return parentSchema;
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     changePropsById(state, payload: { id: string; props: string; value: any }) {
       const { id, props, value } = payload;
-      const propsObj = getSchemaById(id, state).props;
 
+      const schema = getSchemaById(id, state);
+
+      if (!schema) return state;
+
+      const propsObj = schema.props;
+
+      // @ts-expect-error I'm sure that propsObj[props] exists
       console.log(`Change ${id} ${props} \n ${propsObj[props]} <- ${value}`);
 
+      // @ts-expect-error I'm sure that propsObj[props] exists
       propsObj[props] = value;
       return state;
     },
@@ -118,6 +135,8 @@ export const schema = createModel<RootModel>()({
       const from = getSchemaById(fromId, stateDeepCopy);
       const to = getSchemaById(toId, stateDeepCopy);
 
+      if (!from || !to) return state;
+
       console.log('swapSchema', from, to);
 
       console.log(`Swap ${from.id} <-> ${to.id}`);
@@ -125,25 +144,23 @@ export const schema = createModel<RootModel>()({
 
       // format the to schema
       Object.keys(to).forEach((key) => {
-        delete to[key];
+        delete to[key as keyof Schema];
       });
       Object.assign(to, from);
       to.id = fromId;
 
       // format the from schema
       Object.keys(from).forEach((key) => {
-        delete from[key];
+        delete from[key as keyof Schema];
       });
       Object.assign(from, toDeepCopy);
 
       return stateDeepCopy;
     },
   },
-  effects: (dispatch) => ({
+  effects: () => ({
     // handle state changes with impure functions.
     // use async/await for async actions
-    async incrementAsync(payload: number, state) {
-      console.log();
-    },
+    async incrementAsync() {},
   }),
 });

@@ -5,22 +5,20 @@ import {
   Empty,
   Typography,
   Flex,
-  Input,
   Divider,
 } from 'antd';
 import MonacoEditor from 'react-monaco-editor';
 import { useSelector } from 'react-redux';
 import { Schema } from '../types/schema';
 import { components } from '../components';
-import { getSchemaById } from '../utils/schemaTools';
-import { store } from '../store';
 
 const { Text, Title } = Typography;
 
 const PropsPanel = () => {
-  const curSchema: Schema = useSelector(
-    (state) => state.designer.currentSelectedSchema,
-  );
+  const curSchema: Schema = useSelector<
+    { designer: { currentSelectedSchema: Schema } },
+    Schema
+  >((state) => state.designer.currentSelectedSchema);
   if (!curSchema) return null;
 
   const Config = components[curSchema.componentNames]?.configPanel;
@@ -53,7 +51,9 @@ export function ConfigPanel() {
   const { useToken } = theme;
   const { token } = useToken();
 
-  const schema = useSelector((state) => state.schema);
+  const schema = useSelector<{ schema: Schema }, Schema>(
+    (state) => state.schema,
+  );
 
   return (
     <div

@@ -1,13 +1,16 @@
 import { Flex, FlexProps, Typography, Switch, Select } from 'antd';
-import { BaseComponent } from '../types/component';
+import { BaseComponent, CombineProps } from '../types/component';
 import { Schema } from '../types/schema';
 import { store } from '../store';
 
 const { Text } = Typography;
 
+// eslint-disable-next-line react-refresh/only-export-components
 const FlexConfig = (props: { schema: Schema }) => {
   const { schema } = props;
 
+  const id = schema.id as string;
+  const schemaProps = schema.props as CombineProps<FlexProps>;
   const setProps = store.dispatch.schema.changePropsById;
 
   return (
@@ -15,10 +18,10 @@ const FlexConfig = (props: { schema: Schema }) => {
       <Flex className="wp-single-line wp-switch" content="center">
         <Text strong>垂直布局</Text>
         <Switch
-          defaultChecked={schema.props.vertical}
+          defaultChecked={schemaProps.vertical}
           onChange={(val) => {
             setProps({
-              id: schema.id,
+              id,
               props: 'vertical',
               value: val,
             });
@@ -28,10 +31,10 @@ const FlexConfig = (props: { schema: Schema }) => {
       <Flex className="wp-single-line wp-select">
         <Text strong>间距</Text>
         <Select
-          value={schema.props.gap}
+          value={schemaProps.gap}
           onChange={(val) => {
             setProps({
-              id: schema.id,
+              id,
               props: 'gap',
               value: val,
             });
@@ -47,15 +50,15 @@ const FlexConfig = (props: { schema: Schema }) => {
       <Flex className="wp-single-line wp-select">
         <Text strong>对齐方式</Text>
         <Select
-          value={schema.props.align}
+          value={schemaProps.align}
           onChange={(val) => {
             setProps({
-              id: schema.id,
+              id,
               props: 'align',
               value: val,
             });
             setProps({
-              id: schema.id,
+              id,
               props: 'content',
               value: val,
             });
@@ -76,6 +79,7 @@ export const flex: BaseComponent<typeof Flex, FlexProps> = {
   label: '布局',
   component: Flex,
   configPanel: FlexConfig,
+  variables: [],
   example: (
     <Flex style={{ width: '100%', height: '100%' }} gap={4}>
       <span

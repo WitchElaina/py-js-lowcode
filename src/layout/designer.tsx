@@ -1,17 +1,17 @@
-import { Col, Flex, Typography } from 'antd';
+import { Col, Flex } from 'antd';
 import { ComponentLibrary } from '../views/ComponentLibrary';
 import { ConfigPanel } from '../views/ConfigPanel';
 import { DesignerCanvas } from '../views/DesignerCanvas';
 import { DesignerScreen } from '../views/Designer';
 import { DesingerSegmented } from '../views/DesingerSegmented';
-
+import { RootState } from '../store';
 import { useSelector } from 'react-redux';
 
 export function Designer() {
-  const { Title } = Typography;
-
-  const width = useSelector((state) => state.designer.width);
-  const height = useSelector((state) => state.designer.height);
+  const width = useSelector<RootState, number>((state) => state.designer.width);
+  const height = useSelector<RootState, number>(
+    (state) => state.designer.height,
+  );
 
   return (
     <Flex style={{ height: '100%' }}>

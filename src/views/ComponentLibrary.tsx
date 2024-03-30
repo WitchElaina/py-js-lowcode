@@ -1,10 +1,14 @@
-import { Card, Col, Flex, List, Typography, theme } from 'antd';
+import { Card, Flex, List, Typography, theme } from 'antd';
 import { components } from '../components';
 import { useDrag } from 'react-dnd';
+import { BaseComponent } from '../types/component';
 
-function DraggableComponentWrapper(props) {
-  const { component, key } = props;
-  const [{ isDragging, isOver }, drag, dragPreview] = useDrag(() => ({
+function DraggableComponentWrapper(props: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  component: BaseComponent<any, any>;
+}) {
+  const { component } = props;
+  const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
     type: 'component',
     item: { component },
     collect: (monitor) => ({

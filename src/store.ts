@@ -4,6 +4,7 @@ import { models, RootModel } from './models';
 
 export const store = init({
   models,
+  // @ts-expect-error immerPlugin type error
   plugins: [immerPlugin()],
 });
 

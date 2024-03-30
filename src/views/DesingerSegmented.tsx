@@ -12,8 +12,12 @@ import { useSelector } from 'react-redux';
 const { Text } = Typography;
 
 export function DesingerSegmented() {
-  const width = useSelector((state) => state.designer.width);
-  const height = useSelector((state) => state.designer.height);
+  const width = useSelector<{ designer: { width: number } }, number>(
+    (state) => state.designer.width,
+  );
+  const height = useSelector<{ designer: { height: number } }, number>(
+    (state) => state.designer.height,
+  );
   const onWidthChange = store.dispatch.designer.setWidth;
   const onHeightChange = store.dispatch.designer.setHeight;
   const setPCView = store.dispatch.designer.setPCView;

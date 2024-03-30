@@ -1,6 +1,6 @@
 import { Schema } from '../types/schema';
 
-export const getSchemaById = (id: string, schema: Schema) => {
+export const getSchemaById = (id: string, schema: Schema): Schema | null => {
   if (schema.id === id) {
     return schema;
   }
@@ -15,7 +15,10 @@ export const getSchemaById = (id: string, schema: Schema) => {
   return null;
 };
 
-export const getParentSchemaById = (id: string, schema: Schema) => {
+export const getParentSchemaById = (
+  id: string,
+  schema: Schema,
+): Schema | null => {
   if (schema.children) {
     for (let i = 0; i < schema.children.length; i++) {
       if (schema.children[i].id === id) {

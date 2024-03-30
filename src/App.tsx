@@ -1,15 +1,10 @@
-import { Layout, theme, Typography } from 'antd';
+import { Layout } from 'antd';
 import { Designer } from './layout/designer';
 import NavHeader from './layout/header';
 
-const { Header, Footer, Sider, Content } = Layout;
-const { Title } = Typography;
-
-const { useToken } = theme;
+const { Content } = Layout;
 
 function App() {
-  const { token } = useToken();
-
   return (
     <Layout>
       <NavHeader />
