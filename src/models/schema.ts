@@ -4,6 +4,9 @@ import { Callback, Schema } from '../types/schema';
 import { v4 as uuidv4 } from 'uuid';
 import { cloneDeep } from 'lodash';
 import { getParentSchemaById, getSchemaById } from '../utils/schemaTools';
+import { useRequest } from 'ahooks';
+import { useRequests } from '../utils/requests';
+import axios from 'axios';
 
 const defaultSchema: Schema = {
   id: 'flex-' + uuidv4(),
@@ -256,10 +259,108 @@ export const schema = createModel<RootModel>()({
 
       return state;
     },
+    runCallback(
+      state,
+      payload: { id: string; eventName: string; execReq: any },
+    ) {
+      const { id, eventName, execReq } = payload;
+
+      const schema = getSchemaById(id, state);
+
+      if (!schema) return state;
+
+      if (!schema.userEvents[eventName]) {
+        return state;
+      }
+
+      schema.userEvents[eventName].forEach((callback) => {
+        // getArgs
+        const args = callback.args.map((arg) => {
+          const argId = arg.id;
+          const argPropName = arg.propName;
+
+          const argSchema = getSchemaById(argId, state);
+
+          if (!argSchema) return null;
+
+          return argSchema.props?.[argPropName] || undefined;
+        });
+
+        console.log(
+          'runCallback',
+          callback.funcName,
+          callback.args.length,
+          args,
+          callback.returnTo.id,
+          callback.returnTo.propName,
+        );
+
+        execReq(callback.funcName, args).then((res: any) => {
+          const returnToId = callback.returnTo.id;
+          const returnToPropName = callback.returnTo.propName;
+
+          const returnToSchema = getSchemaById(returnToId, state);
+
+          if (!returnToSchema) return;
+
+          console.log(res.data);
+        });
+      });
+
+      return state;
+    },
   },
-  effects: () => ({
+  effects: (dispatch) => ({
     // handle state changes with impure functions.
     // use async/await for async actions
-    async incrementAsync() {},
+    async runAsync(payload, rootState) {
+      console.log('runAsync', payload, rootState);
+      const { id, eventName, execReq } = payload;
+
+      const schema = getSchemaById(id, rootState.schema);
+      const callbackList = schema?.userEvents?.[eventName] || [];
+      console.log('runAsync Callback', callbackList);
+
+      callbackList.forEach(async (callback) => {
+        // getArgs
+        const args = callback.args.map((arg) => {
+          const argId = arg.id;
+          const argPropName = arg.propName;
+
+          const argSchema = getSchemaById(argId, rootState.schema);
+
+          if (!argSchema) return null;
+          if (!argSchema?.props?.[argPropName]) return null;
+
+          return argSchema.props?.[argPropName];
+        });
+
+        console.log(
+          'runAsync',
+          callback.funcName,
+          callback.args.length,
+          args,
+          callback.returnTo.id,
+          callback.returnTo.propName,
+        );
+
+        if (!callback.funcName) return;
+        const res = await execReq(callback.funcName, args);
+        console.log(res.data);
+
+        const returnToId = callback.returnTo.id;
+        const returnToPropName = callback.returnTo.propName;
+
+        const returnToSchema = getSchemaById(returnToId, rootState.schema);
+
+        if (!returnToSchema) return;
+
+        dispatch.schema.changePropsById({
+          id: returnToId,
+          props: returnToPropName,
+          value: res.data,
+        });
+      });
+    },
   }),
 });

@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { Tag, theme } from 'antd';
 import { BaseComponent } from '../types/component';
+import { store } from '../store';
+import { useRequests } from './requests';
 
 const { useToken } = theme;
 
@@ -124,6 +126,20 @@ export const RenderDesigner = (props: {
     schema.children,
   ]);
 
+  const { execFunc } = useRequests();
+
+  // 获取用户事件
+  const events = Object.keys(schema?.userEvents || {});
+  const eventsCallback: Record<string, () => void> = {};
+  events.forEach((event: string) => {
+    eventsCallback[event] = () =>
+      store.dispatch.schema.runAsync({
+        id: schema.id as string,
+        eventName: event,
+        execReq: execFunc,
+      });
+  });
+
   return (
     <div
       onClick={(e) => {
@@ -192,9 +208,9 @@ export const RenderDesigner = (props: {
       {/* 组件本身 */}
       <span ref={ref}>
         {schema.voidElementTag ? (
-          <Component key={schema.id} {...schema.props} />
+          <Component key={schema.id} {...schema.props} {...eventsCallback} />
         ) : (
-          <Component {...schema.props} key={schema.id}>
+          <Component {...schema.props} key={schema.id} {...eventsCallback}>
             {/* 非布局组件的children */}
             {schema.children === null && schema.props?.children}
 

@@ -13,8 +13,15 @@ export const useRequests = () => {
 
   const getFuncDetailList = async () => axios.get(`http://${API_URL}/list`);
 
+  const execFunc = async (funcName: string, args: any[]) =>
+    axios.post(`http://${API_URL}/exec`, {
+      name: funcName,
+      args,
+    });
+
   return {
     getFuncList,
     getFuncDetailList,
+    execFunc,
   };
 };
