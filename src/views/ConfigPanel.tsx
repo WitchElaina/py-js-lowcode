@@ -22,6 +22,7 @@ import { PythonCallback } from '../types/python';
 import { getSchemaById } from '../utils/schemaTools';
 import { cloneDeep } from 'lodash';
 import { useDrop } from 'react-dnd';
+import { store } from '../store';
 
 const { Text, Title } = Typography;
 
@@ -81,6 +82,8 @@ const EventConfig = (props: { curSchema: Schema }) => {
 
   const [curSelectEvent, setCurSelectEvent] = useState<string>(eventList[0]);
 
+  const setCallback = store.dispatch.schema.setCallback;
+
   const { getFuncList, getFuncDetailList } = useRequests();
 
   const {
@@ -98,6 +101,12 @@ const EventConfig = (props: { curSchema: Schema }) => {
     const globalSchema = useSelector<{ schema: Schema }, Schema>(
       (state) => state.schema,
     );
+
+    useEffect(() => {
+      if (curSchema.userEvents[curEventName].length === 0) {
+        // setEditingIndex(null);
+      }
+    }, [curSchema]);
 
     const initialCallbackItem = {
       funcName: '',
@@ -309,7 +318,16 @@ const EventConfig = (props: { curSchema: Schema }) => {
                       ) : (
                         <Button
                           size="small"
-                          onClick={() => setEditingIndex(null)}
+                          onClick={() => {
+                            setEditingIndex(null);
+                            console.log('EditingIndex', editingIndex, item);
+                            setCallback({
+                              id: curSchema.id as string,
+                              eventName: curEventName,
+                              callback: item,
+                              index,
+                            });
+                          }}
                           type="primary"
                         >
                           完成
@@ -323,7 +341,9 @@ const EventConfig = (props: { curSchema: Schema }) => {
                 </>
               }
             >
-              <Row key={getKey(index)} index={index} item={item} />
+              {editingIndex === index && (
+                <Row key={getKey(index)} index={index} item={item} />
+              )}
             </Card>
           </>
         ))}
@@ -392,7 +412,7 @@ const EventPanel = () => {
       {events ? (
         <EventConfig
           curSchema={curSchema}
-          key={`${curSchema.id}-config-event`}
+          // key={`${curSchema.id}-config-event`}
         />
       ) : (
         <Empty

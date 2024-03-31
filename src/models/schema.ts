@@ -1,6 +1,6 @@
 import { createModel } from '@rematch/core';
 import { RootModel } from '.';
-import { Schema } from '../types/schema';
+import { Callback, Schema } from '../types/schema';
 import { v4 as uuidv4 } from 'uuid';
 import { cloneDeep } from 'lodash';
 import { getParentSchemaById, getSchemaById } from '../utils/schemaTools';
@@ -169,6 +169,31 @@ export const schema = createModel<RootModel>()({
       Object.assign(from, toDeepCopy);
 
       return stateDeepCopy;
+    },
+    setCallback(
+      state,
+      payload: {
+        id: string;
+        eventName: string;
+        index: number;
+        callback: Callback;
+      },
+    ) {
+      console.log('setCallback', payload);
+
+      const { id, eventName, index, callback } = payload;
+
+      const schema = getSchemaById(id, state);
+
+      if (!schema) return state;
+
+      if (!schema.userEvents[eventName]) {
+        schema.userEvents[eventName] = [];
+      }
+
+      schema.userEvents[eventName][index] = callback;
+
+      return state;
     },
   },
   effects: () => ({
