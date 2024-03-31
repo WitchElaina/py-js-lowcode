@@ -29,7 +29,25 @@ const defaultSchema: Schema = {
       title: '按钮',
       children: null,
       userEvents: {
-        onClick: [],
+        onClick: [
+          {
+            funcName: 'add',
+            args: [],
+            returnTo: {
+              id: '',
+              propName: '',
+            },
+          },
+          {
+            funcName: 'sub',
+            args: [],
+            returnTo: {
+              id: '',
+              propName: '',
+            },
+          },
+        ],
+        onMouseEnter: [],
       },
     },
     {
@@ -192,6 +210,49 @@ export const schema = createModel<RootModel>()({
       }
 
       schema.userEvents[eventName][index] = callback;
+
+      return state;
+    },
+    appendCallback(state, payload: { id: string; eventName: string }) {
+      const { id, eventName } = payload;
+
+      const callback: Callback = {
+        funcName: '',
+        args: [],
+        returnTo: {
+          id: '',
+          propName: '',
+        },
+      };
+
+      const schema = getSchemaById(id, state);
+
+      if (!schema) return state;
+
+      if (!schema.userEvents[eventName]) {
+        schema.userEvents[eventName] = [];
+      }
+
+      const newList = [...schema.userEvents[eventName], callback];
+      schema.userEvents[eventName] = newList;
+
+      return state;
+    },
+    deleteCallback(
+      state,
+      payload: { id: string; eventName: string; index: number },
+    ) {
+      const { id, eventName, index } = payload;
+
+      const schema = getSchemaById(id, state);
+
+      if (!schema) return state;
+
+      if (!schema.userEvents[eventName]) {
+        return state;
+      }
+
+      schema.userEvents[eventName].splice(index, 1);
 
       return state;
     },

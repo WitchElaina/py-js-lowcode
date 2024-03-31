@@ -10,19 +10,22 @@ import {
   Button,
   Input,
   Card,
+  Result,
 } from 'antd';
 import MonacoEditor from 'react-monaco-editor';
 import { useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import { Callback, CallbackProps, Schema } from '../types/schema';
 import { components } from '../components';
 import { useEffect, useState } from 'react';
 import { useRequests } from '../utils/requests';
-import { useDynamicList, useRequest } from 'ahooks';
+import { useDynamicList, useRequest, useUpdate } from 'ahooks';
 import { PythonCallback } from '../types/python';
 import { getSchemaById } from '../utils/schemaTools';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, update } from 'lodash';
 import { useDrop } from 'react-dnd';
 import { store } from '../store';
+import { EventConfigPanel } from './EventConfigPanel';
 
 const { Text, Title } = Typography;
 
@@ -73,288 +76,63 @@ const PropsPanel = () => {
 };
 
 // 函数事件配置表单
-const EventConfig = (props: { curSchema: Schema }) => {
-  const { curSchema } = props;
-
-  const curComponentEvents = components[curSchema.componentNames]?.userEvents;
-
-  const eventList = Object.keys(curComponentEvents || {});
-
-  const [curSelectEvent, setCurSelectEvent] = useState<string>(eventList[0]);
-
-  const setCallback = store.dispatch.schema.setCallback;
+const EventConfig = (props: { curSchema: Schema; update: () => void }) => {
+  /**
+   * 依赖读取
+   * @argument curSchema 当前选中的 schema 子节点
+   * @argument globalSchema 全局 schema 根节点
+   * @argument funcList Python 适配器中注册的函数列表
+   * @argument funcDetails Python 适配器中注册的函数详情列表
+   * @argument curComponentEvents 当前组件支持的事件描述对象
+   *  eg. { onClick: { label: '点击事件' }
+   * @argument eventList 当前组件支持的事件列表
+   *  eg. ['onClick']
+   */
+  const { curSchema, update } = props;
+  const globalSchema = useSelector<{ schema: Schema }, Schema>(
+    (state) => state.schema,
+  );
 
   const { getFuncList, getFuncDetailList } = useRequests();
-
   const {
     data: funcList,
-    error: funcListError,
     loading: funcListLoading,
+    error: funcListError,
+    refresh: refreshFuncList,
   } = useRequest(getFuncList);
+  const {
+    data: funcDetails,
+    loading: funcDetailsLoading,
+    error: funcDetailsError,
+    refresh: refreshFuncDetails,
+  } = useRequest(getFuncDetailList);
 
-  const { data: funcDetails } = useRequest(getFuncDetailList);
+  console.log('funcList', funcList);
+  console.log('funcDetails', funcDetails);
 
-  if (!curComponentEvents) return null;
+  const curComponentEvents = components[curSchema.componentNames]?.userEvents;
+  const eventList = Object.keys(curComponentEvents || {});
 
-  const CallbackForm = (props: { curEventName: string }) => {
-    const { curEventName } = props;
-    const globalSchema = useSelector<{ schema: Schema }, Schema>(
-      (state) => state.schema,
-    );
+  /**
+   * 状态管理
+   * @argument curSelectEvent 当前选中要配置的组件事件
+   * ↑ @argument curCallbackList 当前选中事件在 schema 中已经配置的回调函数列表
+   */
+  // 默认选中的配置事件
+  const [curSelectEvent, setCurSelectEvent] = useState<string>(eventList[0]);
+  const [curCallbackList, setCurCallbackList] = useState<Callback[]>([]);
 
-    useEffect(() => {
-      if (curSchema.userEvents[curEventName].length === 0) {
-        // setEditingIndex(null);
-      }
-    }, [curSchema]);
-
-    const initialCallbackItem = {
-      funcName: '',
-      args: [],
-      returnTo: {
-        id: '',
-        propName: '',
-      },
-    };
-
-    let existCallbacks: Callback[];
-    if (curSchema.userEvents[curEventName].length === 0) {
-      existCallbacks = [];
-    } else {
-      existCallbacks = cloneDeep(curSchema.userEvents[curEventName]);
+  useEffect(() => {
+    const select = getSchemaById(curSchema.id, globalSchema);
+    if (select) {
+      setCurCallbackList(select.userEvents[curSelectEvent] || []);
     }
+  }, [globalSchema, curSchema, curSelectEvent]);
 
-    const { list, remove, getKey, push, replace } =
-      useDynamicList(existCallbacks);
-    const [editingIndex, setEditingIndex] = useState<number | null>(null);
-
-    const Row = (props: { index: number; item: Callback }) => {
-      const { index, item } = props;
-
-      const [funcName, setFuncName] = useState<string>(item.funcName);
-      const [args, setArgs] = useState<CallbackProps[]>(item.args);
-      const [argNames, setArgNames] = useState<string[]>([]);
-
-      const FuncNameForm = () => {
-        return (
-          <Select
-            value={funcName}
-            onChange={(e) => {
-              setFuncName(e);
-              const newItem = cloneDeep(item);
-              newItem.funcName = e;
-              const newFuncArgs = funcDetails?.data.find(
-                (func) => func.name === e,
-              )?.args;
-              console.log('NewFuncArgs', funcDetails?.data, newFuncArgs);
-              // init args with newFuncArgs
-              newItem.args = newFuncArgs?.map((arg) => ({
-                id: '',
-                propName: '',
-              }));
-
-              replace(index, newItem);
-            }}
-          >
-            {funcList?.data?.map((func) => (
-              <Select.Option key={func} value={func}>
-                函数 <Text code>{func}</Text>
-              </Select.Option>
-            ))}
-          </Select>
-        );
-      };
-
-      const PropsForm = (props: {
-        compId: string;
-        propsName: string;
-        onChange: (value: CallbackProps) => void;
-      }) => {
-        const { compId, propsName, onChange } = props;
-        const [options, setOptions] = useState<string[]>([]);
-        const [selectedCompId, setSelectedCompId] = useState<string>(compId);
-
-        useEffect(() => {
-          if (!selectedCompId) return;
-          const compSchema = getSchemaById(selectedCompId, globalSchema);
-          if (compSchema) {
-            console.log('SetOptions', Object.keys(compSchema.props));
-            setOptions(Object.keys(compSchema.props));
-          }
-        }, [selectedCompId]);
-
-        const [{ isOver }, drop] = useDrop<
-          { component: Schema },
-          void,
-          { isOver: boolean }
-        >({
-          accept: 'move',
-          drop(item, monitor) {
-            console.log('DropMove to Input', item.component.id);
-            setSelectedCompId(item.component.id as string);
-          },
-        });
-
-        return (
-          <Flex gap={5} align="center">
-            <div
-              ref={drop}
-              style={{
-                width: '60%',
-              }}
-            >
-              <Input
-                value={selectedCompId}
-                placeholder="从画布上拖拽组件到此处"
-              />
-            </div>
-            <Select
-              placeholder="属性"
-              style={{ width: '40%' }}
-              defaultValue={propsName}
-              options={options.map((option) => ({
-                label: option,
-                value: option,
-              }))}
-              onChange={(e) => onChange({ id: selectedCompId, propName: e })}
-            ></Select>
-          </Flex>
-        );
-      };
-
-      return (
-        <Flex gap={10} vertical>
-          <>
-            <Text strong>要执行的 Python 函数</Text>
-            <FuncNameForm />
-          </>
-
-          <>
-            <Text strong>传入函数的参数</Text>
-            {args.map((arg, argIndex) => {
-              const argNameList = funcDetails?.data.find(
-                (func) => func.name === funcName,
-              )?.args;
-
-              return (
-                <Flex
-                  vertical
-                  gap={2}
-                  key={`${argIndex}.${arg.id}.${arg.propName}`}
-                >
-                  <Flex gap={2}>
-                    <Text>参数</Text>
-                    <Text code>
-                      {argNameList ? argNameList[argIndex] : `参数${argIndex}`}
-                    </Text>
-                  </Flex>
-                  <PropsForm
-                    compId={arg.id}
-                    propsName={arg.propName}
-                    onChange={(props) => {
-                      const newArgs = [...args];
-                      newArgs[argIndex] = props;
-                      const newItem = cloneDeep(item);
-                      newItem.args = newArgs;
-                      replace(index, newItem);
-                    }}
-                  />
-                </Flex>
-              );
-            })}
-          </>
-          <>
-            <Text strong>返回值写入到</Text>
-            <PropsForm
-              compId={item.returnTo.id}
-              propsName={item.returnTo.propName}
-              onChange={(props) => {
-                const newItem = cloneDeep(item);
-                newItem.returnTo = props;
-                replace(index, newItem);
-              }}
-            />
-          </>
-        </Flex>
-      );
-    };
-
-    return (
-      <>
-        {list.map((item, index) => (
-          <>
-            <Card
-              size="small"
-              style={{
-                border: '1px solid #D4D4D4',
-              }}
-              title={
-                <>
-                  <Flex
-                    gap={2}
-                    align="center"
-                    style={{
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Flex gap={2}>
-                      <Title
-                        level={5}
-                        style={{
-                          margin: '15px 0px',
-                        }}
-                      >
-                        回调函数#{index + 1}
-                      </Title>
-                    </Flex>
-                    <Flex gap={6}>
-                      {editingIndex !== index ? (
-                        <Button
-                          size="small"
-                          onClick={() => setEditingIndex(index)}
-                        >
-                          编辑
-                        </Button>
-                      ) : (
-                        <Button
-                          size="small"
-                          onClick={() => {
-                            setEditingIndex(null);
-                            console.log('EditingIndex', editingIndex, item);
-                            setCallback({
-                              id: curSchema.id as string,
-                              eventName: curEventName,
-                              callback: item,
-                              index,
-                            });
-                          }}
-                          type="primary"
-                        >
-                          完成
-                        </Button>
-                      )}
-                      <Button size="small" danger onClick={() => remove(index)}>
-                        删除
-                      </Button>
-                    </Flex>
-                  </Flex>
-                </>
-              }
-            >
-              {editingIndex === index && (
-                <Row key={getKey(index)} index={index} item={item} />
-              )}
-            </Card>
-          </>
-        ))}
-        <Flex>
-          <Button onClick={() => push(initialCallbackItem)} block>
-            添加回调函数
-          </Button>
-        </Flex>
-      </>
-    );
-  };
+  /**
+   * 渲染模板
+   */
+  if (!curComponentEvents) return null;
 
   return (
     <>
@@ -368,7 +146,7 @@ const EventConfig = (props: { curSchema: Schema }) => {
       </Title>
       <Select value={curSelectEvent} onChange={setCurSelectEvent}>
         {eventList.map((event) => (
-          <Select.Option key={event} value={event}>
+          <Select.Option key={`select-option-py-func-${event}`} value={event}>
             {curComponentEvents[event].label}
             <Text
               code
@@ -381,7 +159,97 @@ const EventConfig = (props: { curSchema: Schema }) => {
           </Select.Option>
         ))}
       </Select>
-      <CallbackForm curEventName={curSelectEvent} />
+      <Divider style={{ margin: '10px 0' }} />
+      {!funcListLoading &&
+        !funcDetailsLoading &&
+        !funcListError &&
+        !funcDetailsError && (
+          <Flex gap={10} vertical>
+            {curCallbackList.map((callback, index) => {
+              return (
+                <Card size="small" key={`${curSchema.id}-callback-${uuidv4()}`}>
+                  <Flex gap={10} vertical>
+                    <Title level={5} style={{ margin: '0' }}>
+                      回调函数 {index + 1}
+                    </Title>
+                    <EventConfigPanel
+                      curCallback={callback}
+                      funcList={funcList?.data || []}
+                      funcDetailList={funcDetails?.data || []}
+                      onChange={(callback: Callback) => {
+                        return store.dispatch.schema.setCallback({
+                          id: curSchema.id as string,
+                          eventName: curSelectEvent,
+                          index,
+                          callback,
+                        });
+                      }}
+                      onDelete={() => {
+                        return store.dispatch.schema.deleteCallback({
+                          id: curSchema.id as string,
+                          eventName: curSelectEvent,
+                          index,
+                        });
+                      }}
+                    />
+                  </Flex>
+                </Card>
+              );
+            })}
+            <Button
+              onClick={() => {
+                store.dispatch.schema.appendCallback({
+                  id: curSchema.id as string,
+                  eventName: curSelectEvent,
+                });
+                update();
+              }}
+              type="link"
+            >
+              添加回调函数
+            </Button>
+          </Flex>
+        )}
+      {(funcListError || funcDetailsError) && (
+        <Result
+          status="error"
+          title="连接 Python 适配器失败"
+          subTitle={
+            <Flex vertical align="center">
+              <Text type="secondary">
+                {funcDetailsError?.name + ': ' + funcDetailsError?.message ||
+                  funcListError?.name + ': ' + funcListError?.message ||
+                  '未知错误'}
+              </Text>
+              <Text type="warning">
+                请检查 Python 适配器是否正常运行，尝试重新连接。
+              </Text>
+            </Flex>
+          }
+          extra={
+            <Flex
+              wrap="wrap"
+              gap={10}
+              align="center"
+              style={{
+                width: '100%',
+                justifyContent: 'center',
+              }}
+            >
+              <Button>帮助文档</Button>
+              <Button
+                type="primary"
+                onClick={() => {
+                  refreshFuncList();
+                  refreshFuncDetails();
+                }}
+              >
+                重新连接
+              </Button>
+            </Flex>
+          }
+        ></Result>
+      )}
     </>
   );
 };
@@ -411,10 +279,12 @@ const EventPanel = () => {
       <InfoPanel curSchema={curSchema} />
       {events ? (
         <EventConfig
+          update={update}
           curSchema={curSchema}
-          // key={`${curSchema.id}-config-event`}
+          key={`${curSchema.id}-config-event`}
         />
       ) : (
+        // <EventConfigPanel curSchema={curSchema} />
         <Empty
           style={{ marginTop: 50 }}
           description={'该组件没有可配置回调事件'}
@@ -454,7 +324,7 @@ export function ConfigPanel() {
         }}
       >
         <Tabs
-          defaultActiveKey="2"
+          defaultActiveKey="3"
           centered
           items={[
             {

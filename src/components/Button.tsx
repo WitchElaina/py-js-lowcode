@@ -118,6 +118,9 @@ export const button: BaseComponent<typeof Button, ButtonProps> = {
     onClick: {
       label: '点击按钮',
     },
+    onMouseEnter: {
+      label: '鼠标移入',
+    },
   },
   configPanel: ButtonConfig,
   defaultSchema: {
@@ -129,6 +132,7 @@ export const button: BaseComponent<typeof Button, ButtonProps> = {
     children: null,
     userEvents: {
       onClick: [],
+      onMouseEnter: [],
     },
   },
 };
