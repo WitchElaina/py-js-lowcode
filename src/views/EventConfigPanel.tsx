@@ -24,17 +24,24 @@ export interface ArgConfigProps {
   compId: string;
   propName: string;
   onChange: (arg: { id: string; propName: string }) => void;
+  isReturnArg?: boolean;
 }
 
 export const ArgConfig: React.FC<ArgConfigProps> = (props) => {
-  const { compId, propName, onChange } = props;
+  const { compId, propName, onChange, isReturnArg } = props;
 
   const { token } = useToken();
 
   const compName = compId?.split('-')[0] || '';
   // const compName = 'button';
   const compProps = components?.[compName]?.defaultSchema?.props || {};
-  const options = Object.keys(compProps);
+
+  let options;
+  if (isReturnArg) {
+    options = components?.[compName]?.states || [];
+  } else {
+    options = Object.keys(compProps);
+  }
 
   const [{ isOver }, drop] = useDrop<
     { component: Schema },
@@ -227,6 +234,7 @@ export const EventConfigPanel: React.FC<EventConfigPanelProps> = (props) => {
               }}
               compId={val.returnTo.id}
               propName={val.returnTo.propName}
+              isReturnArg
             />
           </Flex>
         </Flex>
