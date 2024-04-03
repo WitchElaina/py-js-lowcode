@@ -83,6 +83,26 @@ const ButtonConfig = (props: { schema: Schema }) => {
           }}
         />
       </Flex>
+      <Flex className="wp-single-line wp-select">
+        <Text strong>大小</Text>
+        <Select
+          style={{ width: '50%' }}
+          variant="filled"
+          defaultValue={schemaProps.size || 'default'}
+          options={[
+            { label: '默认', value: 'default' },
+            { label: '大', value: 'large' },
+            { label: '小', value: 'small' },
+          ]}
+          onChange={(val) => {
+            setProps({
+              id,
+              props: 'size',
+              value: val,
+            });
+          }}
+        />
+      </Flex>
       <Flex className="wp-single-line wp-input">
         <Text strong>标签</Text>
         <Input
