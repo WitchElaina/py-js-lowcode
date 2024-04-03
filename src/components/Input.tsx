@@ -114,9 +114,14 @@ export const input: BaseComponent<typeof Input, InputProps> = {
   states: {
     value: '值',
   },
-  userEvents: {
-    onChange: {
-      label: '值改变',
+  userEvents: {},
+  defaultEvents: {
+    onChange: (e, id) => {
+      store.dispatch.schema.changePropsById({
+        id,
+        props: 'value',
+        value: e.target.value,
+      });
     },
   },
   defaultSchema: {
