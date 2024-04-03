@@ -47,4 +47,6 @@ export interface BaseComponent<ComponentType, PropsType> {
   states: Record<keyof CombineProps<PropsType>, string>;
   // 用户事件
   userEvents?: Record<string, UserEventContent>;
+  // 默认事件
+  defaultEvents?: Record<string, (e: any, id: string) => void>;
 }

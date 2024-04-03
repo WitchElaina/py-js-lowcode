@@ -140,6 +140,20 @@ export const RenderDesigner = (props: {
       });
   });
 
+  // 组件自带事件
+  const defaultEvents = Object.keys(
+    components?.[schema.componentNames]?.defaultEvents || {},
+  );
+  defaultEvents.forEach((event: string) => {
+    eventsCallback[event] = (e: unknown) => {
+      console.log('defaultEvents', event, schema.id, e.target.value);
+      components?.[schema.componentNames]?.defaultEvents?.[event](
+        e,
+        schema.id as string,
+      );
+    };
+  });
+
   return (
     <div
       onClick={(e) => {
