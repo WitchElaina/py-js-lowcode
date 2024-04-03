@@ -1,10 +1,5 @@
 import { ReactNode } from 'react';
 import { Schema } from './schema';
-export interface BaseVariable<T> {
-  name: keyof T;
-  label: string;
-  value?: T[keyof T];
-}
 
 // state 值类型
 export interface BaseState<T> {
@@ -43,13 +38,13 @@ export interface BaseComponent<ComponentType, PropsType> {
   // 组件属性，即 react 组件的 props
   props?: CombineProps<PropsType>;
   // 用户可配置组件属性
-  variables: CombineProps<BaseVariable<PropsType>>[];
+  variables: Record<keyof CombineProps<PropsType>, string>;
   // 配置面板组件
   configPanel?: React.FC<{ schema: Schema }>;
   // 默认的 schema
   defaultSchema: Schema;
   // 组件 state
-  states: (keyof CombineProps<PropsType>)[];
+  states: Record<keyof CombineProps<PropsType>, string>;
   // 用户事件
   userEvents?: Record<string, UserEventContent>;
 }

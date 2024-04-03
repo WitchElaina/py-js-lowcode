@@ -108,21 +108,12 @@ export const input: BaseComponent<typeof Input, InputProps> = {
   component: Input,
   example: <Input placeholder="请输入" />,
   configPanel: InputConfig,
-  variables: [
-    {
-      name: 'placeholder',
-      label: '占位符',
-    },
-    {
-      name: 'prefix',
-      label: '前缀',
-    },
-    {
-      name: 'suffix',
-      label: '后缀',
-    },
-  ],
-  states: ['value'],
+  variables: {
+    value: '值',
+  },
+  states: {
+    value: '值',
+  },
   userEvents: {
     onChange: {
       label: '值改变',

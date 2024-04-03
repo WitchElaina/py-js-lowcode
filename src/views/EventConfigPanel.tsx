@@ -34,14 +34,21 @@ export const ArgConfig: React.FC<ArgConfigProps> = (props) => {
 
   const compName = compId?.split('-')[0] || '';
   // const compName = 'button';
-  const compProps = components?.[compName]?.defaultSchema?.props || {};
+  const compProps = isReturnArg
+    ? components?.[compName]?.states || {}
+    : components?.[compName]?.variables || {};
 
-  let options;
-  if (isReturnArg) {
-    options = components?.[compName]?.states || [];
-  } else {
-    options = Object.keys(compProps);
-  }
+  const options = Object.keys(compProps).map((op) => {
+    return {
+      value: op,
+      label: (
+        <>
+          {compProps[op]}
+          <Text code>{op}</Text>
+        </>
+      ),
+    };
+  });
 
   const [{ isOver }, drop] = useDrop<
     { component: Schema },
@@ -84,16 +91,13 @@ export const ArgConfig: React.FC<ArgConfigProps> = (props) => {
         <Select
           value={propName}
           style={{
-            width: '100px',
+            width: '150px',
           }}
           onChange={(value) => {
             onChange({ id: compId, propName: value });
           }}
           placeholder="属性"
-          options={options.map((option) => ({
-            label: option,
-            value: option,
-          }))}
+          options={options}
         ></Select>
       </Flex>
     </div>

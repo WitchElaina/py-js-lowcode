@@ -127,19 +127,15 @@ export const button: BaseComponent<typeof Button, ButtonProps> = {
   label: '按钮',
   component: Button,
   example: <Button block>按钮</Button>,
-  variables: [
-    {
-      name: 'children',
-      label: '文本',
-    },
-  ],
-  states: [],
+  variables: {
+    children: '标签',
+  },
+  states: {
+    children: '标签',
+  },
   userEvents: {
     onClick: {
       label: '点击按钮',
-    },
-    onMouseEnter: {
-      label: '鼠标移入',
     },
   },
   configPanel: ButtonConfig,
@@ -152,7 +148,6 @@ export const button: BaseComponent<typeof Button, ButtonProps> = {
     children: null,
     userEvents: {
       onClick: [],
-      onMouseEnter: [],
     },
   },
 };
