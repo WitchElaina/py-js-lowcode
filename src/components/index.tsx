@@ -17,38 +17,8 @@ import {
 } from 'antd';
 import { button } from './Button';
 import { flex } from './Flex';
+import { input } from './Input';
 import { BaseComponent } from '../types/component';
-
-const input: BaseComponent<typeof Input, InputProps> = {
-  name: 'input',
-  label: '输入框',
-  component: Input,
-  example: <Input placeholder="请输入" />,
-  variables: [
-    {
-      name: 'placeholder',
-      label: '占位符',
-    },
-    {
-      name: 'prefix',
-      label: '前缀',
-    },
-    {
-      name: 'suffix',
-      label: '后缀',
-    },
-  ],
-  states: ['value'],
-  defaultSchema: {
-    componentNames: 'input',
-    props: {
-      placeholder: '请输入',
-    },
-    title: '输入框',
-    children: null,
-    voidElementTag: true,
-  },
-};
 
 const checkbox: BaseComponent<typeof Checkbox, CheckboxProps> = {
   name: 'checkbox',
