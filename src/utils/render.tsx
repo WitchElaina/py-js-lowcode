@@ -2,12 +2,13 @@ import { Schema } from '../types/schema';
 import { components } from '../components';
 import { useEffect, useRef, useState } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { Tag, theme } from 'antd';
+import { Tag, theme, Typography } from 'antd';
 import { BaseComponent } from '../types/component';
 import { store } from '../store';
 import { useRequests } from './requests';
 
 const { useToken } = theme;
+const { Text } = Typography;
 
 export const RenderDesigner = (props: {
   schema: Schema;
@@ -243,16 +244,30 @@ export const RenderDesigner = (props: {
 
             {/* 布局组件的children */}
             {Array.isArray(schema.children) &&
-              schema.children.map((item) => (
-                <RenderDesigner
-                  schema={item}
-                  appendSchema={appendSchema}
-                  appendExistSchema={appendExistSchema}
-                  swapSchema={swapSchema}
-                  deleteSchema={deleteSchema}
-                  onClickCallback={onClickCallback}
-                  setParentHover={setIsHovering}
-                />
+              (schema.children.length > 0 ? (
+                schema.children.map((item) => (
+                  <RenderDesigner
+                    schema={item}
+                    appendSchema={appendSchema}
+                    appendExistSchema={appendExistSchema}
+                    swapSchema={swapSchema}
+                    deleteSchema={deleteSchema}
+                    onClickCallback={onClickCallback}
+                    setParentHover={setIsHovering}
+                  />
+                ))
+              ) : (
+                <Text
+                  type="secondary"
+                  style={{
+                    display:
+                      blankDropProps.isOver || blankDropProps.canDrop
+                        ? 'none'
+                        : 'block',
+                  }}
+                >
+                  空布局组件
+                </Text>
               ))}
           </Component>
         )}
