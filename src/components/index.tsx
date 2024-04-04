@@ -1,13 +1,10 @@
 import {
-  Input,
   Checkbox,
-  InputNumber,
   Radio,
   Select,
   Slider,
   Switch,
   Image,
-  InputProps,
   CheckboxProps,
   RadioProps,
   SelectProps,
@@ -18,6 +15,7 @@ import {
 import { button } from './Button';
 import { flex } from './Flex';
 import { input } from './Input';
+import { inputNumber } from './InputNumber';
 import { BaseComponent } from '../types/component';
 
 const checkbox: BaseComponent<typeof Checkbox, CheckboxProps> = {
@@ -34,27 +32,6 @@ const checkbox: BaseComponent<typeof Checkbox, CheckboxProps> = {
     },
     title: '多选框',
     children: null,
-  },
-};
-
-const inputNumber: BaseComponent<typeof InputNumber, InputProps> = {
-  name: 'inputNumber',
-  label: '数字输入框',
-  component: InputNumber,
-  example: <InputNumber placeholder="请输入数字" style={{ width: '100%' }} />,
-  variables: {},
-  states: {},
-  defaultSchema: {
-    componentNames: 'inputNumber',
-    props: {
-      placeholder: '请输入数字',
-      style: {
-        width: '100%',
-      },
-    },
-    title: '数字输入框',
-    children: null,
-    voidElementTag: true,
   },
 };
 
