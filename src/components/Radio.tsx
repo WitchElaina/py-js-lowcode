@@ -48,6 +48,15 @@ export const radio: BaseComponent<typeof Radio.Group, RadioGroupProps> = {
   configPanel: RadioConfig,
   variables: { value: '值' },
   states: {},
+  defaultEvents: {
+    onChange: (e, id) => {
+      store.dispatch.schema.changePropsById({
+        id,
+        props: 'value',
+        value: e.target.value,
+      });
+    },
+  },
   defaultSchema: {
     componentNames: 'radio',
     props: {

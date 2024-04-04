@@ -87,6 +87,15 @@ export const select: BaseComponent<typeof Select, SelectProps> = {
   variables: { value: '值' },
   states: {},
   configPanel: SelectConfig,
+  defaultEvents: {
+    onChange: (e, id) => {
+      store.dispatch.schema.changePropsById({
+        id,
+        props: 'value',
+        value: e,
+      });
+    },
+  },
   defaultSchema: {
     componentNames: 'select',
     props: {
