@@ -1,9 +1,7 @@
 import {
-  Checkbox,
   Slider,
   Switch,
   Image,
-  CheckboxProps,
   SliderSingleProps,
   SwitchProps,
   ImageProps,
@@ -14,24 +12,8 @@ import { input } from './Input';
 import { inputNumber } from './InputNumber';
 import { select } from './Select';
 import { radio } from './Radio';
+import { checkbox } from './Checkbox';
 import { BaseComponent } from '../types/component';
-
-const checkbox: BaseComponent<typeof Checkbox, CheckboxProps> = {
-  name: 'checkbox',
-  label: '多选框',
-  component: Checkbox,
-  example: <Checkbox>多选框</Checkbox>,
-  variables: {},
-  states: {},
-  defaultSchema: {
-    componentNames: 'checkbox',
-    props: {
-      children: '多选框',
-    },
-    title: '多选框',
-    children: null,
-  },
-};
 
 const slider: BaseComponent<typeof Slider, SliderSingleProps> = {
   name: 'slider',
