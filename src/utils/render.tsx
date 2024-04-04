@@ -149,7 +149,7 @@ export const RenderDesigner = (props: {
   );
   defaultEvents.forEach((event: string) => {
     eventsCallback[event] = (e: unknown) => {
-      console.log('defaultEvents', event, schema.id, e.target.value);
+      console.log('defaultEvents', event, schema.id, e);
       components?.[schema.componentNames]?.defaultEvents?.[event](
         e,
         schema.id as string,
