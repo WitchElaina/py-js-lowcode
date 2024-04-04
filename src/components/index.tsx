@@ -1,13 +1,11 @@
 import {
   Checkbox,
   Radio,
-  Select,
   Slider,
   Switch,
   Image,
   CheckboxProps,
   RadioProps,
-  SelectProps,
   SliderSingleProps,
   SwitchProps,
   ImageProps,
@@ -16,6 +14,7 @@ import { button } from './Button';
 import { flex } from './Flex';
 import { input } from './Input';
 import { inputNumber } from './InputNumber';
+import { select } from './Select';
 import { BaseComponent } from '../types/component';
 
 const checkbox: BaseComponent<typeof Checkbox, CheckboxProps> = {
@@ -49,27 +48,6 @@ const radio: BaseComponent<typeof Radio, RadioProps> = {
     },
     title: '单选框',
     children: null,
-  },
-};
-
-const select: BaseComponent<typeof Select, SelectProps> = {
-  name: 'select',
-  label: '选择器',
-  component: Select,
-  example: <Select style={{ width: '100%' }} placeholder={'请选择选项'} />,
-  variables: {},
-  states: {},
-  defaultSchema: {
-    componentNames: 'select',
-    props: {
-      style: {
-        width: '100%',
-      },
-      placeholder: '请选择选项',
-    },
-    title: '选择器',
-    children: null,
-    voidElementTag: true,
   },
 };
 

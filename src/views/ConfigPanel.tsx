@@ -324,7 +324,7 @@ export function ConfigPanel() {
         }}
       >
         <Tabs
-          defaultActiveKey="3"
+          defaultActiveKey="2"
           centered
           items={[
             {

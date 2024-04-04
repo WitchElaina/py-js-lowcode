@@ -16,3 +16,7 @@ body {
   padding: 5px 10px;
   height: 40px;
 }
+
+.config-wrapper .wp-multi-line {
+  padding: 5px 10px;
+}
