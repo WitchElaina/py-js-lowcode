@@ -23,6 +23,7 @@ export function DesignerScreen(props: DesignerScreenProps) {
   const appendExist = store.dispatch.schema.appendExist;
   const swapSchema = store.dispatch.schema.swapSchema;
   const onClickCallback = store.dispatch.designer.setCurSchema;
+  const deleteSchema = store.dispatch.schema.deleteSchema;
 
   return (
     <div
@@ -51,6 +52,7 @@ export function DesignerScreen(props: DesignerScreenProps) {
           appendSchema={append}
           appendExistSchema={appendExist}
           swapSchema={swapSchema}
+          deleteSchema={deleteSchema}
           onClickCallback={onClickCallback}
         />
       </div>

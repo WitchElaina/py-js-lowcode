@@ -17,6 +17,7 @@ export const RenderDesigner = (props: {
     parentId: string;
   }) => void;
   swapSchema: (props: { fromId: string; toId: string }) => void;
+  deleteSchema: (props: { id: string }) => void;
   onClickCallback?: (schema: Schema) => void;
   setParentHover?: (props: boolean) => void;
 }) => {
@@ -25,6 +26,7 @@ export const RenderDesigner = (props: {
     appendSchema,
     appendExistSchema,
     swapSchema,
+    deleteSchema,
     onClickCallback,
   } = props;
 
@@ -212,10 +214,21 @@ export const RenderDesigner = (props: {
           color="purple-inverse"
           style={{
             fontSize: 12,
+            marginRight: '2px',
           }}
         >
           {schema.title}{' '}
           {schema.id?.split('-')[0] + '#' + schema.id?.split('-')[1]}
+        </Tag>
+        <Tag
+          color="red-inverse"
+          style={{
+            fontSize: 12,
+            cursor: 'pointer',
+          }}
+          onClick={() => deleteSchema({ id: schema.id as string })}
+        >
+          删除
         </Tag>
       </div>
 
@@ -236,6 +249,7 @@ export const RenderDesigner = (props: {
                   appendSchema={appendSchema}
                   appendExistSchema={appendExistSchema}
                   swapSchema={swapSchema}
+                  deleteSchema={deleteSchema}
                   onClickCallback={onClickCallback}
                   setParentHover={setIsHovering}
                 />

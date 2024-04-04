@@ -191,6 +191,21 @@ export const schema = createModel<RootModel>()({
 
       return stateDeepCopy;
     },
+    deleteSchema(state, payload: { id: string }) {
+      const { id } = payload;
+
+      const parentSchema = getParentSchemaById(id, state);
+
+      if (!parentSchema || !Array.isArray(parentSchema.children)) {
+        return state;
+      }
+
+      parentSchema.children = parentSchema.children.filter(
+        (child) => child.id !== id,
+      );
+
+      return state;
+    },
     setCallback(
       state,
       payload: {
