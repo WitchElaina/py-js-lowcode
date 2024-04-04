@@ -114,7 +114,6 @@ export const input: BaseComponent<typeof Input, InputProps> = {
   states: {
     value: '值',
   },
-  userEvents: {},
   defaultEvents: {
     onChange: (e, id) => {
       store.dispatch.schema.changePropsById({
@@ -132,8 +131,5 @@ export const input: BaseComponent<typeof Input, InputProps> = {
     title: '输入框',
     children: null,
     voidElementTag: true,
-    userEvents: {
-      onChange: [],
-    },
   },
 };

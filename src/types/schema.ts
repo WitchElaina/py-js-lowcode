@@ -36,5 +36,5 @@ export interface Schema {
   // 子组件 schema
   children: Schema[] | null;
   // 用户事件
-  userEvents: Record<string, Callback[]>;
+  userEvents?: Record<string, Callback[]>;
 }
