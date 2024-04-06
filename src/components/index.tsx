@@ -1,11 +1,4 @@
-import {
-  Slider,
-  Switch,
-  Image,
-  SliderSingleProps,
-  SwitchProps,
-  ImageProps,
-} from 'antd';
+import { Switch, Image, SwitchProps, ImageProps } from 'antd';
 import { button } from './Button';
 import { flex } from './Flex';
 import { input } from './Input';
@@ -13,23 +6,8 @@ import { inputNumber } from './InputNumber';
 import { select } from './Select';
 import { radio } from './Radio';
 import { checkbox } from './Checkbox';
+import { slider } from './Slider';
 import { BaseComponent } from '../types/component';
-
-const slider: BaseComponent<typeof Slider, SliderSingleProps> = {
-  name: 'slider',
-  label: '滑动输入条',
-  component: Slider,
-  example: <Slider />,
-  variables: {},
-  states: {},
-  defaultSchema: {
-    componentNames: 'slider',
-    props: {},
-    title: '滑动输入条',
-    children: null,
-    voidElementTag: true,
-  },
-};
 
 const switcher: BaseComponent<typeof Switch, SwitchProps> = {
   name: 'switcher',
