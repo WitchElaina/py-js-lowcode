@@ -324,6 +324,13 @@ export const schema = createModel<RootModel>()({
 
       return state;
     },
+    loadSchemaJson(state, payload: { schemaJson: string }) {
+      const { schemaJson } = payload;
+
+      const schema = JSON.parse(schemaJson);
+
+      return schema;
+    },
   },
   effects: (dispatch) => ({
     // handle state changes with impure functions.
