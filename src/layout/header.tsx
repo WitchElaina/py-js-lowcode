@@ -29,7 +29,7 @@ function NavHeader() {
   const { getFuncList } = useRequests();
 
   const { data, error } = useRequest(getFuncList, {
-    pollingInterval: 5000,
+    pollingInterval: import.meta.env.VITE_HEARTBEAT_INTERVAL || 5000,
   });
 
   const handleLoad = (info) => {

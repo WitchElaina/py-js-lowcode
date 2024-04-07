@@ -3,8 +3,8 @@ import { RootModel } from '.';
 import { Setting } from '../types/settings';
 
 const initialState: Setting = {
-  pyAdapterHost: 'localhost',
-  pyAdapterPort: '6001',
+  pyAdapterHost: import.meta.env.VITE_PY_ADAPTER_HOST,
+  pyAdapterPort: import.meta.env.VITE_PY_ADAPTER_PORT,
 };
 
 export const settings = createModel<RootModel>()({
