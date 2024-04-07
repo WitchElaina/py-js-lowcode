@@ -7,7 +7,9 @@ export const useRequests = () => {
     (state) => state.settings,
   );
   const { pyAdapterHost, pyAdapterPort } = settings;
-  const API_URL = `${pyAdapterHost}:${pyAdapterPort}`;
+  const API_URL = `${pyAdapterHost}${
+    pyAdapterPort ? `:${pyAdapterPort}` : ':'
+  }`;
 
   const getFuncList = async () => axios.get(`http://${API_URL}/list/name`);
 
