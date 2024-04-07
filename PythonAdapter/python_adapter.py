@@ -101,6 +101,6 @@ def run(file_server=False):
     # start flask server
     logger.info("Flask Server Start")
     app.run(
-        host=os.getenv("PY_ADAPTER_HOST" or "127.0.0.1"),
-        port=os.getenv("PY_ADAPTER_PORT" or 6001),
+        host=os.getenv("VITE_PY_ADAPTER_HOST" or "127.0.0.1"),
+        port=os.getenv("VITE_PY_ADAPTER_PORT" or 6001),
     )
