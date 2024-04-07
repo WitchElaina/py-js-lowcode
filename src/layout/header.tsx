@@ -10,15 +10,27 @@ import {
 } from 'antd';
 import { store } from '../store';
 import { useSelector } from 'react-redux';
+import { SettingModal } from '../views/Setting';
+import { useState } from 'react';
+import { useRequests } from '../utils/requests';
+import { useRequest } from 'ahooks';
 
 const { Header } = Layout;
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 const { useToken } = theme;
 
 function NavHeader() {
   const { token } = useToken();
   const schema = useSelector((state) => state.schema);
+
+  const [isSettingOpen, setIsSettingOpen] = useState(false);
+
+  const { getFuncList } = useRequests();
+
+  const { data, error } = useRequest(getFuncList, {
+    pollingInterval: 5000,
+  });
 
   const handleLoad = (info) => {
     const fileReader = new FileReader();
@@ -69,11 +81,14 @@ function NavHeader() {
       </Flex>
 
       <Space>
-        <Button type="link" size="small">
-          Python 适配器
-          <Badge style={{ paddingLeft: '8px' }} status="success" />
-        </Button>
-        <Button type="link" size="small">
+        <Text type="secondary">
+          Python 适配器连接状态
+          <Badge
+            style={{ paddingLeft: '8px' }}
+            status={error ? 'error' : 'success'}
+          />
+        </Text>
+        <Button type="link" size="small" onClick={() => setIsSettingOpen(true)}>
           设置
         </Button>
         <Upload customRequest={handleLoad} showUploadList={false}>
@@ -82,6 +97,7 @@ function NavHeader() {
         <Button onClick={handleSave}>保存工程文件</Button>
         <Button type="primary">预览页面</Button>
       </Space>
+      <SettingModal isOpen={isSettingOpen} setIsOpen={setIsSettingOpen} />
     </Header>
   );
 }
