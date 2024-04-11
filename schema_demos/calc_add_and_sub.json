@@ -1,0 +1,131 @@
+{
+  "id": "flex-babf143c-930d-4786-8440-9a7daa34ff74",
+  "componentNames": "flex",
+  "props": {
+    "style": { "width": "100%", "height": "100%", "padding": 16 },
+    "vertical": false,
+    "gap": 16,
+    "align": "center",
+    "content": "center"
+  },
+  "title": "设计器",
+  "userEvents": {},
+  "children": [
+    {
+      "componentNames": "text",
+      "props": { "children": "Number 1" },
+      "title": "文本",
+      "children": null,
+      "userEvents": { "onClick": [] },
+      "id": "text-3f818313-c4d2-4d98-812d-4d82efc0bc2a"
+    },
+    {
+      "componentNames": "inputNumber",
+      "props": {
+        "placeholder": "请输入数字",
+        "style": { "width": "100%" },
+        "value": 50
+      },
+      "title": "数字输入框",
+      "children": null,
+      "voidElementTag": true,
+      "id": "inputNumber-0730a4da-7992-4073-b652-746565fd82e6"
+    },
+    {
+      "componentNames": "text",
+      "props": { "children": "Number 2" },
+      "title": "文本",
+      "children": null,
+      "userEvents": { "onClick": [] },
+      "id": "text-11e56652-dae9-4c66-8675-579bd8aac3bd"
+    },
+    {
+      "componentNames": "inputNumber",
+      "props": {
+        "placeholder": "请输入数字",
+        "style": { "width": "100%" },
+        "value": 503
+      },
+      "title": "数字输入框",
+      "children": null,
+      "voidElementTag": true,
+      "id": "inputNumber-3a55b3b8-a0fa-40fb-8908-0ac1213469e5"
+    },
+    {
+      "componentNames": "button",
+      "props": { "children": "+ Add" },
+      "title": "按钮",
+      "children": null,
+      "userEvents": {
+        "onClick": [
+          {
+            "funcName": "add",
+            "args": [
+              {
+                "id": "inputNumber-0730a4da-7992-4073-b652-746565fd82e6",
+                "propName": "value"
+              },
+              {
+                "id": "inputNumber-3a55b3b8-a0fa-40fb-8908-0ac1213469e5",
+                "propName": "value"
+              }
+            ],
+            "returnTo": {
+              "id": "inputNumber-607e50f0-7c4f-4a46-9898-fdec81b5dde0",
+              "propName": "value"
+            }
+          }
+        ]
+      },
+      "id": "button-5dc7e811-f6e3-47da-9978-ca8cecab97f1"
+    },
+    {
+      "componentNames": "button",
+      "props": { "children": "- Sub" },
+      "title": "按钮",
+      "children": null,
+      "userEvents": {
+        "onClick": [
+          {
+            "funcName": "sub",
+            "args": [
+              {
+                "id": "inputNumber-0730a4da-7992-4073-b652-746565fd82e6",
+                "propName": "value"
+              },
+              {
+                "id": "inputNumber-3a55b3b8-a0fa-40fb-8908-0ac1213469e5",
+                "propName": "value"
+              }
+            ],
+            "returnTo": {
+              "id": "inputNumber-607e50f0-7c4f-4a46-9898-fdec81b5dde0",
+              "propName": "value"
+            }
+          }
+        ]
+      },
+      "id": "button-f6814fbe-b9bd-4825-b29c-9ba8bfed4320"
+    },
+    {
+      "componentNames": "text",
+      "props": { "children": "Result " },
+      "title": "文本",
+      "children": null,
+      "userEvents": { "onClick": [] },
+      "id": "text-1f5b0c7d-504b-4d96-b93e-ea9d76d1219a"
+    },
+    {
+      "componentNames": "inputNumber",
+      "props": {
+        "placeholder": "⬅️ Click to calc",
+        "style": { "width": "100%" },
+        "value": null
+      },
+      "title": "数字输入框",
+      "children": null,
+      "voidElementTag": true,
+      "id": "inputNumber-607e50f0-7c4f-4a46-9898-fdec81b5dde0"
+    }
+  ]
+}
