@@ -8,6 +8,7 @@ import { checkbox } from './Checkbox';
 import { slider } from './Slider';
 import { switcher } from './Switch';
 import { image } from './Image';
+import { text } from './Text';
 
 export const components = {
   button,
@@ -20,4 +21,5 @@ export const components = {
   switcher,
   image,
   flex,
+  text,
 };
