@@ -48,6 +48,22 @@ const PropsPanel = () => {
     { designer: { currentSelectedSchema: Schema } },
     Schema
   >((state) => state.designer.currentSelectedSchema);
+  const schema = useSelector<{ schema: Schema }, Schema>(
+    (state) => state.schema,
+  );
+
+  useEffect(() => {
+    if (curSchema) {
+      const id = curSchema.id as string;
+      if (!id) return;
+      const curSchemaNew = getSchemaById(id, schema);
+      if (curSchemaNew) {
+        store.dispatch.designer.setCurSchema(curSchemaNew);
+      }
+      console.log('schema update', curSchema);
+    }
+  }, [schema]);
+
   if (!curSchema)
     return (
       <Empty style={{ marginTop: 50 }} description={'请先在左侧选择组件'} />
