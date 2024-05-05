@@ -184,6 +184,7 @@ export const RenderDesigner = (props: {
         // width: '100%',
         // height: '100%',
         opacity: isDragging ? 0.6 : 1,
+        ...schema.props.style,
       }}
     >
       {/* 上方显示的组件名称信息 */}
