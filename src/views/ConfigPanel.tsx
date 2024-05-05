@@ -11,13 +11,14 @@ import {
   Input,
   Card,
   Result,
+  Switch,
 } from 'antd';
 import MonacoEditor from 'react-monaco-editor';
 import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { Callback, CallbackProps, Schema } from '../types/schema';
 import { components } from '../components';
-import { useEffect, useState } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 import { useRequests } from '../utils/requests';
 import { useDynamicList, useRequest, useUpdate } from 'ahooks';
 import { PythonCallback } from '../types/python';
@@ -39,6 +40,72 @@ const InfoPanel = (props: { curSchema: Schema }) => {
       <Text code>{curSchema.id}</Text>
       <Divider style={{ margin: '10px 0' }} />
     </>
+  );
+};
+
+const StylePanel = (props: { curSchema: Schema }) => {
+  const { curSchema } = props;
+  const originStyle = curSchema?.props?.style || {};
+  console.log('stylePanel', originStyle);
+  const setProps = store.dispatch.schema.changePropsById;
+
+  const setStyle = (key: string, value: any) => {
+    const newStyle = cloneDeep(originStyle);
+    newStyle[key] = value;
+    setProps({
+      id: curSchema.id as string,
+      props: 'style',
+      value: newStyle,
+    });
+  };
+
+  return (
+    <Flex vertical gap={0} className="config-wrapper">
+      <Flex className="wp-single-line wp-input">
+        <Text strong>宽度</Text>
+        <Input
+          style={{ width: '50%' }}
+          variant="filled"
+          defaultValue={originStyle.width}
+          onBlur={(e) => {
+            setStyle('width', e.target.value);
+          }}
+        />
+      </Flex>
+      <Flex className="wp-single-line wp-input">
+        <Text strong>高度</Text>
+        <Input
+          style={{ width: '50%' }}
+          variant="filled"
+          defaultValue={originStyle.height}
+          onBlur={(e) => {
+            setStyle('height', e.target.value);
+          }}
+        />
+      </Flex>
+      <Flex className="wp-single-line wp-input">
+        <Text strong>外边距</Text>
+        <Input
+          style={{ width: '50%' }}
+          variant="filled"
+          defaultValue={originStyle.margin}
+          onBlur={(e) => {
+            setStyle('margin', e.target.value);
+          }}
+        />
+      </Flex>
+      <Flex className="wp-single-line wp-input">
+        <Text strong>内边距</Text>
+        <Input
+          style={{ width: '50%' }}
+          variant="filled"
+          defaultValue={originStyle.padding}
+          onBlur={(e) => {
+            setStyle('padding', e.target.value);
+          }}
+        />
+      </Flex>
+    </Flex>
   );
 };
 
@@ -64,6 +131,8 @@ const PropsPanel = () => {
     }
   }, [schema]);
 
+  const [customStyle, setCustomStyle] = useState(false);
+
   if (!curSchema)
     return (
       <Empty style={{ marginTop: 50 }} description={'请先在左侧选择组件'} />
@@ -82,7 +151,31 @@ const PropsPanel = () => {
           }}
         >
           <InfoPanel curSchema={curSchema} />
+
           <Config schema={curSchema} key={`${curSchema.id}-config-props`} />
+          <Divider style={{ margin: '10px 0' }} />
+
+          <Flex
+            content="center"
+            gap={8}
+            align="center"
+            style={{
+              paddingBottom: 8,
+            }}
+          >
+            <Text strong>高级样式</Text>
+            <Switch
+              checked={customStyle}
+              onChange={setCustomStyle}
+              size="small"
+            />
+          </Flex>
+          {customStyle && (
+            <StylePanel
+              curSchema={curSchema}
+              key={`${curSchema.id}-config-style`}
+            />
+          )}
         </Flex>
       ) : (
         <Empty style={{ marginTop: 50 }} description={'该组件没有可配置属性'} />
