@@ -9,6 +9,7 @@ import { slider } from './Slider';
 import { switcher } from './Switch';
 import { image } from './Image';
 import { text } from './Text';
+import { inputArea } from './InputArea';
 
 export const components = {
   button,
@@ -22,4 +23,5 @@ export const components = {
   image,
   flex,
   text,
+  inputArea,
 };
