@@ -11,6 +11,7 @@ import { image } from './Image';
 import { text } from './Text';
 import { inputArea } from './InputArea';
 import { chatList } from './ChatList';
+import { library } from './Library';
 
 export const components = {
   button,
@@ -26,4 +27,5 @@ export const components = {
   text,
   inputArea,
   chatList,
+  library,
 };

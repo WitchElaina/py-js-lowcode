@@ -26,5 +26,16 @@ def mock_ask_ai(msg):
     return mock_content
 
 
+mock_pics = [
+    "https://www.loliapi.com/acg/pc/",
+]
+
+
+@reg
+def mock_gen_pic():
+    mock_pics.append("https://www.loliapi.com/acg/pc/")
+    return mock_pics
+
+
 if __name__ == "__main__":
     run(file_server=True)
