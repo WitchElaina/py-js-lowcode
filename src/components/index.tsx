@@ -10,6 +10,7 @@ import { switcher } from './Switch';
 import { image } from './Image';
 import { text } from './Text';
 import { inputArea } from './InputArea';
+import { chatList } from './ChatList';
 
 export const components = {
   button,
@@ -24,4 +25,5 @@ export const components = {
   flex,
   text,
   inputArea,
+  chatList,
 };
