@@ -1,7 +1,7 @@
 import os
 
-import func_manager as fm
-from logger import create_logger
+from . import func_manager as fm
+from .logger import create_logger
 
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
