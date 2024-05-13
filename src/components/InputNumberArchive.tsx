@@ -6,54 +6,12 @@ import {
   Select,
   InputNumber,
   Input,
-  Slider,
 } from 'antd';
 import { BaseComponent, CombineProps } from '../types/component';
 import { Schema } from '../types/schema';
 import { store } from '../store';
-import { useEffect, useState } from 'react';
 
 const { Text } = Typography;
-
-interface CustomInputNumberProps {
-  title: string;
-  value: number;
-  onChange: (value: number) => void;
-  disabled: boolean;
-  variant: 'outlined' | 'filled' | 'borderless';
-  size: 'default' | 'large' | 'small';
-  max: number;
-  min: number;
-  step: number;
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-const Comp = (props: CustomInputNumberProps) => {
-  return (
-    <Flex
-      vertical
-      gap={0}
-      style={{
-        border: '1px solid #d9d9d9',
-        borderRadius: 8,
-        padding: 16,
-      }}
-    >
-      <Flex align="center" gap={4}>
-        <Text strong style={{ width: '100%' }}>
-          {props.title}
-        </Text>
-        <InputNumber
-          {...props}
-          style={{
-            width: 'max-content',
-          }}
-        />
-      </Flex>
-      <Slider {...props} />
-    </Flex>
-  );
-};
 
 // eslint-disable-next-line react-refresh/only-export-components
 const InputNumberConfig = (props: { schema: Schema }) => {
@@ -121,7 +79,7 @@ const InputNumberConfig = (props: { schema: Schema }) => {
 
       <Flex className="wp-single-line wp-input">
         <Text strong>最大值</Text>
-        <InputNumber
+        <Input
           style={{ width: '50%' }}
           variant="filled"
           defaultValue={schemaProps.max as string}
@@ -129,14 +87,14 @@ const InputNumberConfig = (props: { schema: Schema }) => {
             setProps({
               id,
               props: 'max',
-              value: e,
+              value: e.target.value,
             });
           }}
         />
       </Flex>
       <Flex className="wp-single-line wp-input">
         <Text strong>最小值</Text>
-        <InputNumber
+        <Input
           style={{ width: '50%' }}
           variant="filled"
           defaultValue={schemaProps.min as string}
@@ -144,7 +102,7 @@ const InputNumberConfig = (props: { schema: Schema }) => {
             setProps({
               id,
               props: 'min',
-              value: e,
+              value: e.target.value,
             });
           }}
         />
@@ -172,7 +130,7 @@ export const inputNumber: BaseComponent<typeof InputNumber, InputNumberProps> =
   {
     name: 'inputNumber',
     label: '数字输入框',
-    component: Comp,
+    component: InputNumber,
     example: <InputNumber placeholder="请输入数字" style={{ width: '100%' }} />,
     configPanel: InputNumberConfig,
     variables: {

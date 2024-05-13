@@ -237,9 +237,19 @@ export const RenderDesigner = (props: {
       {/* 组件本身 */}
       <span ref={ref}>
         {schema.voidElementTag ? (
-          <Component key={schema.id} {...schema.props} {...eventsCallback} />
+          <Component
+            title={schema.title}
+            key={schema.id}
+            {...schema.props}
+            {...eventsCallback}
+          />
         ) : (
-          <Component {...schema.props} key={schema.id} {...eventsCallback}>
+          <Component
+            title={schema.title}
+            {...schema.props}
+            key={schema.id}
+            {...eventsCallback}
+          >
             {/* 非布局组件的children */}
             {schema.children === null && schema.props?.children}
 
