@@ -35,16 +35,18 @@ def exec_func(func_name, *args):
         logger.error(f"Failed to get {func_name}: {e}")
         raise e
 
+    ret = None
+
     try:
         logger.info(f"Executing {func_name} with args: {args}")
-        func(*args)
+        ret = func(*args)
     except Exception as e:
         logger.error(f"Failed to execute {func_name}: {e}")
         raise e
     else:
         logger.info(f"{func_name} executed successfully.")
 
-    return func(*args)
+    return ret
 
 
 # Flask request handler
