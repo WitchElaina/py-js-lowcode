@@ -96,6 +96,7 @@ function NavHeader() {
         </Upload>
         <Button onClick={handleSave}>保存工程文件</Button>
         <Button type="primary">预览页面</Button>
+        <Button>导出代码</Button>
       </Space>
       <SettingModal isOpen={isSettingOpen} setIsOpen={setIsSettingOpen} />
     </Header>
