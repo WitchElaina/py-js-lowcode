@@ -157,6 +157,14 @@ export const RenderDesigner = (props: {
     };
   });
 
+  const styleProps = schema.props?.style || {};
+  const otherProps = Object.keys(schema.props || {}).reduce((acc, key) => {
+    if (key !== 'style') {
+      acc[key] = schema.props[key];
+    }
+    return acc;
+  }, {});
+
   return (
     <div
       onClick={(e) => {
@@ -184,7 +192,7 @@ export const RenderDesigner = (props: {
         // width: '100%',
         // height: '100%',
         opacity: isDragging ? 0.6 : 1,
-        ...schema.props.style,
+        ...styleProps,
       }}
     >
       {/* 上方显示的组件名称信息 */}
@@ -240,14 +248,14 @@ export const RenderDesigner = (props: {
           <Component
             title={schema.title}
             key={schema.id}
-            {...schema.props}
+            {...otherProps}
             {...eventsCallback}
           />
         ) : (
           <Component
             title={schema.title}
-            {...schema.props}
             key={schema.id}
+            {...otherProps}
             {...eventsCallback}
           >
             {/* 非布局组件的children */}
