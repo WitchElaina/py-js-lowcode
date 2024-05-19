@@ -1,0 +1,384 @@
+Gradio 1 
+
+[2024-05-16 11:57:57,958]-[DEBUG](httpcore.connection): connect_tcp.started host='127.0.0.1' port=7860 local_address=None timeout=3 socket_options=None
+[2024-05-16 11:57:57,958]-[DEBUG](httpcore.connection): connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f861e0fbca0>
+[2024-05-16 11:57:57,958]-[DEBUG](httpcore.http11): send_request_headers.started request=<Request [b'HEAD']>
+[2024-05-16 11:57:57,959]-[DEBUG](httpcore.http11): send_request_headers.complete
+[2024-05-16 11:57:57,959]-[DEBUG](httpcore.http11): send_request_body.started request=<Request [b'HEAD']>
+[2024-05-16 11:57:57,960]-[DEBUG](httpcore.http11): send_request_body.complete
+[2024-05-16 11:57:57,961]-[DEBUG](httpcore.http11): receive_response_headers.started request=<Request [b'HEAD']>
+[2024-05-16 11:57:57,979]-[DEBUG](httpcore.http11): receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Thu, 16 May 2024 03:57:57 GMT'), (b'server', b'uvicorn'), (b'content-length', b'20624'), (b'content-type', b'text/html; charset=utf-8'), (b'access-control-allow-methods', b'GET, POST, PUT, DELETE, OPTIONS'), (b'access-control-allow-headers', b'Origin, Content-Type, Accept')])
+[2024-05-16 11:57:57,980]-[INFO](httpx): HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+[2024-05-16 11:57:57,980]-[DEBUG](httpcore.http11): receive_response_body.started request=<Request [b'HEAD']>
+[2024-05-16 11:57:57,981]-[DEBUG](httpcore.http11): receive_response_body.complete
+[2024-05-16 11:57:57,981]-[DEBUG](httpcore.http11): response_closed.started
+[2024-05-16 11:57:57,981]-[DEBUG](httpcore.http11): response_closed.complete
+[2024-05-16 11:57:57,981]-[DEBUG](httpcore.connection): close.started
+[2024-05-16 11:57:57,981]-[DEBUG](httpcore.connection): close.complete
+
+To create a public link, set `share=True` in `launch()`.
+[2024-05-16 11:57:57,983]-[DEBUG](httpx): load_ssl_context verify=True cert=None trust_env=True http2=False
+[2024-05-16 11:57:57,984]-[DEBUG](httpx): load_verify_locations cafile='/root/miniconda3/lib/python3.8/site-packages/certifi/cacert.pem'
+[2024-05-16 11:57:57,997]-[DEBUG](httpcore.connection): connect_tcp.started host='api.gradio.app' port=443 local_address=None timeout=5 socket_options=None
+[2024-05-16 11:57:58,105]-[DEBUG](httpcore.connection): connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f861e166f40>
+[2024-05-16 11:57:58,105]-[DEBUG](httpcore.connection): start_tls.started ssl_context=<ssl.SSLContext object at 0x7f8718e4f640> server_hostname='api.gradio.app' timeout=5
+[2024-05-16 11:57:58,129]-[DEBUG](httpcore.connection): start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f8718fc3eb0>
+[2024-05-16 11:57:58,129]-[DEBUG](httpcore.http11): send_request_headers.started request=<Request [b'GET']>
+[2024-05-16 11:57:58,130]-[DEBUG](httpcore.http11): send_request_headers.complete
+[2024-05-16 11:57:58,130]-[DEBUG](httpcore.http11): send_request_body.started request=<Request [b'GET']>
+[2024-05-16 11:57:58,130]-[DEBUG](httpcore.http11): send_request_body.complete
+[2024-05-16 11:57:58,130]-[DEBUG](httpcore.http11): receive_response_headers.started request=<Request [b'GET']>
+[2024-05-16 11:57:58,214]-[DEBUG](httpcore.connection): connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f861e10c940>
+[2024-05-16 11:57:58,214]-[DEBUG](httpcore.connection): start_tls.started ssl_context=<ssl.SSLContext object at 0x7f861e138540> server_hostname='api.gradio.app' timeout=5
+[2024-05-16 11:57:58,333]-[DEBUG](httpcore.http11): receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 16 May 2024 03:57:58 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'21'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*')])
+[2024-05-16 11:57:58,334]-[INFO](httpx): HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+[2024-05-16 11:57:58,334]-[DEBUG](httpcore.http11): receive_response_body.started request=<Request [b'GET']>
+[2024-05-16 11:57:58,334]-[DEBUG](httpcore.http11): receive_response_body.complete
+[2024-05-16 11:57:58,334]-[DEBUG](httpcore.http11): response_closed.started
+[2024-05-16 11:57:58,334]-[DEBUG](httpcore.http11): response_closed.complete
+[2024-05-16 11:57:58,334]-[DEBUG](httpcore.connection): close.started
+[2024-05-16 11:57:58,334]-[DEBUG](httpcore.connection): close.complete
+IMPORTANT: You are using gradio version 4.20.0, however version 4.29.0 is available, please upgrade.
+--------
+[2024-05-16 11:57:58,450]-[DEBUG](httpcore.connection): start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f861e166d00>
+[2024-05-16 11:57:58,451]-[DEBUG](httpcore.http11): send_request_headers.started request=<Request [b'POST']>
+[2024-05-16 11:57:58,451]-[DEBUG](httpcore.http11): send_request_headers.complete
+[2024-05-16 11:57:58,452]-[DEBUG](httpcore.http11): send_request_body.started request=<Request [b'POST']>
+[2024-05-16 11:57:58,452]-[DEBUG](httpcore.http11): send_request_body.complete
+[2024-05-16 11:57:58,452]-[DEBUG](httpcore.http11): receive_response_headers.started request=<Request [b'POST']>
+[2024-05-16 11:57:58,620]-[DEBUG](httpcore.connection): start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f861e10cc40>
+[2024-05-16 11:57:58,620]-[DEBUG](httpcore.http11): send_request_headers.started request=<Request [b'POST']>
+[2024-05-16 11:57:58,621]-[DEBUG](httpcore.http11): send_request_headers.complete
+[2024-05-16 11:57:58,621]-[DEBUG](httpcore.http11): send_request_body.started request=<Request [b'POST']>
+[2024-05-16 11:57:58,621]-[DEBUG](httpcore.http11): send_request_body.complete
+[2024-05-16 11:57:58,621]-[DEBUG](httpcore.http11): receive_response_headers.started request=<Request [b'POST']>
+[2024-05-16 11:57:58,712]-[DEBUG](httpcore.http11): receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 16 May 2024 03:57:58 GMT'), (b'Content-Type', b'text/html; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*'), (b'Content-Encoding', b'gzip')])
+[2024-05-16 11:57:58,713]-[INFO](httpx): HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+[2024-05-16 11:57:58,713]-[DEBUG](httpcore.http11): receive_response_body.started request=<Request [b'POST']>
+[2024-05-16 11:57:58,714]-[DEBUG](httpcore.http11): receive_response_body.complete
+[2024-05-16 11:57:58,714]-[DEBUG](httpcore.http11): response_closed.started
+[2024-05-16 11:57:58,714]-[DEBUG](httpcore.http11): response_closed.complete
+[2024-05-16 11:57:58,714]-[DEBUG](httpcore.connection): close.started
+[2024-05-16 11:57:58,715]-[DEBUG](httpcore.connection): close.complete
+[2024-05-16 11:57:58,924]-[DEBUG](httpcore.http11): receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 16 May 2024 03:57:58 GMT'), (b'Content-Type', b'text/html; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*'), (b'Content-Encoding', b'gzip')])
+[2024-05-16 11:57:58,925]-[INFO](httpx): HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+[2024-05-16 11:57:58,925]-[DEBUG](httpcore.http11): receive_response_body.started request=<Request [b'POST']>
+[2024-05-16 11:57:58,926]-[DEBUG](httpcore.http11): receive_response_body.complete
+[2024-05-16 11:57:58,926]-[DEBUG](httpcore.http11): response_closed.started
+[2024-05-16 11:57:58,926]-[DEBUG](httpcore.http11): response_closed.complete
+[2024-05-16 11:57:58,926]-[DEBUG](httpcore.connection): close.started
+[2024-05-16 11:57:58,927]-[DEBUG](httpcore.connection): close.complete
+
+
+
+2
+
+[2024-05-16 12:01:26,744]-[DEBUG](httpcore.connection): connect_tcp.started host='127.0.0.1' port=7860 local_address=None timeout=3 socket_options=None
+[2024-05-16 12:01:26,745]-[DEBUG](httpcore.connection): connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f7a4b639ca0>
+[2024-05-16 12:01:26,745]-[DEBUG](httpcore.http11): send_request_headers.started request=<Request [b'HEAD']>
+[2024-05-16 12:01:26,747]-[DEBUG](httpcore.http11): send_request_headers.complete
+[2024-05-16 12:01:26,748]-[DEBUG](httpcore.http11): send_request_body.started request=<Request [b'HEAD']>
+[2024-05-16 12:01:26,748]-[DEBUG](httpcore.http11): send_request_body.complete
+[2024-05-16 12:01:26,748]-[DEBUG](httpcore.http11): receive_response_headers.started request=<Request [b'HEAD']>
+[2024-05-16 12:01:26,760]-[DEBUG](httpcore.http11): receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Thu, 16 May 2024 04:01:26 GMT'), (b'server', b'uvicorn'), (b'content-length', b'20625'), (b'content-type', b'text/html; charset=utf-8'), (b'access-control-allow-methods', b'GET, POST, PUT, DELETE, OPTIONS'), (b'access-control-allow-headers', b'Origin, Content-Type, Accept')])
+[2024-05-16 12:01:26,760]-[INFO](httpx): HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+[2024-05-16 12:01:26,760]-[DEBUG](httpcore.http11): receive_response_body.started request=<Request [b'HEAD']>
+[2024-05-16 12:01:26,760]-[DEBUG](httpcore.http11): receive_response_body.complete
+[2024-05-16 12:01:26,760]-[DEBUG](httpcore.http11): response_closed.started
+[2024-05-16 12:01:26,760]-[DEBUG](httpcore.http11): response_closed.complete
+[2024-05-16 12:01:26,761]-[DEBUG](httpcore.connection): close.started
+[2024-05-16 12:01:26,761]-[DEBUG](httpcore.connection): close.complete
+
+To create a public link, set `share=True` in `launch()`.
+[2024-05-16 12:01:26,762]-[DEBUG](httpx): load_ssl_context verify=True cert=None trust_env=True http2=False
+[2024-05-16 12:01:26,763]-[DEBUG](httpx): load_verify_locations cafile='/root/miniconda3/lib/python3.8/site-packages/certifi/cacert.pem'
+[2024-05-16 12:01:26,771]-[DEBUG](httpcore.connection): connect_tcp.started host='api.gradio.app' port=443 local_address=None timeout=5 socket_options=None
+[2024-05-16 12:01:26,932]-[DEBUG](httpcore.connection): connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f7a5207af70>
+[2024-05-16 12:01:26,932]-[DEBUG](httpcore.connection): start_tls.started ssl_context=<ssl.SSLContext object at 0x7f7b49640640> server_hostname='api.gradio.app' timeout=5
+[2024-05-16 12:01:26,944]-[DEBUG](httpcore.connection): start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f7b4976cd60>
+[2024-05-16 12:01:26,944]-[DEBUG](httpcore.http11): send_request_headers.started request=<Request [b'GET']>
+[2024-05-16 12:01:26,945]-[DEBUG](httpcore.http11): send_request_headers.complete
+[2024-05-16 12:01:26,945]-[DEBUG](httpcore.http11): send_request_body.started request=<Request [b'GET']>
+[2024-05-16 12:01:26,945]-[DEBUG](httpcore.http11): send_request_body.complete
+[2024-05-16 12:01:26,945]-[DEBUG](httpcore.http11): receive_response_headers.started request=<Request [b'GET']>
+[2024-05-16 12:01:26,956]-[DEBUG](httpcore.connection): connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f7a4b64e8e0>
+[2024-05-16 12:01:26,956]-[DEBUG](httpcore.connection): start_tls.started ssl_context=<ssl.SSLContext object at 0x7f7a5203abc0> server_hostname='api.gradio.app' timeout=5
+[2024-05-16 12:01:27,149]-[DEBUG](httpcore.http11): receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 16 May 2024 04:01:27 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'21'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*')])
+[2024-05-16 12:01:27,149]-[INFO](httpx): HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+[2024-05-16 12:01:27,149]-[DEBUG](httpcore.http11): receive_response_body.started request=<Request [b'GET']>
+[2024-05-16 12:01:27,150]-[DEBUG](httpcore.http11): receive_response_body.complete
+[2024-05-16 12:01:27,150]-[DEBUG](httpcore.http11): response_closed.started
+[2024-05-16 12:01:27,150]-[DEBUG](httpcore.http11): response_closed.complete
+[2024-05-16 12:01:27,150]-[DEBUG](httpcore.connection): close.started
+[2024-05-16 12:01:27,150]-[DEBUG](httpcore.connection): close.complete
+IMPORTANT: You are using gradio version 4.20.0, however version 4.29.0 is available, please upgrade.
+--------
+[2024-05-16 12:01:27,304]-[DEBUG](httpcore.connection): start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f7a52032850>
+[2024-05-16 12:01:27,304]-[DEBUG](httpcore.http11): send_request_headers.started request=<Request [b'POST']>
+[2024-05-16 12:01:27,305]-[DEBUG](httpcore.http11): send_request_headers.complete
+[2024-05-16 12:01:27,305]-[DEBUG](httpcore.http11): send_request_body.started request=<Request [b'POST']>
+[2024-05-16 12:01:27,305]-[DEBUG](httpcore.http11): send_request_body.complete
+[2024-05-16 12:01:27,305]-[DEBUG](httpcore.http11): receive_response_headers.started request=<Request [b'POST']>
+[2024-05-16 12:01:27,341]-[DEBUG](httpcore.connection): start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f7a52083760>
+[2024-05-16 12:01:27,341]-[DEBUG](httpcore.http11): send_request_headers.started request=<Request [b'POST']>
+[2024-05-16 12:01:27,342]-[DEBUG](httpcore.http11): send_request_headers.complete
+[2024-05-16 12:01:27,342]-[DEBUG](httpcore.http11): send_request_body.started request=<Request [b'POST']>
+[2024-05-16 12:01:27,342]-[DEBUG](httpcore.http11): send_request_body.complete
+[2024-05-16 12:01:27,343]-[DEBUG](httpcore.http11): receive_response_headers.started request=<Request [b'POST']>
+[2024-05-16 12:01:27,577]-[DEBUG](httpcore.http11): receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 16 May 2024 04:01:27 GMT'), (b'Content-Type', b'text/html; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*'), (b'Content-Encoding', b'gzip')])
+[2024-05-16 12:01:27,578]-[INFO](httpx): HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+[2024-05-16 12:01:27,578]-[DEBUG](httpcore.http11): receive_response_body.started request=<Request [b'POST']>
+[2024-05-16 12:01:27,578]-[DEBUG](httpcore.http11): receive_response_body.complete
+[2024-05-16 12:01:27,579]-[DEBUG](httpcore.http11): response_closed.started
+[2024-05-16 12:01:27,579]-[DEBUG](httpcore.http11): response_closed.complete
+[2024-05-16 12:01:27,579]-[DEBUG](httpcore.connection): close.started
+[2024-05-16 12:01:27,579]-[DEBUG](httpcore.connection): close.complete
+[2024-05-16 12:01:27,646]-[DEBUG](httpcore.http11): receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 16 May 2024 04:01:27 GMT'), (b'Content-Type', b'text/html; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*'), (b'Content-Encoding', b'gzip')])
+[2024-05-16 12:01:27,647]-[INFO](httpx): HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+[2024-05-16 12:01:27,647]-[DEBUG](httpcore.http11): receive_response_body.started request=<Request [b'POST']>
+[2024-05-16 12:01:27,648]-[DEBUG](httpcore.http11): receive_response_body.complete
+[2024-05-16 12:01:27,648]-[DEBUG](httpcore.http11): response_closed.started
+[2024-05-16 12:01:27,648]-[DEBUG](httpcore.http11): response_closed.complete
+[2024-05-16 12:01:27,649]-[DEBUG](httpcore.connection): close.started
+[2024-05-16 12:01:27,649]-[DEBUG](httpcore.connection): close.complete
+
+
+
+3
+
+[2024-05-16 12:04:05,083]-[DEBUG](httpcore.connection): connect_tcp.started host='127.0.0.1' port=7860 local_address=None timeout=3 socket_options=None
+[2024-05-16 12:04:05,083]-[DEBUG](httpcore.connection): connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f25622c1970>
+[2024-05-16 12:04:05,083]-[DEBUG](httpcore.http11): send_request_headers.started request=<Request [b'HEAD']>
+[2024-05-16 12:04:05,084]-[DEBUG](httpcore.http11): send_request_headers.complete
+[2024-05-16 12:04:05,085]-[DEBUG](httpcore.http11): send_request_body.started request=<Request [b'HEAD']>
+[2024-05-16 12:04:05,085]-[DEBUG](httpcore.http11): send_request_body.complete
+[2024-05-16 12:04:05,085]-[DEBUG](httpcore.http11): receive_response_headers.started request=<Request [b'HEAD']>
+[2024-05-16 12:04:05,099]-[DEBUG](httpcore.http11): receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'date', b'Thu, 16 May 2024 04:04:05 GMT'), (b'server', b'uvicorn'), (b'content-length', b'20625'), (b'content-type', b'text/html; charset=utf-8'), (b'access-control-allow-methods', b'GET, POST, PUT, DELETE, OPTIONS'), (b'access-control-allow-headers', b'Origin, Content-Type, Accept')])
+[2024-05-16 12:04:05,099]-[INFO](httpx): HTTP Request: HEAD http://127.0.0.1:7860/ "HTTP/1.1 200 OK"
+[2024-05-16 12:04:05,100]-[DEBUG](httpcore.http11): receive_response_body.started request=<Request [b'HEAD']>
+[2024-05-16 12:04:05,100]-[DEBUG](httpcore.http11): receive_response_body.complete
+[2024-05-16 12:04:05,100]-[DEBUG](httpcore.http11): response_closed.started
+[2024-05-16 12:04:05,100]-[DEBUG](httpcore.http11): response_closed.complete
+[2024-05-16 12:04:05,100]-[DEBUG](httpcore.connection): close.started
+[2024-05-16 12:04:05,100]-[DEBUG](httpcore.connection): close.complete
+
+To create a public link, set `share=True` in `launch()`.
+[2024-05-16 12:04:05,101]-[DEBUG](httpx): load_ssl_context verify=True cert=None trust_env=True http2=False
+[2024-05-16 12:04:05,102]-[DEBUG](httpx): load_verify_locations cafile='/root/miniconda3/lib/python3.8/site-packages/certifi/cacert.pem'
+[2024-05-16 12:04:05,117]-[DEBUG](httpcore.connection): connect_tcp.started host='api.gradio.app' port=443 local_address=None timeout=5 socket_options=None
+[2024-05-16 12:04:05,209]-[DEBUG](httpcore.connection): start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f266efcae80>
+[2024-05-16 12:04:05,209]-[DEBUG](httpcore.http11): send_request_headers.started request=<Request [b'GET']>
+[2024-05-16 12:04:05,210]-[DEBUG](httpcore.http11): send_request_headers.complete
+[2024-05-16 12:04:05,210]-[DEBUG](httpcore.http11): send_request_body.started request=<Request [b'GET']>
+[2024-05-16 12:04:05,210]-[DEBUG](httpcore.http11): send_request_body.complete
+[2024-05-16 12:04:05,210]-[DEBUG](httpcore.http11): receive_response_headers.started request=<Request [b'GET']>
+[2024-05-16 12:04:05,267]-[DEBUG](httpcore.connection): connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f2563c66c40>
+[2024-05-16 12:04:05,268]-[DEBUG](httpcore.connection): start_tls.started ssl_context=<ssl.SSLContext object at 0x7f2562aebbc0> server_hostname='api.gradio.app' timeout=5
+[2024-05-16 12:04:05,331]-[DEBUG](httpcore.connection): connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f25646f1100>
+[2024-05-16 12:04:05,332]-[DEBUG](httpcore.connection): start_tls.started ssl_context=<ssl.SSLContext object at 0x7f2563c36540> server_hostname='api.gradio.app' timeout=5
+[2024-05-16 12:04:05,385]-[DEBUG](httpcore.http11): receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 16 May 2024 04:04:05 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'21'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*')])
+[2024-05-16 12:04:05,386]-[INFO](httpx): HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+[2024-05-16 12:04:05,386]-[DEBUG](httpcore.http11): receive_response_body.started request=<Request [b'GET']>
+[2024-05-16 12:04:05,386]-[DEBUG](httpcore.http11): receive_response_body.complete
+[2024-05-16 12:04:05,387]-[DEBUG](httpcore.http11): response_closed.started
+[2024-05-16 12:04:05,387]-[DEBUG](httpcore.http11): response_closed.complete
+[2024-05-16 12:04:05,387]-[DEBUG](httpcore.connection): close.started
+[2024-05-16 12:04:05,387]-[DEBUG](httpcore.connection): close.complete
+IMPORTANT: You are using gradio version 4.20.0, however version 4.29.0 is available, please upgrade.
+--------
+[2024-05-16 12:04:05,676]-[DEBUG](httpcore.connection): start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f2563c66a30>
+[2024-05-16 12:04:05,677]-[DEBUG](httpcore.http11): send_request_headers.started request=<Request [b'POST']>
+[2024-05-16 12:04:05,677]-[DEBUG](httpcore.http11): send_request_headers.complete
+[2024-05-16 12:04:05,677]-[DEBUG](httpcore.http11): send_request_body.started request=<Request [b'POST']>
+[2024-05-16 12:04:05,678]-[DEBUG](httpcore.http11): send_request_body.complete
+[2024-05-16 12:04:05,678]-[DEBUG](httpcore.http11): receive_response_headers.started request=<Request [b'POST']>
+[2024-05-16 12:04:05,737]-[DEBUG](httpcore.connection): start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x7f25622c1fa0>
+[2024-05-16 12:04:05,737]-[DEBUG](httpcore.http11): send_request_headers.started request=<Request [b'POST']>
+[2024-05-16 12:04:05,738]-[DEBUG](httpcore.http11): send_request_headers.complete
+[2024-05-16 12:04:05,738]-[DEBUG](httpcore.http11): send_request_body.started request=<Request [b'POST']>
+[2024-05-16 12:04:05,738]-[DEBUG](httpcore.http11): send_request_body.complete
+[2024-05-16 12:04:05,738]-[DEBUG](httpcore.http11): receive_response_headers.started request=<Request [b'POST']>
+[2024-05-16 12:04:05,962]-[DEBUG](httpcore.http11): receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 16 May 2024 04:04:05 GMT'), (b'Content-Type', b'text/html; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*'), (b'Content-Encoding', b'gzip')])
+[2024-05-16 12:04:05,963]-[INFO](httpx): HTTP Request: POST https://api.gradio.app/gradio-initiated-analytics/ "HTTP/1.1 200 OK"
+[2024-05-16 12:04:05,963]-[DEBUG](httpcore.http11): receive_response_body.started request=<Request [b'POST']>
+[2024-05-16 12:04:05,964]-[DEBUG](httpcore.http11): receive_response_body.complete
+[2024-05-16 12:04:05,964]-[DEBUG](httpcore.http11): response_closed.started
+[2024-05-16 12:04:05,964]-[DEBUG](httpcore.http11): response_closed.complete
+[2024-05-16 12:04:05,965]-[DEBUG](httpcore.connection): close.started
+[2024-05-16 12:04:05,965]-[DEBUG](httpcore.connection): close.complete
+[2024-05-16 12:04:06,031]-[DEBUG](httpcore.http11): receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 16 May 2024 04:04:05 GMT'), (b'Content-Type', b'text/html; charset=utf-8'), (b'Transfer-Encoding', b'chunked'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*'), (b'Content-Encoding', b'gzip')])
+[2024-05-16 12:04:06,032]-[INFO](httpx): HTTP Request: POST https://api.gradio.app/gradio-launched-telemetry/ "HTTP/1.1 200 OK"
+[2024-05-16 12:04:06,032]-[DEBUG](httpcore.http11): receive_response_body.started request=<Request [b'POST']>
+[2024-05-16 12:04:06,033]-[DEBUG](httpcore.http11): receive_response_body.complete
+[2024-05-16 12:04:06,033]-[DEBUG](httpcore.http11): response_closed.started
+[2024-05-16 12:04:06,033]-[DEBUG](httpcore.http11): response_closed.complete
+[2024-05-16 12:04:06,033]-[DEBUG](httpcore.connection): close.started
+[2024-05-16 12:04:06,033]-[DEBUG](httpcore.connection): close.complete
+
+
+
+
+ py-js-lowcode  yarn dev
+yarn run v1.22.19
+$ vite
+
+  VITE v5.2.6  ready in 263 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://172.22.47.92:5173/
+  ➜  Network: http://192.168.28.1:5173/
+  ➜  Network: http://192.168.116.1:5173/
+  ➜  Network: http://10.38.202.93:5173/
+  ➜  press h + enter to show help
+
+ *  History restored 
+
+ py-js-lowcode  yarn dev
+yarn run v1.22.19
+$ vite
+
+  VITE v5.2.6  ready in 192 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://172.22.47.92:5173/
+  ➜  Network: http://192.168.28.1:5173/
+  ➜  Network: http://192.168.116.1:5173/
+  ➜  Network: http://10.38.202.93:5173/
+  ➜  press h + enter to show help
+11:32:06 AM [vite] hmr update /src/components/Library.tsx
+11:32:06 AM [vite] hmr update /src/components/Library.tsx (x2)
+11:32:06 AM [vite] hmr invalidate /src/components/Library.tsx Could not Fast Refresh ("library" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react-swc#consistent-components-exports
+11:32:06 AM [vite] hmr update /src/views/ComponentLibrary.tsx, /src/views/ConfigPanel.tsx, /src/utils/previewRender.tsx, /src/utils/render.tsx, /src/views/EventConfigPanel.tsx
+11:32:06 AM [vite] hmr invalidate /src/components/Library.tsx Could not Fast Refresh ("library" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react-swc#consistent-components-exports
+11:32:06 AM [vite] hmr update /src/views/ComponentLibrary.tsx, /src/views/ConfigPanel.tsx, /src/utils/previewRender.tsx, /src/utils/render.tsx, /src/views/EventConfigPanel.tsx
+11:32:11 AM [vite] hmr update /src/components/Library.tsx
+11:32:11 AM [vite] hmr invalidate /src/components/Library.tsx Could not Fast Refresh ("library" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react-swc#consistent-components-exports
+11:32:11 AM [vite] hmr update /src/views/ComponentLibrary.tsx, /src/views/ConfigPanel.tsx, /src/utils/previewRender.tsx, /src/utils/render.tsx, /src/views/EventConfigPanel.tsx
+11:32:11 AM [vite] hmr invalidate /src/components/Library.tsx Could not Fast Refresh ("library" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react-swc#consistent-components-exports
+11:32:11 AM [vite] hmr update /src/views/ComponentLibrary.tsx, /src/views/ConfigPanel.tsx, /src/utils/previewRender.tsx, /src/utils/render.tsx, /src/views/EventConfigPanel.tsx
+11:33:43 AM [vite] hmr update /src/components/Library.tsx
+11:33:44 AM [vite] hmr invalidate /src/components/Library.tsx Could not Fast Refresh ("library" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react-swc#consistent-components-exports
+11:33:44 AM [vite] hmr update /src/views/ComponentLibrary.tsx, /src/views/ConfigPanel.tsx, /src/utils/previewRender.tsx, /src/utils/render.tsx, /src/views/EventConfigPanel.tsx
+ py-js-lowcode  yarn dev
+yarn run v1.22.19
+$ vite
+
+  VITE v5.2.6  ready in 184 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://172.22.47.92:5173/
+  ➜  Network: http://192.168.28.1:5173/
+  ➜  Network: http://192.168.116.1:5173/
+  ➜  Network: http://10.38.202.93:5173/
+  ➜  press h + enter to show help
+ py-js-lowcode  yarn build
+yarn run v1.22.19
+$ tsc && vite build
+ py-js-lowcode  yarn build
+yarn run v1.22.19
+ py-js-lowcode  yarn run preview
+yarn run v1.22.19
+$ vite preview
+  ➜  Local:   http://localhost:4173/
+  ➜  Network: http://172.22.47.92:4173/
+  ➜  Network: http://192.168.28.1:4173/
+  ➜  Network: http://192.168.116.1:4173/
+  ➜  Network: http://10.38.202.93:4173/
+  ➜  press h + enter to show help
+ py-js-lowcode  yarn run dev
+yarn run v1.22.19
+$ vite
+
+  VITE v5.2.6  ready in 184 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://172.22.47.92:5173/
+  ➜  Network: http://192.168.28.1:5173/
+  ➜  Network: http://192.168.116.1:5173/
+  ➜  Network: http://10.38.202.93:5173/
+  ➜  press h + enter to show help
+ py-js-lowcode  yarn run dev
+yarn run v1.22.19
+$ vite
+
+  VITE v5.2.6  ready in 188 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://172.22.47.92:5173/
+  ➜  Network: http://192.168.28.1:5173/
+  ➜  Network: http://192.168.116.1:5173/
+  ➜  Network: http://10.38.202.93:5173/
+  ➜  press h + enter to show help
+^V
+ py-js-lowcode  yarn run dev
+yarn run v1.22.19
+$ vite
+
+  VITE v5.2.6  ready in 186 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://172.22.47.92:5173/
+  ➜  Network: http://192.168.28.1:5173/
+  ➜  Network: http://192.168.116.1:5173/
+  ➜  Network: http://10.38.202.93:5173/
+  ➜  press h + enter to show help
+ py-js-lowcode  .\PythonAdapter\.venv\Scripts\Activate.ps1
+ py-js-lowcode  python .\gpt-lowcode.py
+[2024-05-16 12:14:24,997][DEBUG](httpx): load_ssl_context verify=True cert=None trust_env=True http2=False
+[2024-05-16 12:14:25,009][DEBUG](httpx): load_verify_locations cafile='C:\\Users\\Witch Elaina\\Projects\\py-js-lowcode\\PythonAdapter\\.venv\\Lib\\site-packages\\certifi\\cacert.pem'
+[2024-05-16 12:14:25,241][INFO](PyAdpt): ask_ai registered successfully.
+[2024-05-16 12:14:25,241][INFO](PyAdpt): add registered successfully.
+[2024-05-16 12:14:25,241][INFO](PyAdpt): sub registered successfully.
+[2024-05-16 12:14:25,242][INFO](PyAdpt): mock_ask_ai registered successfully.
+[2024-05-16 12:14:25,242][INFO](PyAdpt): mock_gen_pic registered successfully.
+[2024-05-16 12:14:25,242][ERROR](PyAdpt): Failed to register ask_ai: Function ask_ai has been registered.        
+[2024-05-16 12:14:25,242][INFO](PyAdpt): Python Adapter Start
+[2024-05-16 12:14:25,242][INFO](PyAdpt): Loading .env
+[2024-05-16 12:14:25,243][INFO](PyAdpt): Loading .env done
+[2024-05-16 12:14:25,243][INFO](PyAdpt): Flask Server Start
+ * Serving Flask app 'PythonAdapter.python_adapter'
+ * Debug mode: off
+[2024-05-16 12:14:25,252][INFO](werkzeug): WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:6001
+[2024-05-16 12:14:25,253][INFO](werkzeug): Press CTRL+C to quit
+ py-js-lowcode  python .\gpt-lowcode.py
+[2024-05-16 12:15:32,157][DEBUG](httpx): load_ssl_context verify=True cert=None trust_env=True http2=False
+[2024-05-16 12:15:32,159][DEBUG](httpx): load_verify_locations cafile='C:\\Users\\Witch Elaina\\Projects\\py-js-lowcode\\PythonAdapter\\.venv\\Lib\\site-packages\\certifi\\cacert.pem'
+[2024-05-16 12:15:32,377][INFO](PyAdpt): ask_ai registered successfully.
+[2024-05-16 12:15:32,378][INFO](PyAdpt): add registered successfully.
+[2024-05-16 12:15:32,378][INFO](PyAdpt): sub registered successfully.
+[2024-05-16 12:15:32,378][INFO](PyAdpt): mock_ask_ai registered successfully.
+[2024-05-16 12:15:32,378][INFO](PyAdpt): mock_gen_pic registered successfully.
+[2024-05-16 12:15:32,378][ERROR](PyAdpt): Failed to register ask_ai: Function ask_ai has been registered.        
+[2024-05-16 12:15:32,378][INFO](PyAdpt): Python Adapter Start
+[2024-05-16 12:15:32,378][INFO](PyAdpt): Loading .env
+[2024-05-16 12:15:32,379][INFO](PyAdpt): Loading .env done
+[2024-05-16 12:15:32,380][INFO](PyAdpt): Flask Server Start
+ * Serving Flask app 'PythonAdapter.python_adapter'
+ * Debug mode: off
+[2024-05-16 12:15:32,387][INFO](werkzeug): WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:6001
+[2024-05-16 12:15:32,388][INFO](werkzeug): Press CTRL+C to quit
+ py-js-lowcode  python .\gpt-lowcode.py
+[2024-05-16 12:16:16,967][DEBUG](httpx): load_ssl_context verify=True cert=None trust_env=True http2=False
+[2024-05-16 12:16:16,969][DEBUG](httpx): load_verify_locations cafile='C:\\Users\\Witch Elaina\\Projects\\py-js-lowcode\\PythonAdapter\\.venv\\Lib\\site-packages\\certifi\\cacert.pem'
+[2024-05-16 12:16:17,199][INFO](PyAdpt): ask_ai registered successfully.
+[2024-05-16 12:16:17,199][INFO](PyAdpt): add registered successfully.
+ py-js-lowcode  python .\gpt-lowcode.py
+[2024-05-16 12:17:08,899][DEBUG](httpx): load_ssl_context verify=True cert=None trust_env=True http2=False
+[2024-05-16 12:17:08,900][DEBUG](httpx): load_verify_locations cafile='C:\\Users\\Witch Elaina\\Projects\\py-js-lowcode\\PythonAdapter\\.venv\\Lib\\site-packages\\certifi\\cacert.pem'
+[2024-05-16 12:17:09,113][INFO](PyAdpt): ask_ai registered successfully.
+[2024-05-16 12:17:09,113][INFO](PyAdpt): add registered successfully.
+[2024-05-16 12:17:09,113][INFO](PyAdpt): sub registered successfully.
+[2024-05-16 12:17:09,114][INFO](PyAdpt): mock_ask_ai registered successfully.
+[2024-05-16 12:17:09,114][INFO](PyAdpt): mock_gen_pic registered successfully.
+[2024-05-16 12:17:09,114][ERROR](PyAdpt): Failed to register ask_ai: Function ask_ai has been registered.
+[2024-05-16 12:17:09,114][INFO](PyAdpt): Python Adapter Start
+[2024-05-16 12:17:09,114][INFO](PyAdpt): Loading .env
+[2024-05-16 12:17:09,115][INFO](PyAdpt): Loading .env done
+[2024-05-16 12:17:09,115][INFO](PyAdpt): Flask Server Start
+ * Serving Flask app 'PythonAdapter.python_adapter'
+ * Debug mode: off
+[2024-05-16 12:17:09,122][INFO](werkzeug): WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:6001
+[2024-05-16 12:17:09,123][INFO](werkzeug): Press CTRL+C to quit

@@ -1,0 +1,82 @@
+1
+Changes detected in: C:\Users\Witch Elaina\Projects\py-js-lowcode\gpt.py
+[2024-05-16 12:51:32,418][DEBUG](httpx): load_ssl_context verify=True cert=None trust_env=True http2=False
+[2024-05-16 12:51:32,419][DEBUG](httpx): load_verify_locations cafile='C:\\Users\\Witch Elaina\\Projects\\py-js-lowcode\\PythonAdapter\\.venv\\Lib\\site-packages\\certifi\\cacert.pem'
+[2024-05-16 12:51:32,420][DEBUG](urllib3.connectionpool): Starting new HTTPS connection (1): huggingface.co:443
+C:\Users\Witch Elaina\Projects\py-js-lowcode\PythonAdapter\.venv\Lib\site-packages\gradio\utils.py:985: UserWarning: Expected 1 arguments for function <function ask_ai_text at 0x0000017C79E8BE20>, received 2.
+  warnings.warn(
+C:\Users\Witch Elaina\Projects\py-js-lowcode\PythonAdapter\.venv\Lib\site-packages\gradio\utils.py:993: UserWarning: Expected maximum 1 arguments for function <function ask_ai_text at 0x0000017C79E8BE20>, received 2.
+  warnings.warn(
+[2024-05-16 12:51:32,669][DEBUG](httpcore.connection): connect_tcp.started host='api.gradio.app' port=443 local_address=None timeout=3 socket_options=None
+[2024-05-16 12:51:32,896][DEBUG](httpcore.connection): connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000017C7CF53D90>
+[2024-05-16 12:51:32,896][DEBUG](httpcore.connection): start_tls.started ssl_context=<ssl.SSLContext object at 0x0000017C7C394950> server_hostname='api.gradio.app' timeout=3
+[2024-05-16 12:51:33,321][DEBUG](httpcore.connection): start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000017C7C6CA010>
+[2024-05-16 12:51:33,321][DEBUG](httpcore.http11): send_request_headers.started request=<Request [b'GET']>
+[2024-05-16 12:51:33,321][DEBUG](httpcore.http11): send_request_headers.complete
+[2024-05-16 12:51:33,321][DEBUG](httpcore.http11): send_request_body.started request=<Request [b'GET']>
+[2024-05-16 12:51:33,322][DEBUG](httpcore.http11): send_request_body.complete
+[2024-05-16 12:51:33,322][DEBUG](httpcore.http11): receive_response_headers.started request=<Request [b'GET']>
+[2024-05-16 12:51:33,530][DEBUG](httpcore.http11): receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 16 May 2024 04:51:34 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'21'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*')])
+[2024-05-16 12:51:33,531][INFO](httpx): HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+[2024-05-16 12:51:33,531][DEBUG](httpcore.http11): receive_response_body.started request=<Request [b'GET']>
+[2024-05-16 12:51:33,532][DEBUG](httpcore.http11): receive_response_body.complete
+[2024-05-16 12:51:33,532][DEBUG](httpcore.http11): response_closed.started
+[2024-05-16 12:51:33,532][DEBUG](httpcore.http11): response_closed.complete
+[2024-05-16 12:51:33,532][DEBUG](httpcore.connection): close.started
+[2024-05-16 12:51:33,533][DEBUG](httpcore.connection): close.complete
+
+
+2
+Changes detected in: C:\Users\Witch Elaina\Projects\py-js-lowcode\gpt.py
+[2024-05-16 12:54:15,590][DEBUG](httpx): load_ssl_context verify=True cert=None trust_env=True http2=False
+[2024-05-16 12:54:15,592][DEBUG](httpx): load_verify_locations cafile='C:\\Users\\Witch Elaina\\Projects\\py-js-lowcode\\PythonAdapter\\.venv\\Lib\\site-packages\\certifi\\cacert.pem' 
+[2024-05-16 12:54:15,594][DEBUG](urllib3.connectionpool): Starting new HTTPS connection (1): huggingface.co:443
+C:\Users\Witch Elaina\Projects\py-js-lowcode\PythonAdapter\.venv\Lib\site-packages\gradio\utils.py:985: UserWarning: Expected 1 arguments for function <function ask_ai_text at 0x0000017C7BD3AC00>, received 5.
+  warnings.warn(
+C:\Users\Witch Elaina\Projects\py-js-lowcode\PythonAdapter\.venv\Lib\site-packages\gradio\utils.py:993: UserWarning: Expected maximum 1 arguments for function <function ask_ai_text at 0x0000017C7BD3AC00>, received 5.
+  warnings.warn(
+[2024-05-16 12:54:15,856][DEBUG](httpcore.connection): connect_tcp.started host='api.gradio.app' port=443 local_address=None timeout=3 socket_options=None
+[2024-05-16 12:54:16,064][DEBUG](httpcore.connection): connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000017C7C929590>
+[2024-05-16 12:54:16,064][DEBUG](httpcore.connection): start_tls.started ssl_context=<ssl.SSLContext object at 0x0000017C7C413AD0> server_hostname='api.gradio.app' timeout=3
+[2024-05-16 12:54:16,462][DEBUG](httpcore.connection): start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000017C7C893F50>
+[2024-05-16 12:54:16,462][DEBUG](httpcore.http11): send_request_headers.started request=<Request [b'GET']>
+[2024-05-16 12:54:16,463][DEBUG](httpcore.http11): send_request_headers.complete
+[2024-05-16 12:54:16,463][DEBUG](httpcore.http11): send_request_body.started request=<Request [b'GET']>
+[2024-05-16 12:54:16,463][DEBUG](httpcore.http11): send_request_body.complete
+[2024-05-16 12:54:16,463][DEBUG](httpcore.http11): receive_response_headers.started request=<Request [b'GET']>
+[2024-05-16 12:54:16,661][DEBUG](httpcore.http11): receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 16 May 2024 04:54:17 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'21'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*')])
+[2024-05-16 12:54:16,661][INFO](httpx): HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+[2024-05-16 12:54:16,661][DEBUG](httpcore.http11): receive_response_body.started request=<Request [b'GET']>
+[2024-05-16 12:54:16,662][DEBUG](httpcore.http11): receive_response_body.complete
+[2024-05-16 12:54:16,662][DEBUG](httpcore.http11): response_closed.started
+[2024-05-16 12:54:16,662][DEBUG](httpcore.http11): response_closed.complete
+[2024-05-16 12:54:16,662][DEBUG](httpcore.connection): close.started
+[2024-05-16 12:54:16,662][DEBUG](httpcore.connection): close.complete
+
+
+3
+Changes detected in: C:\Users\Witch Elaina\Projects\py-js-lowcode\gpt.py
+[2024-05-16 12:56:03,130][DEBUG](httpx): load_ssl_context verify=True cert=None trust_env=True http2=False
+[2024-05-16 12:56:03,132][DEBUG](httpx): load_verify_locations cafile='C:\\Users\\Witch Elaina\\Projects\\py-js-lowcode\\PythonAdapter\\.venv\\Lib\\site-packages\\certifi\\cacert.pem' 
+[2024-05-16 12:56:03,133][DEBUG](urllib3.connectionpool): Starting new HTTPS connection (1): huggingface.co:443
+C:\Users\Witch Elaina\Projects\py-js-lowcode\PythonAdapter\.venv\Lib\site-packages\gradio\utils.py:985: UserWarning: Expected 1 arguments for function <function ask_ai_text at 0x0000017C79E8BE20>, received 3.
+  warnings.warn(
+C:\Users\Witch Elaina\Projects\py-js-lowcode\PythonAdapter\.venv\Lib\site-packages\gradio\utils.py:993: UserWarning: Expected maximum 1 arguments for function <function ask_ai_text at 0x0000017C79E8BE20>, received 3.
+  warnings.warn(
+[2024-05-16 12:56:03,398][DEBUG](httpcore.connection): connect_tcp.started host='api.gradio.app' port=443 local_address=None timeout=3 socket_options=None
+[2024-05-16 12:56:03,615][DEBUG](httpcore.connection): connect_tcp.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000017C7C65B9D0>
+[2024-05-16 12:56:03,615][DEBUG](httpcore.connection): start_tls.started ssl_context=<ssl.SSLContext object at 0x0000017C7C716BA0> server_hostname='api.gradio.app' timeout=3
+[2024-05-16 12:56:04,030][DEBUG](httpcore.connection): start_tls.complete return_value=<httpcore._backends.sync.SyncStream object at 0x0000017C7C69A690>
+[2024-05-16 12:56:04,030][DEBUG](httpcore.http11): send_request_headers.started request=<Request [b'GET']>
+[2024-05-16 12:56:04,031][DEBUG](httpcore.http11): send_request_headers.complete
+[2024-05-16 12:56:04,031][DEBUG](httpcore.http11): send_request_body.started request=<Request [b'GET']>
+[2024-05-16 12:56:04,031][DEBUG](httpcore.http11): send_request_body.complete
+[2024-05-16 12:56:04,031][DEBUG](httpcore.http11): receive_response_headers.started request=<Request [b'GET']>
+[2024-05-16 12:56:04,242][DEBUG](httpcore.http11): receive_response_headers.complete return_value=(b'HTTP/1.1', 200, b'OK', [(b'Date', b'Thu, 16 May 2024 04:56:05 GMT'), (b'Content-Type', b'application/json'), (b'Content-Length', b'21'), (b'Connection', b'keep-alive'), (b'Server', b'nginx/1.18.0'), (b'Access-Control-Allow-Origin', b'*')])
+[2024-05-16 12:56:04,243][INFO](httpx): HTTP Request: GET https://api.gradio.app/pkg-version "HTTP/1.1 200 OK"
+[2024-05-16 12:56:04,243][DEBUG](httpcore.http11): receive_response_body.started request=<Request [b'GET']>
+[2024-05-16 12:56:04,243][DEBUG](httpcore.http11): receive_response_body.complete
+[2024-05-16 12:56:04,243][DEBUG](httpcore.http11): response_closed.started
+[2024-05-16 12:56:04,243][DEBUG](httpcore.http11): response_closed.complete
+[2024-05-16 12:56:04,244][DEBUG](httpcore.connection): close.started
+[2024-05-16 12:56:04,244][DEBUG](httpcore.connection): close.complete

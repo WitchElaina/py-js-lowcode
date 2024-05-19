@@ -1,0 +1,24 @@
+Total milliseconds: 30.871337890625
+Total milliseconds: 24.19970703125
+Total milliseconds: 19.12353515625
+log/lowcode/add  Average milliseconds: 24.731526692708332
+
+Total milliseconds: 16.803955078125
+Total milliseconds: 16.1962890625
+Total milliseconds: 18.17626953125
+log/lowcode/callback  Average milliseconds: 17.058837890625
+
+Total milliseconds: 21.486328125
+Total milliseconds: 19.4384765625
+Total milliseconds: 18.19091796875
+log/lowcode/change  Average milliseconds: 19.705240885416668
+
+Total milliseconds: 27.1357421875
+Total milliseconds: 27.548828125
+Total milliseconds: 28.487060546875
+log/lowcode/del  Average milliseconds: 27.723876953125
+
+Total milliseconds: 3.209716796875
+Total milliseconds: 3.125244140625
+Total milliseconds: 2.92236328125
+log/lowcode/style  Average milliseconds: 3.0857747395833335

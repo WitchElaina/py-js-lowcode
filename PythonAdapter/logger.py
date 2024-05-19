@@ -2,7 +2,7 @@ import logging
 
 # Logger configuration
 logging.basicConfig(
-    level=logging.DEBUG, format="[%(levelname)s](%(name)s): %(message)s"
+    level=logging.DEBUG, format="[%(asctime)s][%(levelname)s](%(name)s): %(message)s"
 )
 
 

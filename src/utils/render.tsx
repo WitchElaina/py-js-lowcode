@@ -22,6 +22,7 @@ export const RenderDesigner = (props: {
   onClickCallback?: (schema: Schema) => void;
   setParentHover?: (props: boolean) => void;
 }) => {
+  console.time('事件 重渲染');
   const {
     schema,
     appendSchema,
@@ -48,7 +49,9 @@ export const RenderDesigner = (props: {
   const [blankDropProps, dropBlank] = useDrop({
     accept: 'component',
     drop: (item: { component: BaseComponent<unknown, unknown> }) => {
+      console.time('新建组件');
       onDrop(item);
+      console.timeEnd('新建组件');
     },
     collect: (monitor) => ({
       canDrop: monitor.canDrop(),
@@ -325,6 +328,7 @@ export const RenderDesigner = (props: {
           backgroundColor: 'rgba(0,0,0,0.1)',
         }}
       ></div>
+      {console.timeEnd('事件 重渲染')}
     </div>
   );
 };

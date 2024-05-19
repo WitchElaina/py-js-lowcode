@@ -12,7 +12,7 @@ export function DesignerCanvas(props: { children: ReactNode }) {
         alignItems: 'center',
         justifyContent: 'center',
       }}
-      content={import.meta.env.VITE_WATERMARK_CONTENT.split(',')}
+      // content={import.meta.env.VITE_WATERMARK_CONTENT.split(',')}
     >
       {props.children}
     </Watermark>
