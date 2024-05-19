@@ -18,7 +18,7 @@ export const components = {
   input,
   checkbox,
   inputNumber,
-  // radio,
+  radio,
   select,
   // slider,
   // switcher,

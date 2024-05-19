@@ -14,6 +14,7 @@ import { SettingModal } from '../views/Setting';
 import { useState } from 'react';
 import { useRequests } from '../utils/requests';
 import { useRequest } from 'ahooks';
+import { useNavigate } from 'react-router-dom';
 
 const { Header } = Layout;
 const { Title, Text } = Typography;
@@ -21,6 +22,8 @@ const { Title, Text } = Typography;
 const { useToken } = theme;
 
 function NavHeader() {
+  const navigate = useNavigate();
+
   const { token } = useToken();
   const schema = useSelector((state) => state.schema);
 
@@ -95,7 +98,9 @@ function NavHeader() {
           <Button>加载工程文件</Button>
         </Upload>
         <Button onClick={handleSave}>保存工程文件</Button>
-        <Button type="primary">预览页面</Button>
+        <Button type="primary" onClick={() => navigate('/preview')}>
+          预览页面
+        </Button>
         <Button>导出代码</Button>
       </Space>
       <SettingModal isOpen={isSettingOpen} setIsOpen={setIsSettingOpen} />

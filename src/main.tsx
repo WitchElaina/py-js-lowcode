@@ -7,6 +7,19 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { store } from './store.ts';
 import { Provider } from 'react-redux';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import PreviewApp from './PreviewApp.tsx';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+  },
+  {
+    path: '/preview',
+    element: <PreviewApp />,
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
@@ -23,7 +36,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   >
     <DndProvider backend={HTML5Backend}>
       <Provider store={store}>
-        <App />
+        <RouterProvider router={router} />
       </Provider>
     </DndProvider>
   </ConfigProvider>,

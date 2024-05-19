@@ -2,6 +2,7 @@ import { Image, ImageProps, Flex, Typography, InputNumber, Input } from 'antd';
 import { BaseComponent, CombineProps } from '../types/component';
 import { Schema } from '../types/schema';
 import { store } from '../store';
+import { useEffect, useState } from 'react';
 
 const { Text } = Typography;
 
@@ -21,9 +22,19 @@ const Library = (props: LibraryProps) => {
 
   const src = srcFromProps?.length ? srcFromProps : ['/imageIcon.svg'];
 
+  const [currentSrc, setCurrentSrc] = useState(src[src?.length - 1]);
+
+  useEffect(() => {
+    setCurrentSrc(src[index]);
+  }, [index]);
+
+  useEffect(() => {
+    setCurrentSrc(src[src?.length - 1]);
+  }, [src]);
+
   return (
     <Flex vertical gap={20} style={{ ...props.style }}>
-      <Image src={src[src?.length - 1]} width={width} height={height} />
+      <Image src={currentSrc} width={width} height={height} />
       <Flex
         gap={10}
         justify="center"

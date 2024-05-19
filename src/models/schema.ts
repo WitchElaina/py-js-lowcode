@@ -364,6 +364,8 @@ export const schema = createModel<RootModel>()({
       schema.userEvents[eventName].forEach((callback) => {
         // getArgs
         const args = callback.args.map((arg) => {
+          if (!arg) return undefined;
+
           const argId = arg.id;
           const argPropName = arg.propName;
 
@@ -419,6 +421,8 @@ export const schema = createModel<RootModel>()({
       callbackList.forEach(async (callback) => {
         // getArgs
         const args = callback.args.map((arg) => {
+          if (!arg) return null;
+
           const argId = arg.id;
           const argPropName = arg.propName;
 
