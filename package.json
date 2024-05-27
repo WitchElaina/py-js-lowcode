@@ -29,6 +29,7 @@
     "react-monaco-editor": "^0.55.0",
     "react-redux": "^9.1.0",
     "react-router-dom": "^6.23.1",
+    "react-use-precision-timer": "^3.5.5",
     "sort-by": "^1.2.0",
     "uuid": "^9.0.1"
   },

@@ -65,7 +65,9 @@ export function ComponentLibrary() {
       </Title>
       <List
         grid={{ column: 2 }}
-        dataSource={Object.values(components)}
+        dataSource={Object.values(components).filter(
+          (comp) => comp.example !== null,
+        )}
         renderItem={(component) => (
           <DraggableComponentWrapper
             component={component}

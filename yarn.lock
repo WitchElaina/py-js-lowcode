@@ -2038,6 +2038,18 @@ react-router@6.23.1:
   dependencies:
     "@remix-run/router" "1.16.1"
 
+react-sub-unsub@^2.2.2:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/react-sub-unsub/-/react-sub-unsub-2.2.7.tgz#d755ea40ab61ff64bc8c73a9013efa910472629d"
+  integrity sha512-b2o0mIW8G4Yb3aaKxFB9iiCCHxCDGmogy+493oQpEJHjBy/hl6uf+6RhAinqKWRwi1fvO6mGIMVGsf2XYLL38g==
+
+react-use-precision-timer@^3.5.5:
+  version "3.5.5"
+  resolved "https://registry.yarnpkg.com/react-use-precision-timer/-/react-use-precision-timer-3.5.5.tgz#a3886d0b344cae9c77c57b9bcd8d86b45d997c4c"
+  integrity sha512-fPf9d1fAb4CCJrJCnErvvB/GFVDm+bzb07WilkiW3hcJUjqS3ep6pCLKUguT76gpPvyOuKp9KSD8z06uM3LzAA==
+  dependencies:
+    react-sub-unsub "^2.2.2"
+
 react@^18.2.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"

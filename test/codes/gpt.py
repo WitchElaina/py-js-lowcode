@@ -2,18 +2,6 @@ from test.codes.test import ask_ai
 import gradio as gr
 
 
-def a(arg):
-    return arg
-
-
-def b(arg):
-    return arg
-
-
-def c(arg):
-    return arg
-
-
 def ask_ai_text(text):
     response = ask_ai(text)
     ret = ""
@@ -22,14 +10,8 @@ def ask_ai_text(text):
     return ret
 
 
-demo = gr.Interface(
-    fn=a,
-    inputs=[
-        "number",
-        "text",
-        "text",
-        "text",
-    ],
-    outputs=["text"],
-)
+with gr.Interface() as demo:
+    demo.add_textbox("text", label="Input Text")
+    demo.add_textbox(ask_ai_text, label="Output Text")
+
 demo.launch()

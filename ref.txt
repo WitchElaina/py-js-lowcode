@@ -1,0 +1,20 @@
+Thakur P, Jadon P. Django: Developing web using Python[C]// 2023 3rd International Conference on Advance Computing and Innovative Technologies in Engineering (ICACITE), 2023: 303-306.
+Xiao J, Wang L, Cheng Y, et al. Web Front-end Development based on Flask Architecture for Image Recognition[C]// 2023 IEEE 7th Information Technology and Mechatronics Engineering Conference (ITOEC), 2023: 1964-1967.
+Sharma M, Khan M S, Singh J. Python & Django the Fastest Growing Web Development Technology[C]// 2024 IEEE 1st Karachi Section Humanitarian Technology Conference (KHI-HTC), 2024: 1-9.
+Quickstart[EB/OL]. https://www.gradio.app/guides/quickstart.
+Calçada A, Bernardino J. Experimental Evaluation of Low Code development, Java Swing and JavaScript programming[C]// Proceedings of the 26th International Database Engineered Applications Symposium, 2022: 103–112.
+The Model-View-ViewModel Pattern[EB/OL]. https://docs.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/mvvm.
+Gomes F, Soares P, Araújo A A. Examining the Performance Implications of Design Patterns in Front-end Web Development: A Preliminar Comparative Study with React and Vue.js[C]// Proceedings of the 29th Brazilian Symposium on Multimedia and the Web, 2023: 255–259.
+Xing Y, Huang J, Lai Y. Research and Analysis of the Front-end Frameworks and Libraries in E-Business Development[C]// Proceedings of the 2019 11th International Conference on Computer and Automation Engineering, 2019: 68–72.
+Novac C M, Novac O C, Sferle R M, et al. Comparative study of some applications made in the Vue.js and React.js frameworks[C]// 2021 16th International Conference on Engineering of Modern Electric Systems (EMES), 2021: 1-4.
+Diniz-Junior R N V, Figueiredo C C L, S.Russo G D, et al. Evaluating the performance of web rendering technologies based on JavaScript: Angular, React, and Vue[C]// 2022 XVLIII Latin American Computer Conference (CLEI), 2022: 1-9.
+康雯珺. 可视化低代码开发平台的研究与实现[D].  北京邮电大学, 2024.
+Juhás G, Molnár L, Juhásová A, et al. Low-code platforms and languages: the future of software development[C]// 2022 20th International Conference on Emerging eLearning Technologies and Applications (ICETA), 2022: 286-293.
+Poonsuph R. Design and Implementation of a LCDP with Enhanced Functionality[C]// 2023 IEEE 8th International Conference On Software Engineering and Computer Systems (ICSECS), 2023: 145-151.
+Chuanjian C, Shuze G, Hua W. Research on Software Development Based on Low-Code Technology[C]// 2023 2nd International Conference on Artificial Intelligence and Autonomous Robot Systems (AIARS), 2023: 210-213.
+Hirzel M. Low-Code Programming Models[J]. Commun. ACM, 2023, 66(10): 76–85.
+Kirchhof J C, Jansen N, Rumpe B, et al. Navigating the Low-Code Landscape: A Comparison of Development Platforms[C]// 2023 ACM/IEEE International Conference on Model Driven Engineering Languages and Systems Companion (MODELS-C), 2023: 854-862.
+Cabot J. Positioning of the low-code movement within the field of model-driven engineering[C]// Proceedings of the 23rd ACM/IEEE International Conference on Model Driven Engineering Languages and Systems: Companion Proceedings, 2020: 1-3.
+张巍. 基于钉钉宜搭的中小企业低代码平台的应用研究[D].  北京邮电大学, 2024.
+孙禹铭. 面向深度学习的低代码开发平台的设计与实现[D].  山东大学, 2023.
+Sahay A, Indamutsa A, Ruscio D D, et al. Supporting the understanding and comparison of low-code development platforms[C]// 2020 46th Euromicro Conference on Software Engineering and Advanced Applications (SEAA), 2020: 171-178.

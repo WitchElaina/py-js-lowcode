@@ -44,7 +44,7 @@ export const radio: BaseComponent<typeof Radio.Group, RadioGroupProps> = {
   name: 'radio',
   label: '单选框',
   component: Radio.Group,
-  example: <Radio>单选框</Radio>,
+  example: null,
   configPanel: RadioConfig,
   variables: { value: '值' },
   states: {},

@@ -11,7 +11,7 @@ import {
 import { store } from '../store';
 import { useSelector } from 'react-redux';
 import { SettingModal } from '../views/Setting';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useRequests } from '../utils/requests';
 import { useRequest } from 'ahooks';
 import { useNavigate } from 'react-router-dom';
@@ -21,7 +21,16 @@ const { Title, Text } = Typography;
 
 const { useToken } = theme;
 
-function NavHeader() {
+function NavHeader(props) {
+  const calcTime = useCallback((sec: number) => {
+    const hours = Math.floor(sec / 3600);
+    const minutes = Math.floor((sec - hours * 3600) / 60);
+    const seconds = sec - hours * 3600 - minutes * 60;
+    return `${minutes} 小时 ${seconds} 分钟`;
+  }, []);
+
+  const sec = calcTime(props.sec);
+
   const navigate = useNavigate();
 
   const { token } = useToken();
@@ -84,6 +93,7 @@ function NavHeader() {
       </Flex>
 
       <Space>
+        <Text type="warning">测试模式，当前项目开发时间：{sec}</Text>
         <Text type="secondary">
           Python 适配器连接状态
           <Badge
